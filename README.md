@@ -10,7 +10,7 @@
 
 # 授課大綱
 
-### 課程主題：Quick R Introduction
+### 課程主題：[Quick R Introduction](https://ling32342.github.io/2017_NCCU_R/RBasic.html#1)
 
 ### Day1 課程大綱
 
