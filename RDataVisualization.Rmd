@@ -166,7 +166,7 @@ library(reshape2)
 
 ## 一切從讀檔開始（CSV）
 
-- [課程資料下載](https://ling32342.github.io/2017_NCCU_R/transaction.csv)
+- [課程資料下載](https://ling32342.github.io/2017_NCCU_R/data/transaction.csv)
 ```{r,eval=FALSE}
 ############### 絕對路徑 ###############
 # 請輸入完整的檔案路徑
