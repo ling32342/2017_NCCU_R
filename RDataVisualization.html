@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EDA with R</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'EDA with R',
+                        subtitle: 'Data Visualization with <strong>ggplot</strong> &amp; <strong>dplyr</strong>',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Ling Hsu (Source from DSP Data Lab)' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="RDataVisualization_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="RDataVisualization_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="RDataVisualization_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="RDataVisualization_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="css/dsp.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">2017.05.17</p>
+          </hgroup>
+  </slide>
+
+<slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>課程綱要</h2></hgroup><article >
+
+</article></slide><slide class=''><hgroup><h2>Agenda</h2></hgroup><article  id="agenda">
+
+<ul>
+<li>Data Visualization</li>
+<li><code>ggplot2</code> in R
+
+<ul>
+<li>基本介紹</li>
+<li>基本架構</li>
+<li>起手式(基本語法)</li>
+<li>應用(各種圖形的呈現)
+
+<ul>
+<li>Bar</li>
+<li>Line</li>
+<li>Histogram</li>
+<li>point</li>
+</ul></li>
+<li>進階技巧傳承篇</li>
+</ul></li>
+<li>互動視覺化</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Data Visualization</h2></hgroup><article  id="data-visualization">
+
+<ul>
+<li>清晰有效地傳達與溝通訊息</li>
+<li>教學、研究、宣傳</li>
+<li>美學、功能兼顧</li>
+<li>統計圖形、訊息可視化</li>
+<li>參考Johnson於DSHC meetp的<a href='http://goo.gl/xYorRm' title=''>DataViz 介紹</a></li>
+<li>Bonus from Alger<a href='http://rpubs.com/lofuyang/167269' title=''>Highchart Introduction</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>ggplot2簡介</h2></hgroup><article  id="ggplot2">
+
+<div style="float:left;width:50%;">
+<ul>
+<li>套件下載次數第一名(<a href='https://www.rdocumentation.org/trends?page1=1&amp;sort1=direct&amp;page2=1&amp;sort2=total&amp;page3=1&amp;page4=1' title=''>Source</a>)</li>
+<li>R環境下的繪圖套件</li>
+<li>取自 “The Grammar of Graphics” (Leland Wilkinson, 2005)</li>
+<li><a href='https://github.com/cosname/ggplot2-translation/blob/master/preface.md' title=''>設計理念</a>
+
+<ul>
+<li>採用圖層系統</li>
+<li>用抽象的概念來控制圖形，</br> 避免細節繁瑣</li>
+<li>圖形美觀</li>
+</ul></li>
+</ul></div>
+
+<div style="float:right;width:48%;">
+<p><img src='img/most_download_in_R.png' width=420 align='center'></img></p></div>
+
+</article></slide><slide class=''><hgroup><h2>The Anatomy of a Plot</h2></hgroup><article  id="the-anatomy-of-a-plot">
+
+<center>
+
+<img src='img/anatomy.png' width=750 align='center'></img>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>ggplot2基本架構</h2></hgroup><article  id="ggplot2">
+
+<ul>
+<li>資料 (data) 和映射 (mapping)</li>
+<li>幾何對象 (<code>geom</code>etric)</li>
+<li>座標尺度 (<code>scale</code>)</li>
+<li>統計轉換 (<code>stat</code>istics)</li>
+<li>座標系統 (<code>coord</code>inante)</li>
+<li>圖層 (layer)</li>
+<li>刻面 (<code>facet</code>)</li>
+<li>主題 (<code>theme</code>)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>ggplot2基本架構(2)</h2></hgroup><article  id="ggplot22">
+
+<center>
+
+<img src='img/ggplot.jpeg' width=550 align='center'></img> </br> source: <a href='http://goo.gl/Odt2Rs' title=''>http://goo.gl/Odt2Rs</a>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>ggplot2 基本語法</h2></hgroup><article  id="ggplot2-">
+
+<pre class = 'prettyprint lang-r'>ggplot(data=..., aes(x=..., y=...)) + 
+  geom_xxx(...) +
+  stat_xxx(...) + 
+  facet_xxx(...) + ...</pre>
+
+<ul>
+<li><code>ggplot</code> 描述 data 從哪來</li>
+<li><code>aes</code> 描述圖上的元素跟 data 之類的對應關係</li>
+<li><code>geom_xxx</code> 描述要畫圖的類型及相關調整的參數</li>
+<li>常用的類型諸如：<code>geom_bar</code>, <code>geom_line</code>, <code>geom_points</code>, &#8230;</li>
+</ul>
+
+<h3><strong>注意</strong></h3>
+
+<ul>
+<li>使用 <code>data.frame</code> 儲存資料 (不可以丟 matrix 物件)</li>
+<li>使用 <code>long format</code> (利用reshape2將資料轉換成 1 row = 1 observation)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>馬上來個範例</h2></hgroup><article  data-background="a.jpeg">
+
+<pre class = 'prettyprint lang-r'># 先定義一個資料表
+data &lt;- data.frame(身份 = c(&quot;大學部&quot;,&quot;研究所&quot;,&quot;教授&quot;,&quot;講師&quot;,&quot;助教&quot;), 
+                   人數 = c(20,15,5,2,3))
+# plot
+ggplot(data = data, aes(x = 身份, y = 人數)) + 
+  geom_bar(stat = &quot;identity&quot;) +
+  theme_grey(base_family = &quot;STHeiti&quot;) </pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>首先請先安裝以下套件</h2></hgroup><article >
+
+<ul>
+<li>安裝套件</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>install.packages(c(&quot;ggplot2&quot;,&quot;dplyr&quot;,&quot;reshape2&quot;),repos=&quot;http://cran.csie.ntu.edu.tw/&quot;)</pre>
+
+<p></br></p>
+
+<ul>
+<li>載入套件</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(ggplot2)
+library(dplyr)
+library(reshape2)</pre>
+
+<p></br></p>
+
+<p>注意：下載完套件一定要記得 <code>library</code> 才能使用喲！</p>
+
+</article></slide><slide class=''><hgroup><h2>一切從讀檔開始（CSV）</h2></hgroup><article  id="csv">
+
+<pre class = 'prettyprint lang-r'>############### 絕對路徑 ###############
+# 請輸入完整的檔案路徑
+data &lt;- read.csv(&quot;/Users/hsiaoling/Desktop/data/transaction.csv&quot;) #如果你是mac
+# 或是
+data &lt;- read.csv(&quot;C:\\Users\\transaction.csv&quot;) #如果你是windows
+
+############### 相對路徑 ###############
+# 瞭解現在我們所處在的路徑
+getwd()
+# 設定我們檔案存放的路徑
+setwd() 
+# 讀檔起手式
+data &lt;- read.csv(&quot;transaction.csv&quot;) 
+# 若讀入的是亂碼，試試以下
+data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;big5&#39;)  #如果你是mac
+# 或是
+data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;utf-8&#39;) #如果你是windows</pre>
+
+</article></slide><slide class=''><hgroup><h2>欄位說明</h2></hgroup><article >
+
+<div style="float:left;width:48%;">
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">英文欄位名稱</th>
+<th align="left">中文欄位名稱</th>
+</tr>
+<tr class="odd">
+<td align="left">city</td>
+<td align="left">縣市</td>
+</tr>
+<tr class="even">
+<td align="left">district</td>
+<td align="left">鄉鎮市區</td>
+</tr>
+<tr class="odd">
+<td align="left">trac_year</td>
+<td align="left">交易年份</td>
+</tr>
+<tr class="even">
+<td align="left">trac_month</td>
+<td align="left">交易月份</td>
+</tr>
+<tr class="odd">
+<td align="left">trac_type</td>
+<td align="left">交易標的</td>
+</tr>
+<tr class="even">
+<td align="left">trac_content</td>
+<td align="left">交易筆棟數</td>
+</tr>
+<tr class="odd">
+<td align="left">use_type</td>
+<td align="left">使用分區或編定</td>
+</tr>
+</table></div>
+
+<div style="float:right;width:50%;">
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">英文欄位名稱</th>
+<th align="left">中文欄位名稱</th>
+</tr>
+<tr class="odd">
+<td align="left">build_type</td>
+<td align="left">建物型態</td>
+</tr>
+<tr class="even">
+<td align="left">build_ymd</td>
+<td align="left">建築完成年月</td>
+</tr>
+<tr class="odd">
+<td align="left">area_land</td>
+<td align="left">土地移轉總面積.平方公尺.</td>
+</tr>
+<tr class="even">
+<td align="left">area_build</td>
+<td align="left">建物移轉總面積.平方公尺.</td>
+</tr>
+<tr class="odd">
+<td align="left">area_park</td>
+<td align="left">車位移轉總面積.平方公尺.</td>
+</tr>
+<tr class="even">
+<td align="left">price_total</td>
+<td align="left">總價.元.</td>
+</tr>
+<tr class="odd">
+<td align="left">price_unit</td>
+<td align="left">單價.元.平方公尺.</td>
+</tr>
+</table></div>
+
+</article></slide><slide class=''><hgroup><h2>以為開始了嗎？</h2></hgroup><article >
+
+<ul>
+<li>進行分析前，先去了解資料的型態與特性</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>str(data)</pre>
+
+<pre >&#39;data.frame&#39;:   153598 obs. of  15 variables:
+ $ city        : Factor w/ 4 levels &quot;高雄市&quot;,&quot;臺北市&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+ $ district    : Factor w/ 99 levels &quot;阿蓮區&quot;,&quot;八里區&quot;,..: 63 96 96 5 96 5 5 38 38 42 ...
+ $ trac_year   : int  102 102 102 102 102 102 102 102 102 102 ...
+ $ trac_month  : Factor w/ 12 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ trac_type   : Factor w/ 2 levels &quot;房地(土地+建物)&quot;,..: 1 1 2 1 1 2 2 2 2 2 ...
+ $ trac_content: Factor w/ 327 levels &quot;土地0建物0車位0&quot;,..: 57 57 58 57 57 62 62 58 64 167 ...
+ $ use_type    : Factor w/ 5 levels &quot;工&quot;,&quot;農&quot;,&quot;其他&quot;,..: 5 4 4 4 5 5 5 5 1 5 ...
+ $ build_type  : Factor w/ 12 levels &quot;辦公商業大樓&quot;,..: 6 12 10 12 7 7 7 12 1 12 ...
+ $ build_ymd   : int  701109 701228 970114 851218 970624 1010724 1010724 1000414 1010531 870910 ...
+ $ area_land   : num  34.96 10.71 8.51 4.7 30.97 ...
+ $ area_build  : num  60.6 104.5 51.9 39.4 185.2 ...
+ $ area_park   : num  0 0 8.55 0 0 ...
+ $ price_total : num  6380000 12010000 10080000 4600000 23800000 ...
+ $ price_unit  : int  105263 114928 194070 116900 128510 218147 204716 174613 133648 27658 ...
+ $ age         : int  32 32 5 17 5 1 1 2 1 15 ...</pre>
+
+</article></slide><slide class=''><hgroup><h2>身為資料分析師，一定要有的好習慣！</h2></hgroup><article >
+
+<ul>
+<li>暸解基本的各變數統計量值</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>summary(data)</pre>
+
+<pre >     city          district        trac_year     trac_month   
+ 高雄市:34460   淡水區 :  7172   Min.   :102   12     :15206  
+ 臺北市:24238   西屯區 :  5974   1st Qu.:102   5      :15079  
+ 臺中市:37482   新莊區 :  5955   Median :102   4      :14682  
+ 新北市:57418   北屯區 :  5881   Mean   :102   3      :14523  
+                新店區 :  5873   3rd Qu.:102   7      :13805  
+                中和區 :  5719   Max.   :102   6      :13392  
+                (Other):117024                 (Other):66911  
+                trac_type              trac_content   use_type     
+ 房地(土地+建物)     :91613   土地1建物1車位0:66792   工  :  3233  
+ 房地(土地+建物)+車位:61985   土地1建物1車位1:41031   農  :   577  
+                              土地2建物1車位0:14537   其他:  8206  
+                              土地1建物1車位2: 7195   商  : 26205  
+                              土地2建物1車位1: 4787   住  :115377  
+                              土地3建物1車位0: 4691                
+                              (Other)        :14565                
+                      build_type      build_ymd         area_land     
+ 住宅大樓(11層含以上有電梯):70725   Min.   : 100602   Min.   :     0  
+ 公寓(5樓含以下無電梯)     :23211   1st Qu.: 780326   1st Qu.:    13  
+ 透天厝                    :21954   Median : 870506   Median :    22  
+ 華廈(10層含以下有電梯)    :20365   Mean   : 868754   Mean   :    42  
+ 套房(1房1廳1衛)           : 9709   3rd Qu.: 991201   3rd Qu.:    36  
+ 店面(店鋪)                : 2888   Max.   :1030313   Max.   :127088  
+ (Other)                   : 4746                                     
+   area_build      area_park        price_total           price_unit     
+ Min.   :    0   Min.   :      0   Min.   :         0   Min.   :      0  
+ 1st Qu.:   85   1st Qu.:      0   1st Qu.:   4900000   1st Qu.:  42685  
+ Median :  124   Median :      0   Median :   8400000   Median :  67880  
+ Mean   :  153   Mean   :     25   Mean   :  12879580   Mean   :  86176  
+ 3rd Qu.:  179   3rd Qu.:      9   3rd Qu.:  14580000   3rd Qu.: 111173  
+ Max.   :79669   Max.   :2400000   Max.   :8800000000   Max.   :4284119  
+                                                        NA&#39;s   :461      
+      age    
+ Min.   :-1  
+ 1st Qu.: 3  
+ Median :15  
+ Mean   :15  
+ 3rd Qu.:24  
+ Max.   :92  
+             </pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>質化 vs 量化：Bar chart</h2></hgroup><article  id="-vs-bar-chart">
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart">
+
+<ul>
+<li><code>geom_bar</code></li>
+<li>先來看看2013年在各縣市的案件交易量</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>thm &lt;- function() theme(text=element_text(size = 15, family = &quot;STHeiti&quot;)) # 控制字體與大小
+    # STHeiti是只有Mac才有的字體, 用來解決Mac系統中文顯示錯誤的問題
+    # Windows系統使用者請忽略 `+ thm()` 指令</pre>
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=city)) + geom_bar(stat = &quot;count&quot;) + thm() # stat = &quot;count&quot; 算個數</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-1">
+
+<ul>
+<li>看臺北市各行政區的案件交易量</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 資料整理
+data %&gt;% 
+  filter(city == &quot;臺北市&quot;) %&gt;% 
+  group_by(district) %&gt;% 
+  summarise(amount=n()) -&gt; table</pre>
+
+<pre ># A tibble: 12 × 2
+   district amount
+     &lt;fctr&gt;  &lt;int&gt;
+1    北投區   2416
+2    大安區   1755
+3    大同區   1092
+4    南港區    989
+5    內湖區   3598
+6    士林區   1859
+7    松山區   1556
+8    萬華區   1584
+9    文山區   2197
+10   信義區   1585
+11   中山區   4410
+12   中正區   1197</pre>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-2">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x=district,y=amount)) +
+  geom_bar(stat = &quot;identity&quot;) + thm() # stat=&#39;identity&#39;以表格的值做為bar的高度</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-17-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-3">
+
+<ul>
+<li>如何控制長條圖的排序呢？</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 看看這個變數的屬性類型
+class(table$district)</pre>
+
+<pre >[1] &quot;factor&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>
+# 根據amount大小，遞減排序設定level順序
+table$district &lt;- factor(table$district,
+                         levels = table$district[order(desc(table$amount))])
+    # order : 給予你由小到大（desc:由大到小）的元素排序位置</pre>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-4">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x=district,y=amount)) +
+  geom_bar(stat = &quot;identity&quot;) + thm() +
+  labs(titles = &quot;臺北市各行政區交易量&quot;, x = &quot;行政區&quot;, y = &quot;案件數&quot;) </pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-19-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+<pre class = 'prettyprint lang-r'>    # lab用來幫圖形的標題、x軸與y軸做命名</pre>
+
+</article></slide><slide class=''><hgroup><h2>挑戰</h2></hgroup><article >
+
+<ul>
+<li>計算台北市&amp;高雄市的各交易標的(trac_type)所佔比例</li>
+</ul>
+
+<pre >Source: local data frame [10 x 4]
+Groups: city [2]
+
+     city use_type amount  rate
+   &lt;fctr&gt;   &lt;fctr&gt;  &lt;int&gt; &lt;dbl&gt;
+1  高雄市       工    196  0.01
+2  高雄市       農    123  0.00
+3  高雄市     其他    532  0.02
+4  高雄市       商   7582  0.22
+5  高雄市       住  26027  0.76
+6  臺北市       工    442  0.02
+7  臺北市       農      3  0.00
+8  臺北市     其他   1709  0.07
+9  臺北市       商   7323  0.30
+10 臺北市       住  14761  0.61</pre>
+
+</article></slide><slide class=''><hgroup><h2>參考解答</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  filter(city == &quot;臺北市&quot; | city == &quot;高雄市&quot; ) %&gt;% 
+  group_by(city,use_type) %&gt;% 
+  summarise(amount = n()) %&gt;% 
+  mutate(rate = round(amount/sum(amount),2) ) -&gt; table</pre>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart：stack</h2></hgroup><article  id="bar-chartstack">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x = city, y = rate, fill = use_type)) +
+  geom_bar(stat = &#39;identity&#39;, position = &#39;stack&#39;) + thm() # stack類別堆疊</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-22-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart：dodge</h2></hgroup><article  id="bar-chartdodge">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x = city, y = rate, fill = use_type)) +
+  geom_bar(stat = &#39;identity&#39;, position = &#39;dodge&#39;) + thm() # dodge類別並排</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-23-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>量化 vs 量化：Line chart</h2></hgroup><article  id="-vs-line-chart">
+
+</article></slide><slide class=''><hgroup><h2>Line chart</h2></hgroup><article  id="line-chart">
+
+<ul>
+<li>各月份交易量</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  group_by(trac_month) %&gt;% 
+  summarise(amount=n()) -&gt; table
+table %&gt;% 
+  ggplot(aes(x=trac_month,y=amount,group=1)) +
+  geom_line() + thm()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-24-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2><code>Multiple</code> Line</h2></hgroup><article  id="multiple-line">
+
+<ul>
+<li>台北市和高雄市的各月份交易量比較</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  group_by(city,trac_month) %&gt;% 
+  summarise(amount=n()) -&gt; table
+table %&gt;% 
+  ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
+  geom_line() + thm()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-25-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Histogram</h2></hgroup><article  id="histogram">
+
+</article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-1">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=age, y =..count..)) + 
+  geom_histogram()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-26-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-2">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=age, y =..density..)) + 
+  geom_histogram()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-27-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-3">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=age, y =..density.., fill =..count..)) + 
+  geom_histogram(binwidth=.5) </pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-28-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Histogram + density</h2></hgroup><article  id="histogram-density">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=age,y=..count..)) + 
+  geom_histogram(binwidth=.5,
+                 colour=&quot;black&quot;, fill=&quot;white&quot;) +
+  geom_density(alpha=.2, fill=&quot;#FF6666&quot;)</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-29-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>boxplot</h2></hgroup><article  id="boxplot">
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=city,y=price_unit)) + 
+  geom_boxplot() + thm()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-30-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section-1">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=city,y=log(price_unit))) + 
+  geom_boxplot() + thm()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-31-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Scatter plot</h2></hgroup><article  id="scatter-plot">
+
+</article></slide><slide class=''><hgroup><h2>Scatter plot</h2></hgroup><article  id="scatter-plot-1">
+
+<ul>
+<li><code>geom_point</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>iris %&gt;% 
+  ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
+  geom_point(shape=1, size=2) # shape控制圖示；size控制點的大小</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-32-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Scatter plot</h2></hgroup><article  id="scatter-plot-2">
+
+<ul>
+<li>參數放在aes()函數裡面，表示資料依據指定欄位內容做不同的shape/size變化</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>iris %&gt;% 
+  ggplot(aes(x=Sepal.Length, y=Petal.Length, 
+             color=Species, shape = Species, size = Species)) + 
+  scale_shape_manual(values=c(1,5,7)) +  # 控制 shape 顯示圖示
+  scale_size_manual(values=c(1,2,3)) +   # 控制圖示 size 顯示大小
+  geom_point() </pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-33-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>進階技巧</h2></hgroup><article >
+
+</article></slide><slide class=''><hgroup><h2><code>stat</code>istics</h2></hgroup><article  id="statistics">
+
+<pre class = 'prettyprint lang-r'>data %&gt;%  
+  filter(district == &quot;大同區&quot;) %&gt;% 
+  ggplot(aes(x = area_build, y = price_total)) +
+  geom_point() + stat_smooth()+ thm()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-34-1.png" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2>facet</h2></hgroup><article  id="facet">
+
+<ul>
+<li>資料整理</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  group_by(city,trac_month) %&gt;% #選擇年度、醫療層級、縣市作為分群
+  summarise(total = n()) -&gt; table # 計算分裙下的總人數</pre>
+
+</article></slide><slide class=''><hgroup><h2>facet</h2></hgroup><article  id="facet-1">
+
+<ul>
+<li><p>theme(axis.text.x = element_text(angle = 90, hjust = 1)) #控制字的方向</p></li>
+<li><p>coord_flip()</p></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x = trac_month, y = total ,fill = city))+
+    geom_bar(stat=&#39;identity&#39;) + thm() +
+    facet_wrap( ~ city , nrow = 2)</pre>
+
+</article></slide><slide class=''><hgroup><h2>coord_flip()</h2></hgroup><article  id="coord_flip">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x = trac_month, y = total ,fill = city))+
+    geom_bar(stat=&#39;identity&#39;) + thm() +
+    facet_wrap( ~ city , nrow = 2) +
+    coord_flip()</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-37-1.png" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2>圖形輸出</h2></hgroup><article >
+
+<ul>
+<li>利用RStudio UI介面存擋</li>
+<li>畫完圖之後，再存檔~~</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>ggsave(&#39;檔案名稱&#39;)
+ggsave(&quot;plot.pdf&quot;, width = 4, height = 4)
+ggsave(&quot;plot.png&quot;, width = 4, height = 4, dpi = 300)</pre>
+
+</article></slide><slide class=''><hgroup><h2>學習資源</h2></hgroup><article >
+
+<ul>
+<li><p><a href='http://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf' title=''>ggplot2 cheat sheet from RStudioInc.</a></p></li>
+<li><p><a href='http://www.cookbook-r.com/Graphs/' title=''>Graphs with ggplot2</a></p></li>
+<li><p><a href='http://docs.ggplot2.org/current/index.html' title=''>ggplot2 官方文件</a></p></li>
+<li><p><a href='http://docs.ggplot2.org/current/scale_brewer.html' title=''>Rcpolorbrewer調色盤</a></p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>掌握心法後，如何自行利用R解決問題</h2></hgroup><article  id="r">
+
+<ul>
+<li>了解自己的需求，詢問關鍵字與函數</li>
+<li><a href='http://www.meetup.com/Taiwan-R' title=''>Taiwan R User Group</a></li>
+<li><a href='https://www.ptt.cc/bbs/R_Language/index.html' title=''>ptt R_Language版</a></li>
+<li><a href='https://groups.google.com/forum/#!forum/taiwanruser' title=''>R軟體使用者論壇</a></li>
+<li><a href='http://stackoverflow.com/' title=''>StackOverflow</a></li>
+<li>歡迎來信 <a href='mailto:ling32342@gmail.com' title=''>ling32342@gmail.com</a> 與我一起交流！</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
