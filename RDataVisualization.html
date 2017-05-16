@@ -52,6 +52,14 @@
   <script src="RDataVisualization_files/ioslides-13.5.1/js/hammer.js"></script>
   <script src="RDataVisualization_files/ioslides-13.5.1/js/slide-controller.js"></script>
   <script src="RDataVisualization_files/ioslides-13.5.1/js/slide-deck.js"></script>
+  <script src="RDataVisualization_files/htmlwidgets-0.8/htmlwidgets.js"></script>
+  <link href="RDataVisualization_files/plotlyjs-1.27.0/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="RDataVisualization_files/plotlyjs-1.27.0/plotly-latest.min.js"></script>
+  <script src="RDataVisualization_files/plotly-binding-4.6.0.9000/plotly.js"></script>
+  <script src="RDataVisualization_files/jquery-1.11.3/jquery.min.js"></script>
+  <link href="RDataVisualization_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+  <script src="RDataVisualization_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+  <script src="RDataVisualization_files/typedarray-0.1/typedarray.min.js"></script>
 
   <style type="text/css">
 
@@ -108,20 +116,20 @@
 <li><code>ggplot2</code> in R
 
 <ul>
-<li>基本介紹</li>
-<li>基本架構</li>
+<li>基本架構介紹</li>
 <li>起手式(基本語法)</li>
 <li>應用(各種圖形的呈現)
 
 <ul>
-<li>Bar</li>
-<li>Line</li>
-<li>Histogram</li>
-<li>point</li>
+<li><code>Bar</code></li>
+<li><code>Line</code></li>
+<li><code>Histogram</code></li>
+<li><code>Boxplot</code></li>
+<li><code>point</code></li>
 </ul></li>
-<li>進階技巧傳承篇</li>
+<li>進階技巧</li>
 </ul></li>
-<li>互動視覺化</li>
+<li>互動式視覺化呈現</li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Data Visualization</h2></hgroup><article  id="data-visualization">
@@ -131,8 +139,6 @@
 <li>教學、研究、宣傳</li>
 <li>美學、功能兼顧</li>
 <li>統計圖形、訊息可視化</li>
-<li>參考Johnson於DSHC meetp的<a href='http://goo.gl/xYorRm' title=''>DataViz 介紹</a></li>
-<li>Bonus from Alger<a href='http://rpubs.com/lofuyang/167269' title=''>Highchart Introduction</a></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>ggplot2簡介</h2></hgroup><article  id="ggplot2">
@@ -197,12 +203,42 @@
 <li>常用的類型諸如：<code>geom_bar</code>, <code>geom_line</code>, <code>geom_points</code>, &#8230;</li>
 </ul>
 
-<h3><strong>注意</strong></h3>
+</article></slide><slide class=''><hgroup><h2>Various functions</h2></hgroup><article  id="various-functions">
+
+<pre class = 'prettyprint lang-r'>library(ggplot2)
+# list all geom
+ls(pattern = &#39;^geom_&#39;, env = as.environment(&#39;package:ggplot2&#39;))</pre>
+
+<pre > [1] &quot;geom_abline&quot;     &quot;geom_area&quot;       &quot;geom_bar&quot;       
+ [4] &quot;geom_bin2d&quot;      &quot;geom_blank&quot;      &quot;geom_boxplot&quot;   
+ [7] &quot;geom_col&quot;        &quot;geom_contour&quot;    &quot;geom_count&quot;     
+[10] &quot;geom_crossbar&quot;   &quot;geom_curve&quot;      &quot;geom_density&quot;   
+[13] &quot;geom_density_2d&quot; &quot;geom_density2d&quot;  &quot;geom_dotplot&quot;   
+[16] &quot;geom_errorbar&quot;   &quot;geom_errorbarh&quot;  &quot;geom_freqpoly&quot;  
+[19] &quot;geom_hex&quot;        &quot;geom_histogram&quot;  &quot;geom_hline&quot;     
+[22] &quot;geom_jitter&quot;     &quot;geom_label&quot;      &quot;geom_line&quot;      
+[25] &quot;geom_linerange&quot;  &quot;geom_map&quot;        &quot;geom_path&quot;      
+[28] &quot;geom_point&quot;      &quot;geom_pointrange&quot; &quot;geom_polygon&quot;   
+[31] &quot;geom_qq&quot;         &quot;geom_quantile&quot;   &quot;geom_raster&quot;    
+[34] &quot;geom_rect&quot;       &quot;geom_ribbon&quot;     &quot;geom_rug&quot;       
+[37] &quot;geom_segment&quot;    &quot;geom_smooth&quot;     &quot;geom_spoke&quot;     
+[40] &quot;geom_step&quot;       &quot;geom_text&quot;       &quot;geom_tile&quot;      
+[43] &quot;geom_violin&quot;     &quot;geom_vline&quot;     </pre>
+
+</article></slide><slide class=''><hgroup><h2><strong>注意</strong></h2></hgroup><article >
 
 <ul>
 <li>使用 <code>data.frame</code> 儲存資料 (不可以丟 matrix 物件)</li>
 <li>使用 <code>long format</code> (利用reshape2將資料轉換成 1 row = 1 observation)</li>
 </ul>
+
+<p></br></p>
+
+<center>
+
+<img src='img/wide-long.png' title=''/>
+
+</center>
 
 </article></slide><slide class=''><hgroup><h2>馬上來個範例</h2></hgroup><article  data-background="a.jpeg">
 
@@ -214,7 +250,7 @@ ggplot(data = data, aes(x = 身份, y = 人數)) +
   geom_bar(stat = &quot;identity&quot;) +
   theme_grey(base_family = &quot;STHeiti&quot;) </pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>首先請先安裝以下套件</h2></hgroup><article >
 
@@ -236,14 +272,17 @@ library(reshape2)</pre>
 
 <p></br></p>
 
-<p>注意：下載完套件一定要記得 <code>library</code> 才能使用喲！</p>
+<p><strong>注意</strong>：下載完套件一定要記得 <code>library</code> 才能使用喲！</p>
 
 </article></slide><slide class=''><hgroup><h2>一切從讀檔開始（CSV）</h2></hgroup><article  id="csv">
+
+<ul>
+<li><a href='https://ling32342.github.io/2017_NCCU_R/transaction.csv' title=''>課程資料下載</a></li>
+</ul>
 
 <pre class = 'prettyprint lang-r'>############### 絕對路徑 ###############
 # 請輸入完整的檔案路徑
 data &lt;- read.csv(&quot;/Users/hsiaoling/Desktop/data/transaction.csv&quot;) #如果你是mac
-# 或是
 data &lt;- read.csv(&quot;C:\\Users\\transaction.csv&quot;) #如果你是windows
 
 ############### 相對路徑 ###############
@@ -255,8 +294,28 @@ setwd()
 data &lt;- read.csv(&quot;transaction.csv&quot;) 
 # 若讀入的是亂碼，試試以下
 data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;big5&#39;)  #如果你是mac
-# 或是
 data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;utf-8&#39;) #如果你是windows</pre>
+
+</article></slide><slide class=''><hgroup><h2>資料介紹</h2></hgroup><article >
+
+<pre >    city district trac_year trac_month            trac_type
+1 臺北市   士林區       102          1      房地(土地+建物)
+2 臺北市   中山區       102          1      房地(土地+建物)
+3 臺北市   中山區       102          1 房地(土地+建物)+車位
+4 臺北市   北投區       102          1      房地(土地+建物)
+5 臺北市   中山區       102          1      房地(土地+建物)
+     trac_content use_type                 build_type build_ymd area_land
+1 土地1建物1車位0       住      公寓(5樓含以下無電梯)    701109      35.0
+2 土地1建物1車位0       商 住宅大樓(11層含以上有電梯)    701228      10.7
+3 土地1建物1車位1       商            套房(1房1廳1衛)    970114       8.5
+4 土地1建物1車位0       商 住宅大樓(11層含以上有電梯)    851218       4.7
+5 土地1建物1車位0       住     華廈(10層含以下有電梯)    970624      31.0
+  area_build area_park price_total price_unit age
+1         61       0.0     6380000     105263  32
+2        104       0.0    12010000     114928  32
+3         52       8.6    10080000     194070   5
+4         39       0.0     4600000     116900  17
+5        185       0.0    23800000     128510   5</pre>
 
 </article></slide><slide class=''><hgroup><h2>欄位說明</h2></hgroup><article >
 
@@ -406,9 +465,9 @@ data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;utf-8&#39;) 
  Max.   :92  
              </pre>
 
-</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>質化 vs 量化：Bar chart</h2></hgroup><article  id="-vs-bar-chart">
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Bar chart</h2></hgroup><article  id="bar-chart">
 
-</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart">
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-1">
 
 <ul>
 <li><code>geom_bar</code></li>
@@ -417,14 +476,34 @@ data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;utf-8&#39;) 
 
 <pre class = 'prettyprint lang-r'>thm &lt;- function() theme(text=element_text(size = 15, family = &quot;STHeiti&quot;)) # 控制字體與大小
     # STHeiti是只有Mac才有的字體, 用來解決Mac系統中文顯示錯誤的問題
-    # Windows系統使用者請忽略 `+ thm()` 指令</pre>
-
-<pre class = 'prettyprint lang-r'>data %&gt;% 
+    # Windows系統使用者請忽略 `+ thm()` 指令
+data %&gt;% 
   ggplot(aes(x=city)) + geom_bar(stat = &quot;count&quot;) + thm() # stat = &quot;count&quot; 算個數</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-15-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-1">
+</article></slide><slide class=''><hgroup><h2>Change labels!</h2></hgroup><article  id="change-labels">
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=city)) + geom_bar(stat = &quot;count&quot;) + thm() +
+  labs(title=&quot;各縣市交易量&quot;,x=&quot;縣市&quot;,y=&quot;交易量&quot;) # lab用來幫圖形的標題、x軸與y軸做命名</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-16-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Change colors!</h2></hgroup><article  id="change-colors">
+
+<ul>
+<li>顏色調整：<code>color</code> vs <code>fill</code>?</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>data %&gt;% 
+  ggplot(aes(x=city)) + geom_bar(stat = &quot;count&quot;) + thm() +
+  labs(title=&quot;各縣市交易量&quot;,x=&quot;縣市&quot;,y=&quot;交易量&quot;) +
+  geom_bar(fill=&#39;snow&#39;, color=&#39;black&#39;) # see colors() if you&#39;re picky</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-17-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-2">
 
 <ul>
 <li>看臺北市各行政區的案件交易量</li>
@@ -434,7 +513,7 @@ data &lt;- read.csv(&quot;transaction.csv&quot;,fileEncoding = &#39;utf-8&#39;) 
 data %&gt;% 
   filter(city == &quot;臺北市&quot;) %&gt;% 
   group_by(district) %&gt;% 
-  summarise(amount=n()) -&gt; table</pre>
+  summarise(amount=n()) -&gt; table # dplyr::n 用來計數</pre>
 
 <pre ># A tibble: 12 × 2
    district amount
@@ -452,46 +531,27 @@ data %&gt;%
 11   中山區   4410
 12   中正區   1197</pre>
 
-</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-2">
+</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-3">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
   ggplot(aes(x=district,y=amount)) +
   geom_bar(stat = &quot;identity&quot;) + thm() # stat=&#39;identity&#39;以表格的值做為bar的高度</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-17-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-20-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-3">
-
-<ul>
-<li>如何控制長條圖的排序呢？</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'># 看看這個變數的屬性類型
-class(table$district)</pre>
-
-<pre >[1] &quot;factor&quot;</pre>
-
-<pre class = 'prettyprint lang-r'>
-# 根據amount大小，遞減排序設定level順序
-table$district &lt;- factor(table$district,
-                         levels = table$district[order(desc(table$amount))])
-    # order : 給予你由小到大（desc:由大到小）的元素排序位置</pre>
-
-</article></slide><slide class=''><hgroup><h2>Bar chart</h2></hgroup><article  id="bar-chart-4">
+</article></slide><slide class=''><hgroup><h2>Reoder x</h2></hgroup><article  id="reoder-x">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
-  ggplot(aes(x=district,y=amount)) +
-  geom_bar(stat = &quot;identity&quot;) + thm() +
-  labs(titles = &quot;臺北市各行政區交易量&quot;, x = &quot;行政區&quot;, y = &quot;案件數&quot;) </pre>
+  ggplot(aes(x=reorder(district,-amount), y=amount)) +
+  geom_bar(stat=&#39;identity&#39;) + thm() +
+  labs(titles = &quot;臺北市各行政區交易量&quot;, x = &quot;行政區&quot;, y = &quot;案件數&quot;)</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-19-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-21-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-<pre class = 'prettyprint lang-r'>    # lab用來幫圖形的標題、x軸與y軸做命名</pre>
-
-</article></slide><slide class=''><hgroup><h2>挑戰</h2></hgroup><article >
+</article></slide><slide class=''><hgroup><h2>小挑戰</h2></hgroup><article >
 
 <ul>
-<li>計算台北市&amp;高雄市的各交易標的(trac_type)所佔比例</li>
+<li>計算臺北市&amp;高雄市的各使用分區或編定(<code>use_type</code>)所佔比例</li>
 </ul>
 
 <pre >Source: local data frame [10 x 4]
@@ -499,16 +559,16 @@ Groups: city [2]
 
      city use_type amount  rate
    &lt;fctr&gt;   &lt;fctr&gt;  &lt;int&gt; &lt;dbl&gt;
-1  高雄市       工    196  0.01
-2  高雄市       農    123  0.00
-3  高雄市     其他    532  0.02
-4  高雄市       商   7582  0.22
-5  高雄市       住  26027  0.76
-6  臺北市       工    442  0.02
-7  臺北市       農      3  0.00
-8  臺北市     其他   1709  0.07
-9  臺北市       商   7323  0.30
-10 臺北市       住  14761  0.61</pre>
+1  高雄市       工    196 0.006
+2  高雄市       農    123 0.004
+3  高雄市     其他    532 0.015
+4  高雄市       商   7582 0.220
+5  高雄市       住  26027 0.755
+6  臺北市       工    442 0.018
+7  臺北市       農      3 0.000
+8  臺北市     其他   1709 0.071
+9  臺北市       商   7323 0.302
+10 臺北市       住  14761 0.609</pre>
 
 </article></slide><slide class=''><hgroup><h2>參考解答</h2></hgroup><article >
 
@@ -518,107 +578,168 @@ Groups: city [2]
   summarise(amount = n()) %&gt;% 
   mutate(rate = round(amount/sum(amount),2) ) -&gt; table</pre>
 
-</article></slide><slide class=''><hgroup><h2>Bar chart：stack</h2></hgroup><article  id="bar-chartstack">
+</article></slide><slide class=''><hgroup><h2>Grouping：<code>stack</code></h2></hgroup><article  id="groupingstack">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
   ggplot(aes(x = city, y = rate, fill = use_type)) +
   geom_bar(stat = &#39;identity&#39;, position = &#39;stack&#39;) + thm() # stack類別堆疊</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-22-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-24-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class=''><hgroup><h2>Bar chart：dodge</h2></hgroup><article  id="bar-chartdodge">
+</article></slide><slide class=''><hgroup><h2>Grouping：<code>dodge</code></h2></hgroup><article  id="groupingdodge">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
   ggplot(aes(x = city, y = rate, fill = use_type)) +
-  geom_bar(stat = &#39;identity&#39;, position = &#39;dodge&#39;) + thm() # dodge類別並排</pre>
+  geom_bar(stat = &#39;identity&#39;, position = &#39;dodge&#39;)  + # dodge類別並排
+  thm() + scale_fill_discrete(name  =&quot;使用分區或編定&quot;)  # 設定圖例的顯示</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-23-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-25-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>量化 vs 量化：Line chart</h2></hgroup><article  id="-vs-line-chart">
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Line chart</h2></hgroup><article  id="line-chart">
 
-</article></slide><slide class=''><hgroup><h2>Line chart</h2></hgroup><article  id="line-chart">
+</article></slide><slide class=''><hgroup><h2>Line chart</h2></hgroup><article  id="line-chart-1">
 
 <ul>
+<li><code>geom_line</code></li>
 <li>各月份交易量</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   group_by(trac_month) %&gt;% 
   summarise(amount=n()) -&gt; table
-table %&gt;% 
-  ggplot(aes(x=trac_month,y=amount,group=1)) +
-  geom_line() + thm()</pre>
+table</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-24-1.png" width="720" style="display: block; margin: auto;" /></p>
+<pre ># A tibble: 12 × 2
+   trac_month amount
+       &lt;fctr&gt;  &lt;int&gt;
+1           1  10367
+2           2   7871
+3           3  14523
+4           4  14682
+5           5  15079
+6           6  13392
+7           7  13805
+8           8  11714
+9           9  10814
+10         10  13166
+11         11  12979
+12         12  15206</pre>
+
+</article></slide><slide class=''><hgroup><h2>Line chart</h2></hgroup><article  id="line-chart-2">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x=trac_month,y=amount,group=1)) +
+  geom_line() + thm() + labs(x = &quot;交易月份&quot; , y = &quot;交易數量&quot;)</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-27-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2><code>Multiple</code> Line</h2></hgroup><article  id="multiple-line">
 
 <ul>
-<li>台北市和高雄市的各月份交易量比較</li>
+<li>各縣市各月份交易量比較</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   group_by(city,trac_month) %&gt;% 
   summarise(amount=n()) -&gt; table
-table %&gt;% 
-  ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
-  geom_line() + thm()</pre>
+table</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-25-1.png" width="720" style="display: block; margin: auto;" /></p>
+<pre >Source: local data frame [48 x 3]
+Groups: city [?]
+
+     city trac_month amount
+   &lt;fctr&gt;     &lt;fctr&gt;  &lt;int&gt;
+1  高雄市          1   2511
+2  高雄市          2   1897
+3  高雄市          3   3355
+4  高雄市          4   3524
+5  高雄市          5   3378
+6  高雄市          6   3097
+7  高雄市          7   3063
+8  高雄市          8   2573
+9  高雄市          9   2354
+10 高雄市         10   2590
+# ... with 38 more rows</pre>
+
+</article></slide><slide class=''><hgroup><h2><code>Multiple</code> Line</h2></hgroup><article  id="multiple-line-1">
+
+<pre class = 'prettyprint lang-r'>table %&gt;% 
+  ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
+  geom_line() + geom_point() + thm() + 
+  labs(x = &quot;交易月份&quot; , y = &quot;交易數量&quot;)</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-29-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Histogram</h2></hgroup><article  id="histogram">
 
 </article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-1">
 
+<ul>
+<li><code>geom_histogram</code></li>
+</ul>
+
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   ggplot(aes(x=age, y =..count..)) + 
   geom_histogram()</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-26-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-30-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-2">
+
+<ul>
+<li><code>aes(y=..count..)</code> vs. <code>aes(y=..density..)</code></li>
+</ul>
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   ggplot(aes(x=age, y =..density..)) + 
   geom_histogram()</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-27-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-31-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>Histogram</h2></hgroup><article  id="histogram-3">
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
-  ggplot(aes(x=age, y =..density.., fill =..count..)) + 
+  ggplot(aes(x=age, y =..density.., fill =..count..)) + # fill 依指定欄位填色
   geom_histogram(binwidth=.5) </pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-28-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-32-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>Histogram + density</h2></hgroup><article  id="histogram-density">
 
+<ul>
+<li><code>geom_histogram()</code> + <code>geom_density()</code></li>
+</ul>
+
 <pre class = 'prettyprint lang-r'>data %&gt;% 
-  ggplot(aes(x=age,y=..count..)) + 
-  geom_histogram(binwidth=.5,
-                 colour=&quot;black&quot;, fill=&quot;white&quot;) +
-  geom_density(alpha=.2, fill=&quot;#FF6666&quot;)</pre>
+  ggplot(aes(x=age,y=..density..)) + 
+  geom_histogram(color=&quot;black&quot;, fill=&quot;white&quot;) +
+  geom_density(alpha=.2, fill=&quot;#FF6666&quot;) # alpha設定透明度</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-29-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-33-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>boxplot</h2></hgroup><article  id="boxplot">
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Boxplot</h2></hgroup><article  id="boxplot">
 
-</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section">
+</article></slide><slide class=''><hgroup><h2>Boxplot</h2></hgroup><article  id="boxplot-1">
+
+<ul>
+<li><code>geom_boxplot</code></li>
+</ul>
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   ggplot(aes(x=city,y=price_unit)) + 
-  geom_boxplot() + thm()</pre>
+  geom_boxplot() + thm() + 
+  labs(x = &quot;縣市&quot; , y = &quot;每平方公尺價格(元)&quot;)</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-30-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-34-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section-1">
+</article></slide><slide class=''><hgroup><h2>Boxplot</h2></hgroup><article  id="boxplot-2">
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
   ggplot(aes(x=city,y=log(price_unit))) + 
-  geom_boxplot() + thm()</pre>
+  geom_boxplot() + thm() + 
+  labs(x = &quot;縣市&quot; , y = &quot;log(每平方公尺價格(元))&quot;)</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-31-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-35-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Scatter plot</h2></hgroup><article  id="scatter-plot">
 
@@ -632,7 +753,15 @@ table %&gt;%
   ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
   geom_point(shape=1, size=2) # shape控制圖示；size控制點的大小</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-32-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-36-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>point shape types in <code>ggplot2</code></h2></hgroup><article  id="point-shape-types-in-ggplot2">
+
+<center>
+
+<img src='img/point_shape_types.png' style='height: 500px' align="middle"></img>
+
+</center>
 
 </article></slide><slide class=''><hgroup><h2>Scatter plot</h2></hgroup><article  id="scatter-plot-2">
 
@@ -642,55 +771,62 @@ table %&gt;%
 
 <pre class = 'prettyprint lang-r'>iris %&gt;% 
   ggplot(aes(x=Sepal.Length, y=Petal.Length, 
-             color=Species, shape = Species, size = Species)) + 
+             color=Species, shape = Species, size = Species)) + geom_point() +
   scale_shape_manual(values=c(1,5,7)) +  # 控制 shape 顯示圖示
-  scale_size_manual(values=c(1,2,3)) +   # 控制圖示 size 顯示大小
-  geom_point() </pre>
+  scale_size_manual(values=c(1,2,3))   # 控制圖示 size 顯示大小</pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-33-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-37-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>進階技巧</h2></hgroup><article >
 
 </article></slide><slide class=''><hgroup><h2><code>stat</code>istics</h2></hgroup><article  id="statistics">
 
-<pre class = 'prettyprint lang-r'>data %&gt;%  
-  filter(district == &quot;大同區&quot;) %&gt;% 
-  ggplot(aes(x = area_build, y = price_total)) +
-  geom_point() + stat_smooth()+ thm()</pre>
+<ul>
+<li>Fit regression line</li>
+</ul>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-34-1.png" width="720" /></p>
+<pre class = 'prettyprint lang-r'>iris %&gt;% 
+  ggplot(aes(x = Sepal.Length, y = Petal.Length)) + 
+  geom_point() +
+  stat_smooth(method=lm, level=.95) # add se=FALSE to disable CI</pre>
 
-</article></slide><slide class=''><hgroup><h2>facet</h2></hgroup><article  id="facet">
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-38-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2><code>facet</code></h2></hgroup><article  id="facet">
 
 <ul>
-<li>資料整理</li>
+<li>比較各縣市在各月份下的交易量</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>data %&gt;% 
-  group_by(city,trac_month) %&gt;% #選擇年度、醫療層級、縣市作為分群
-  summarise(total = n()) -&gt; table # 計算分裙下的總人數</pre>
+  group_by(city,trac_month) %&gt;% # 選擇縣市、交易月份作為分群
+  summarise(total = n()) -&gt; table # 計算分群下的總數
+table %&gt;% 
+  ggplot(aes(x = trac_month, y = total ,fill = city))+
+    geom_bar(stat=&#39;identity&#39;) + thm()</pre>
 
-</article></slide><slide class=''><hgroup><h2>facet</h2></hgroup><article  id="facet-1">
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-39-1.png" width="720" style="display: block; margin: auto;" /></p>
 
-<ul>
-<li><p>theme(axis.text.x = element_text(angle = 90, hjust = 1)) #控制字的方向</p></li>
-<li><p>coord_flip()</p></li>
-</ul>
+</article></slide><slide class=''><hgroup><h2><code>facet</code></h2></hgroup><article  id="facet-1">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
   ggplot(aes(x = trac_month, y = total ,fill = city))+
     geom_bar(stat=&#39;identity&#39;) + thm() +
-    facet_wrap( ~ city , nrow = 2)</pre>
+    facet_wrap( ~city , nrow = 2) +
+    labs(x = &quot;交易月份&quot; ,y=&quot;交易量&quot;)</pre>
 
-</article></slide><slide class=''><hgroup><h2>coord_flip()</h2></hgroup><article  id="coord_flip">
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-40-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2><code>coord</code>_flip()</h2></hgroup><article  id="coord_flip">
 
 <pre class = 'prettyprint lang-r'>table %&gt;% 
   ggplot(aes(x = trac_month, y = total ,fill = city))+
     geom_bar(stat=&#39;identity&#39;) + thm() +
     facet_wrap( ~ city , nrow = 2) +
-    coord_flip()</pre>
+    labs(x = &quot;交易月份&quot; ,y=&quot;交易量&quot;) +
+    coord_flip() </pre>
 
-<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-37-1.png" width="720" /></p>
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-41-1.png" width="720" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>圖形輸出</h2></hgroup><article >
 
@@ -703,24 +839,86 @@ table %&gt;%
 ggsave(&quot;plot.pdf&quot;, width = 4, height = 4)
 ggsave(&quot;plot.png&quot;, width = 4, height = 4, dpi = 300)</pre>
 
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>互動式視覺化呈現</h2></hgroup><article >
+
+</article></slide><slide class=''><hgroup><h2>package：<code>Plotly</code></h2></hgroup><article  id="packageplotly">
+
+<ul>
+<li>Plotly是一個資料視覺化的R套件，以簡單的方式，讓資料能夠產生互動的效果。</li>
+<li>提供一個合作平台，使用者能夠將自己在R中繪製的圖存上屬於自己的Plotly平台上。</li>
+<li><a href='https://plot.ly/' title=''>Plotly官方網站</a></li>
+<li>結合了各式各樣的API，包裝<code>Python</code>、<code>R</code>、<code>Malab</code>、&#8230;等等</li>
+</ul>
+
+<ul class = 'build'>
+<li>當然～ggplot2也能夠輕易地使用plotly轉換成互動式的圖表！！</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>套件安裝</h2></hgroup><article >
+
+<ul>
+<li>直接從<code>CRAN</code>內下載</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># Plotly is now on CRAN!
+install.packages(&quot;plotly&quot;)
+# install the latest development version (on GitHub) via devtools</pre>
+
+<ul>
+<li><code>或是</code>從<code>github</code>上下載，但前提是<code>先</code>安裝<code>devtools</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;ropensci/plotly&quot;)</pre>
+
+<p></br></p>
+
+<ul>
+<li>安裝完，一樣別忘了要<code>library</code>！</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(plotly)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Point with <code>ggplot2</code></h2></hgroup><article  id="point-with-ggplot2">
+
+<ul>
+<li>先將要畫的圖存成一個物件</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>iris %&gt;% 
+  ggplot(aes(Petal.Width, Sepal.Length, colour=Species)) +
+    geom_point() -&gt; a
+a</pre>
+
+<p><img src="RDataVisualization_files/figure-html/unnamed-chunk-46-1.png" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Point with <code>ggplotly</code></h2></hgroup><article  id="point-with-ggplotly">
+
+<pre class = 'prettyprint lang-r'>ggplotly(a)</pre>
+
+<div id="16ba6269e4f4" style="width:720px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="16ba6269e4f4">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"text":["Petal.Width: 0.2<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.9<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.7<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.6<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.4<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 4.6<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.4<br />Species: setosa","Petal.Width: 0.1<br />Sepal.Length: 4.9<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.4<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.8<br />Species: setosa","Petal.Width: 0.1<br />Sepal.Length: 4.8<br />Species: setosa","Petal.Width: 0.1<br />Sepal.Length: 4.3<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.8<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.7<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.4<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 5.7<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.4<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.6<br />Species: setosa","Petal.Width: 0.5<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.8<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.2<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.2<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.7<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.8<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.4<br />Species: setosa","Petal.Width: 0.1<br />Sepal.Length: 5.2<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.5<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.9<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.5<br />Species: setosa","Petal.Width: 0.1<br />Sepal.Length: 4.9<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.4<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 4.5<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.4<br />Species: setosa","Petal.Width: 0.6<br />Sepal.Length: 5.0<br />Species: setosa","Petal.Width: 0.4<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.3<br />Sepal.Length: 4.8<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.1<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 4.6<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.3<br />Species: setosa","Petal.Width: 0.2<br />Sepal.Length: 5.0<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":null,"yaxis":null,"hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"text":["Petal.Width: 1.4<br />Sepal.Length: 7.0<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.4<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.9<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.5<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.5<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.7<br />Species: versicolor","Petal.Width: 1.6<br />Sepal.Length: 6.3<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 6.6<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 5.2<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 5.9<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 6.0<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 6.1<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.6<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 6.7<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 5.6<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 5.8<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.2<br />Species: versicolor","Petal.Width: 1.1<br />Sepal.Length: 5.6<br />Species: versicolor","Petal.Width: 1.8<br />Sepal.Length: 5.9<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 6.1<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.3<br />Species: versicolor","Petal.Width: 1.2<br />Sepal.Length: 6.1<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 6.4<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 6.6<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 6.8<br />Species: versicolor","Petal.Width: 1.7<br />Sepal.Length: 6.7<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.0<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 5.7<br />Species: versicolor","Petal.Width: 1.1<br />Sepal.Length: 5.5<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 5.5<br />Species: versicolor","Petal.Width: 1.2<br />Sepal.Length: 5.8<br />Species: versicolor","Petal.Width: 1.6<br />Sepal.Length: 6.0<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 5.4<br />Species: versicolor","Petal.Width: 1.6<br />Sepal.Length: 6.0<br />Species: versicolor","Petal.Width: 1.5<br />Sepal.Length: 6.7<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 6.3<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.6<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.5<br />Species: versicolor","Petal.Width: 1.2<br />Sepal.Length: 5.5<br />Species: versicolor","Petal.Width: 1.4<br />Sepal.Length: 6.1<br />Species: versicolor","Petal.Width: 1.2<br />Sepal.Length: 5.8<br />Species: versicolor","Petal.Width: 1.0<br />Sepal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.6<br />Species: versicolor","Petal.Width: 1.2<br />Sepal.Length: 5.7<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.7<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 6.2<br />Species: versicolor","Petal.Width: 1.1<br />Sepal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.3<br />Sepal.Length: 5.7<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":null,"yaxis":null,"hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"text":["Petal.Width: 2.5<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 1.9<br />Sepal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 7.1<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 2.2<br />Sepal.Length: 6.5<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 7.6<br />Species: virginica","Petal.Width: 1.7<br />Sepal.Length: 4.9<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 7.3<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.7<br />Species: virginica","Petal.Width: 2.5<br />Sepal.Length: 7.2<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 6.5<br />Species: virginica","Petal.Width: 1.9<br />Sepal.Length: 6.4<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 6.8<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 5.7<br />Species: virginica","Petal.Width: 2.4<br />Sepal.Length: 5.8<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.4<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.5<br />Species: virginica","Petal.Width: 2.2<br />Sepal.Length: 7.7<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 7.7<br />Species: virginica","Petal.Width: 1.5<br />Sepal.Length: 6.0<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.9<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 5.6<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 7.7<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 7.2<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.2<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.1<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 6.4<br />Species: virginica","Petal.Width: 1.6<br />Sepal.Length: 7.2<br />Species: virginica","Petal.Width: 1.9<br />Sepal.Length: 7.4<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 7.9<br />Species: virginica","Petal.Width: 2.2<br />Sepal.Length: 6.4<br />Species: virginica","Petal.Width: 1.5<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 1.4<br />Sepal.Length: 6.1<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 7.7<br />Species: virginica","Petal.Width: 2.4<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.4<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 6.0<br />Species: virginica","Petal.Width: 2.1<br />Sepal.Length: 6.9<br />Species: virginica","Petal.Width: 2.4<br />Sepal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.9<br />Species: virginica","Petal.Width: 1.9<br />Sepal.Length: 5.8<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.8<br />Species: virginica","Petal.Width: 2.5<br />Sepal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.7<br />Species: virginica","Petal.Width: 1.9<br />Sepal.Length: 6.3<br />Species: virginica","Petal.Width: 2.0<br />Sepal.Length: 6.5<br />Species: virginica","Petal.Width: 2.3<br />Sepal.Length: 6.2<br />Species: virginica","Petal.Width: 1.8<br />Sepal.Length: 5.9<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":null,"yaxis":null,"hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.958904109589,"r":7.30593607305936,"b":40.9132420091324,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"type":"linear","autorange":false,"tickmode":"array","range":[-0.02,2.62],"ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Petal.Width","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"type":"linear","autorange":false,"tickmode":"array","range":[4.12,8.08],"ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Sepal.Length","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.93503937007874},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest"},"source":"A","attrs":{"16ba4a6baa0f":{"x":{},"y":{},"colour":{},"type":"ggplotly"}},"cur_data":"16ba4a6baa0f","visdat":{"16ba4a6baa0f":["function (y) ","x"]},"config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1}},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":{"render":[{"code":"function(el, x) { var ctConfig = crosstalk.var('plotlyCrosstalkOpts').set({\"on\":\"plotly_click\",\"persistent\":false,\"dynamic\":false,\"selectize\":false,\"opacityDim\":0.2,\"selected\":{\"opacity\":1}}); }","data":null}]}}</script>
+
 </article></slide><slide class=''><hgroup><h2>學習資源</h2></hgroup><article >
 
 <ul>
-<li><p><a href='http://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf' title=''>ggplot2 cheat sheet from RStudioInc.</a></p></li>
+<li><p><a href='http://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf' title=''>ggplot2 cheat sheet from RStudio Inc.</a></p></li>
 <li><p><a href='http://www.cookbook-r.com/Graphs/' title=''>Graphs with ggplot2</a></p></li>
 <li><p><a href='http://docs.ggplot2.org/current/index.html' title=''>ggplot2 官方文件</a></p></li>
-<li><p><a href='http://docs.ggplot2.org/current/scale_brewer.html' title=''>Rcpolorbrewer調色盤</a></p></li>
+<li><p><a href='http://docs.ggplot2.org/current/scale_brewer.html' title=''>Rcolorbrewer調色盤</a></p></li>
+<li><p><a href='https://plot.ly/ggplot2/' title=''>Plotly ggplot2 Library</a></p></li>
+<li><p><a href='http://jkunst.com/highcharter/oldindex.html#shiny-integration' title=''>highcharter套件介紹</a></p></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>掌握心法後，如何自行利用R解決問題</h2></hgroup><article  id="r">
 
 <ul>
-<li>了解自己的需求，詢問關鍵字與函數</li>
-<li><a href='http://www.meetup.com/Taiwan-R' title=''>Taiwan R User Group</a></li>
-<li><a href='https://www.ptt.cc/bbs/R_Language/index.html' title=''>ptt R_Language版</a></li>
-<li><a href='https://groups.google.com/forum/#!forum/taiwanruser' title=''>R軟體使用者論壇</a></li>
-<li><a href='http://stackoverflow.com/' title=''>StackOverflow</a></li>
-<li>歡迎來信 <a href='mailto:ling32342@gmail.com' title=''>ling32342@gmail.com</a> 與我一起交流！</li>
+<li><p>了解自己的需求，詢問關鍵字與函數</p></li>
+<li><p><a href='http://www.meetup.com/Taiwan-R' title=''>Taiwan R User Group</a></p></li>
+<li><p><a href='https://www.ptt.cc/bbs/R_Language/index.html' title=''>ptt R_Language版</a></p></li>
+<li><p><a href='https://groups.google.com/forum/#!forum/taiwanruser' title=''>R軟體使用者論壇</a></p></li>
+<li><p><a href='http://stackoverflow.com/' title=''>StackOverflow</a></p></li>
+<li><p>歡迎來信 <a href='mailto:ling32342@gmail.com' title=''>ling32342@gmail.com</a> 與我一起交流！</p></li>
 </ul></article></slide>
 
 
