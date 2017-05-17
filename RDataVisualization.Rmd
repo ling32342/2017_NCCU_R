@@ -444,11 +444,21 @@ data %>%
   labs(x = "縣市" , y = "每平方公尺價格(元)")
 ```
 
+## Change `limits` of axes!
+
+```{r,warning=FALSE,fig.align='center', message=FALSE}
+data %>% 
+  ggplot(aes(x=city,y=price_unit)) + 
+  geom_boxplot() + thm() + 
+  labs(x = "縣市" , y = "每平方公尺價格(元)") + 
+  coord_cartesian(ylim = c(0, 2000000)) # 設定y軸上下界線
+```
+
 ## Boxplot 
 ```{r,warning=FALSE,fig.align='center', message=FALSE}
 data %>% 
   ggplot(aes(x=city,y=log(price_unit))) + 
-  geom_boxplot() + thm() + 
+  geom_boxplot() + thm() + # geom_boxplot(outlier.shape = NA) outlier不顯示
   labs(x = "縣市" , y = "log(每平方公尺價格(元))")
 ```
 
