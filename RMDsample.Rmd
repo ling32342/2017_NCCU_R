@@ -1,0 +1,72 @@
+---
+title: "一週天氣預報"
+author: "我是小弟"
+date: "2017/5/23"
+output: 
+  html_document:
+    keep_md: true
+---
+
+##  在地天氣報馬仔
+
+白天多雲、午後山區易有短暫陣雨，晚起本市因鋒面接近而易有短暫陣雨。
+
+今(22)日天氣穩定，以多雲為主，僅部分山區午後在熱力作用下有短暫陣雨；溫度方面，臺北站測得的高溫為30.4度，低溫為24.1度。
+
+明(22)日白天仍以多雲、午後山區易有短暫陣雨的天氣為主；不過，晚起隨著鋒面接近，本市全區都將轉為易有短暫陣雨的天氣；在溫度方面，預測白天高溫約32度，早晚低溫約24度；由於中午左右稍嫌悶熱，戶外活動請注意補充水分。
+
+
+
+### 台北市１週預報
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+weather <- read.csv("/Users/pineapple/Documents/DSP/DSP集訓班/weatherbig5.csv", fileEncoding = "big5")
+
+day1 <- filter(weather, 早晚=="白天")
+day2 <- mutate(day1, 溫度=paste(高溫,低溫,sep="-"))
+day3 <- select(day2, 天氣, 溫度)
+
+night1 <- filter(weather, 早晚=="晚上")
+night2 <- mutate(night1, 溫度=paste(高溫,低溫,sep="-"))
+night3 <- select(night2, 天氣, 溫度)
+
+out <- data.frame(t(bind_cols(day3, night3)))
+colnames(out) <- day1$日期
+rownames(out) <- c("白天天氣","白天溫度","晚上天氣","晚上溫度")
+
+
+
+```
+
+```{r results='asis', echo=FALSE}
+knitr::kable(out)
+```
+
+
+
+
+### 未來7天預報圖
+
+
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(tidyr)
+dat1 <- mutate(weather, 時間=paste(日期,早晚,sep="\n"))
+dat2 <- select(dat1, 時間, 高溫, 低溫)
+dat3 <- gather(dat2,variable,value,2:3)
+
+ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) + 
+  geom_line() + 
+  labs(x="時間", y="溫度") +
+  theme_gray(base_family="STHeiti") # 顯示中文字 Mac user only
+
+
+```
+

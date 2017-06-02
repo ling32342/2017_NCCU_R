@@ -1,0 +1,272 @@
+---
+title: "實價登錄資料"
+author: "li-yun"
+date: "2017/5/24"
+output: 
+  html_document:
+    theme: united
+    toc : true
+    toc_float: true
+---
+
+##  前情提要
+  我是台中建設公司的小職員，老闆突然想要知道全台灣房屋的市場行情，特別想針對大城市進行投資。\
+  所以命令你在下班前，把房屋的市場報告交出來。
+
+<p style="color:#750000;font-size:18px;">小職員欲哭無淚，好想趕快下班R～～</p>
+
+### 資料分析流程
+
+1.  資料採集
+2.  資料清洗處理
+3.  統計及分析
+4.  視覺呈現
+5.  報告產出
+
+
+##  1.  資料採集
+
+- 有資料之後，請務必一定要先了解資料所記錄的內容
+- 欄位名稱、資料區間、資料筆數...
+- 資料來源
+    - 這分資料來源為**政府開放平台**下載的資料
+
+### 讀檔
+
+- 做資料分析一定要有資料才能進行下去，所以首先是要有資料！
+```{r}
+data <- read.csv("/Users/pineapple/Documents/DSP/DSP集訓班/transaction.csv")
+```
+
+
+### 欄位說明
+
+```{r echo = FALSE,fig.height=3, warning=FALSE, fig.align='center', message=FALSE, results='asis'}
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(highcharter)
+library(DT)
+data.frame(英文欄位名稱=c("city","district","trac_year","trac_month","trac_type","trac_content",
+                   "use_type","build_type","build_ymd","area_land","area_build",
+                   "area_park","price_total","price_unit"),
+           中文欄位名稱=c("縣市","鄉鎮市區","交易年份","交易月份","交易標的","交易筆棟數","使用分區或編定",
+                    "建物型態","建築完成年月","土地移轉總面積.平方公尺.","建物移轉總面積.平方公尺.",
+                    "車位移轉總面積.平方公尺.","總價.元.","單價.元.平方公尺.")) -> name
+
+datatable(name, options = list(pageLength = 14))
+
+```
+
+
+
+### 資料區間
+
+- 必須了解資料區間
+- 分析結果區間
+- 與其他資料結合
+- 觀察欄位可以發現有關於時間紀錄的欄位包括`trac_year`以及`trac_month`
+
+####  資料年
+
+顯示這筆資料皆為民國102年的交易紀錄
+```{r}
+summary(data$trac_year)
+```
+
+
+####  資料月
+
+顯示這筆資料皆為民國102年1月到民國102年12月的交易紀錄
+```{r}
+summary(data$trac_month)
+```
+
+
+####  資料筆數
+
+- 了解資料比數可以幫助判斷需使用的工具
+- 每個軟體可以處理的資料筆數不盡相通
+
+方法：直接看Environment的objects個數
+
+
+####  資料地區
+
+```{r}
+table(data$city)
+```
+
+
+
+
+###  觀察資料
+
+- 可以透過`str(data)`了解資料的型態與特性
+- 利用`summary(data)`暸解基本的各變數統計量值
+- 還有很多方法可以了解你的資料～
+
+
+##  2.  資料清洗處理
+
+- 透過`summary(data)`後，我們可以發現，老闆最關心的價錢有一些奇怪的現象
+- 紀錄價錢的有兩個欄位
+    - 第13欄：**price_total**	總價.元.
+    - 第14欄：**price_unit**	單價.元.平方公尺.
+- 有很多值為0
+- 影響平均房價
+
+```{r}
+summary(data)
+```
+
+### 解決**price_unit**為0的情形
+
+- 使用which
+- 發現雖然平均單價為0，但是總價不為0
+- 單價可以自行運算
+
+```{r eval=FALSE}
+# 觀察單價為0的資料
+data[which(data$price_unit==0),]
+```
+
+
+####  另起爐灶
+
+- 觀察欄位發現這筆資料有紀錄每筆房屋買賣的**area_build**土地移轉總面積.平方公尺.
+- 總價/總面積 = 平均單價
+- 可以使用`dplyr`中的`mutate`新增欄位
+- 或是直接insert新的欄位
+- 新增欄位後，發現還是有單價為零的情形，處理的方式為：
+    - 刪除？
+    - 填補中位數
+    - 依照自己的需求決定
+
+```{r}
+# 寫法mutate
+data_1 <- mutate(data,price_unit_new = price_total/area_build)
+summary(data_1$price_unit_new)
+# 這裡發現紀錄為0的資料很少，所以採取直接刪除
+# != 是不等於的意思
+data_1 <- data_1[which(data_1$price_unit!=0),]
+```
+
+
+
+### 資料內的其它問題
+
+1.  建物型態
+    - 影響到單價
+
+2.  利用 EDA (探索性資料分析) 發現資料的問題以及挖掘資料的價值！
+
+
+
+##  3.  統計及分析
+
+在這一步可以進行進一步的分析\
+
+
+- 北中南地區房屋單價是否有差別\
+- 房屋的年齡是否會影響到售價\
+- 以上問題都可以透過：   \
+    - 圖表觀察\
+    - 使用統計方法檢定\
+
+
+
+##  4.  視覺呈現
+
+參考上禮拜教學文件：[小0大大](https://ling32342.github.io/2017_NCCU_R/RDataVisualization.html#1)
+
+### 不同視覺化套件
+
+- 這次R語言集訓班教的是入門款：ggplot2
+    - 好上手
+    - 資源豐富
+    
+- 每個視覺化的套件都有優缺點
+    - 傳統的plot
+    - ggplot2
+    - plotly
+    - highcharts
+    - ...
+    
+- 熟悉一個套件，其它套件當輔助即可
+
+### For example
+
+#### 用iris來示範(一直被使用可憐的iris)
+
+
+#### ggplot2
+
+```{r}
+# 記得安裝並且library套件
+# install.packages("ggplot2")
+# library(ggplot2)
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) + 
+    geom_point(aes(color=Species, shape=Species)) +
+    xlab("Sepal Length") +  ylab("Sepal Width") +
+    ggtitle("Sepal Length-Width")
+
+```
+
+
+#### plotly
+
+```{r}
+# 記得安裝並且library套件
+# install.packages("plotly")
+# library(plotly)
+iris %>% 
+  plot_ly(x = iris$Sepal.Length, y = iris$Sepal.Width, type = 'scatter',
+          mode = 'markers', symbol = iris$Species, symbols = c('circle','x','triangle-up-open'),
+          color = iris$Species , marker = list(size = 10)) %>% 
+  layout(title =  "Sepal Length-Width",legend = list(orientation = 'h'))
+```
+
+#### highcharts
+
+```{r, message=FALSE, warning=FALSE}
+# 記得安裝並且library套件
+# install.packages("highcharter")
+# library(highcharter)
+hc <- highchart()
+for (Species in unique(iris$Species)) {
+  hc <- hc %>%
+    hc_add_series_scatter(iris$Sepal.Length[iris$Species == Species],
+                          iris$Sepal.Width[iris$Species == Species],
+                          name = sprintf("Species: %s", Species),
+                          showInLegend = TRUE)
+}
+
+hc %>% hc_title(text = "Sepal Length-Width")
+```
+
+
+
+##  5.  報告產出
+
+參考今天的教學文件：[立筠](https://lucy0222.github.io/2017_NCCU_R/Rmarkdown.html#1)
+
+- Rmarkdown
+- 簡報
+
+
+
+
+<p style="color:#750000;font-size:36px;">祝大家越來越熟悉 R 語言～～</p>
+
+
+
+
+
+
+
+
+
+

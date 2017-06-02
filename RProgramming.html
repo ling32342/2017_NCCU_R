@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R Programming</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'R Programming',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'LIYUN (Source from Johnson Hsieh)' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <link href="RProgramming_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="RProgramming_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="RProgramming_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="RProgramming_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="RProgramming_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="css/dsp.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>上禮拜要會的事</h2></hgroup><article >
+
+<ul>
+<li>建立 R 的使用環境</li>
+<li>熟悉 R 語言基礎操作
+
+<ul>
+<li>敘述句、數列</li>
+<li>查詢說明檔</li>
+</ul></li>
+<li>了解 R 語言的物件的結構
+
+<ul>
+<li>變數型態：logical、numeric、character、factor</li>
+<li>資料存放容器：list、data.frame</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>這禮拜目標</h2></hgroup><article >
+
+<ul>
+<li>體會 R 語言的流程控制</li>
+<li>學習 R 語言的資料整理</li>
+<li>確立 R 語言的資料爬析概念</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>資料處理流程</h2></hgroup><article >
+
+<ul>
+<li>資料採集<br/></li>
+<li>資料清洗處理<br/></li>
+<li>統計及分析<br/></li>
+<li>視覺呈現<br/></li>
+<li>報告產出<br/><br/><br/>
+
+<p style="color:#0000C6;font-size:36px;">
+
+這些都是R可以辦到的事情！
+
+</p></li>
+</ul>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch01：表格型文件的輸入與輸出</h2></hgroup><article  id="ch01">
+
+</article></slide><slide class=''><hgroup><h2>讀取表格檔案</h2></hgroup><article >
+
+<ul>
+<li>下載範例資料 <a href='https://lucy0222.github.io/2017_NCCU_R/hsb.csv' title=''>https://lucy0222.github.io/2017_NCCU_R/hsb.csv</a></li>
+<li>利用<code>read.csv</code> 讀取 <code>csv</code> 檔 (一種以逗點分隔欄位的資料格式)</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 可以使用R指令來下載
+url &lt;- &quot;https://lucy0222.github.io/2017_NCCU_R/hsb.csv&quot;
+download.file(url, destfile = &quot;hsb.csv&quot;) # 把檔案另存成hbs.csv
+dat &lt;- read.csv(&quot;hsb.csv&quot;)
+head(dat)</pre>
+
+<pre >   id    sex  race ses schtyp       prog read write math science socst
+1  70   male White   1 public    general   57    52   41      47    57
+2 121 female White   2 public vocational   68    59   53      63    61
+3  86   male White   3 public    general   44    33   54      58    31
+4 141   male White   3 public vocational   63    44   47      53    56
+5 172   male White   2 public   academic   47    52   57      53    61
+6 113   male White   2 public   academic   44    52   51      63    61</pre>
+
+</article></slide><slide class=''><hgroup><h2>讀取表格檔案</h2></hgroup><article  id="-1">
+
+<p>讀取自己電腦裡的csv檔</p>
+
+<pre class = 'prettyprint lang-r'># 方法1. 透過介面選擇檔案所在路徑
+path &lt;- file.choose()
+dat &lt;- read.csv(path)
+
+# 方法2. 自行輸入檔案所在路徑
+path &lt;- &quot;/Volumes/LEEF SURGE/LearnR/hsb.csv&quot;
+dat &lt;- read.csv(path)
+
+# 方法3. 自行輸入檔案相對路徑
+dat &lt;- read.csv(&quot;hsb.csv&quot;)</pre>
+
+</article></slide><slide class=''><hgroup><h2>輸出表格檔案</h2></hgroup><article >
+
+<p>利用<code>write.csv</code>將<code>data.frame</code>格式的R物件另存成csv檔</p>
+
+<pre class = 'prettyprint lang-r'>write.csv(dat, &quot;hsb_new.csv&quot;, row.names=FALSE, quote=FALSE)</pre>
+
+</article></slide><slide class=''><hgroup><h2>淺談路徑設定</h2></hgroup><article >
+
+<ul>
+<li><code>getwd</code> 查詢目前所在的資料夾路徑 (絕對路徑)</li>
+<li><code>setwd</code> 設定所在的資料夾路徑 <br> (Session -&gt; Set Working Directory -&gt; Choose Directory)</li>
+<li>檔案 (檔案路徑 file directory) vs. 資料夾 (工作路徑 working directory)</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>getwd()</pre>
+
+<pre >[1] &quot;/Users/pineapple/Documents/DSP/DSP集訓班/NCCU-R-Workshop-gh-pages&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>dat &lt;- read.csv(&quot;hsb.csv&quot;)</pre>
+
+</article></slide><slide class=''><hgroup><h2>排解疑難1 - 路徑錯誤</h2></hgroup><article  id="1---">
+
+<pre class = 'prettyprint lang-r'>path &lt;- &quot;wrong_file_path&quot;
+dat &lt;- read.csv(file = path)</pre>
+
+<pre>
+Error in file(file, "rt") : 無法開啟連結
+此外: Warning message:
+  In file(file, "rt") : 無法開啟檔案 'wrong_file_path' ：No such file or directory
+</pre>
+
+<ul>
+<li>絕對路徑 -&gt; 確認檔案是否存在</li>
+<li>相對路徑 -&gt; 利用<code>getwd</code>了解R 當下的路徑位置</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>排解疑難2 - 格式錯誤</h2></hgroup><article  id="2---">
+
+<pre class = 'prettyprint lang-r'>path &lt;- &quot;hsb.csv&quot;
+dat &lt;- read.csv(file = path, header = TRUE, sep = &quot;1&quot;)</pre>
+
+<pre>
+Error in read.table(file = file, header = header, sep = sep, quote = quote,  : 
+  more columns than column names
+</pre>
+
+<ul>
+<li>利用其他編輯器確認分隔符號</li>
+<li>確認每列的資料的欄位是正確的</li>
+<li>必要時，請用其他文件編輯器校正欲讀取的檔案</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>排解疑難3 - 編碼錯誤</h2></hgroup><article  id="3---">
+
+<pre class = 'prettyprint lang-r'>url &lt;- &quot;https://lucy0222.github.io/2017_NCCU_R/%E8%B2%B7%E8%B3%A3st_A_10109_10109.csv&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>dat &lt;- read.csv(url)</pre>
+
+<pre class="code">
+Error in make.names(col.names, unique = TRUE) : 
+  無效的多位元組字串於 <b6>m<c2><ed><a5><ab><b0><cf>
+</pre>
+
+<ul>
+<li>查詢檔案的編碼</li>
+<li>常見的中文編碼有UTF-8和BIG-5</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 利用`fileEncoding`參數選擇檔案編碼 - big5 / utf8
+dat2 &lt;- read.csv(url, fileEncoding = &quot;big5&quot;)</pre>
+
+</article></slide><slide class=''><hgroup><h2>讀取其他軟體資料集</h2></hgroup><article >
+
+<ul>
+<li>For SPSS and Stata datasets, use the <code>foreign</code> package</li>
+<li>Cars: <a href='http://calcnet.mth.cmich.edu/org/spss/V16_materials/DataSets_v16/Cars.sav' title=''>Cars.sav</a></li>
+<li>Milk Production: <a href='http://www.ats.ucla.edu/stat/stata/examples/chp/p004.dta' title=''>p004.dat</a></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># install.packages(&quot;foreign&quot;) # 安裝R套件 foreign
+library(foreign) # 載入套件 
+cars &lt;- read.spss(&quot;data/Cars.sav&quot;, to.data.frame = TRUE)
+milk &lt;- read.dta(&quot;data/p004.dta&quot;)
+# head(cars)
+# head(milk)</pre>
+
+</article></slide><slide class=''><hgroup><h2>讀取其他軟體資料集</h2></hgroup><article  id="-1">
+
+<ul>
+<li>For SAS datasets, use the <code>sas7bdat</code> package</li>
+<li>airline: <a href='http://www.principlesofeconometrics.com/sas/airline.sas7bdat' title=''>airline.sas7bdat</a></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># install.packages(&quot;sas7bdat&quot;)
+library(sas7bdat)
+airline &lt;- read.sas7bdat(&quot;data/airline.sas7bdat&quot;)
+head(airline)</pre>
+
+<pre >  YEAR     Y     W      R     L     K
+1 1948 1.214 0.243 0.1454 1.415 0.612
+2 1949 1.354 0.260 0.2181 1.384 0.559
+3 1950 1.569 0.278 0.3157 1.388 0.573
+4 1951 1.948 0.297 0.3940 1.550 0.564
+5 1952 2.265 0.310 0.3559 1.802 0.574
+6 1953 2.731 0.322 0.3593 1.926 0.711</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch02：讀取網頁內容(Lite)</h2></hgroup><article  id="ch02lite">
+
+</article></slide><slide class=''><hgroup><h2>逐行輸入與輸出</h2></hgroup><article >
+
+<ul>
+<li><code>readLines</code>, <code>writeLines</code></li>
+<li>是讀取網頁原始碼的好工具</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>output &lt;- file(&quot;output.txt&quot;)
+writeLines(as.character(1:12), con = output)
+input &lt;- readLines(output)
+input</pre>
+
+<pre > [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>練習</h2></hgroup><article >
+
+<p>從<a href='http://www.buzzhand.com/post_365903.html' title=''>網頁中</a>，找出藝人官方身高</p>
+
+<pre class = 'prettyprint lang-r'>web_page &lt;- readLines(&quot;http://www.buzzhand.com/post_365903.html&quot;)
+matches &lt;- gregexpr(&quot;[\u4E00-\u9FA5]+官方身高：[0-9]+cm&quot;, web_page)
+tmp &lt;- regmatches(web_page, matches)
+unlist(tmp)</pre>
+
+<pre > [1] &quot;張梓琳官方身高：182cm&quot; &quot;周迅官方身高：160cm&quot;  
+ [3] &quot;林志玲官方身高：173cm&quot; &quot;韓庚官方身高：181cm&quot;  
+ [5] &quot;張翰官方身高：184cm&quot;   &quot;何炅官方身高：172cm&quot;  
+ [7] &quot;陳喬恩官方身高：165cm&quot; &quot;宋慧喬官方身高：161cm&quot;
+ [9] &quot;伊能靜官方身高：161cm&quot; &quot;倪妮官方身高：170cm&quot;  
+[11] &quot;宋慧喬官方身高：161cm&quot; &quot;周迅官方身高：160cm&quot;  
+[13] &quot;全智賢官方身高：174cm&quot;</pre>
+
+<p></br></p>
+
+<pre >其中：
+[\u4E00-\u9FA5] 表示所有中文字符 ; [0-9] 含數字之字串 ; [a]+ 一或多個 a</pre>
+
+</article></slide><slide class=''><hgroup><h2>進階練習</h2></hgroup><article >
+
+<p>找出<a href='http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html' title=''>清心福全</a>台北市南港店的地址</p>
+
+<pre class = 'prettyprint lang-r'># gregexpr要怎麼用？輸入：?gregexpr
+web_page &lt;- readLines(&quot;http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html&quot;)
+matches &lt;- gregexpr(&quot;台北市南港區[\u4E00-\u9FA5|0-9|(|)]+&quot;, web_page)
+tmp &lt;- regmatches(web_page, matches)
+unlist(tmp) # 把 list 轉成 vector</pre>
+
+<pre >[1] &quot;台北市南港區南港路3段20號&quot;   &quot;台北市南港區南港路一段154號&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>小挑戰</h2></hgroup><article >
+
+<ul>
+<li>找出清心福全台北市門市的電話號碼</li>
+<li>提示：<code>&quot;02-[0-9]+&quot;</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>小挑戰</h2></hgroup><article  id="-1">
+
+<ul>
+<li>找出清心福全台北市門市的電話號碼</li>
+<li>提示：<code>&quot;02-[0-9]+&quot;</code></li>
+</ul>
+
+<h3>參考解答</h3>
+
+<pre class = 'prettyprint lang-r'>web_page &lt;- readLines(&quot;http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html&quot;)
+matches &lt;- gregexpr(&quot;02-[0-9]+&quot;, web_page)
+tmp &lt;- regmatches(web_page, matches)
+unlist(tmp) </pre>
+
+<pre > [1] &quot;02-28761717&quot; &quot;02-28311515&quot; &quot;02-28805757&quot; &quot;02-28829191&quot; &quot;02-28126988&quot;
+ [6] &quot;02-28835757&quot; &quot;02-28335151&quot; &quot;02-28382099&quot; &quot;02-25993301&quot; &quot;02-25964768&quot;
+[11] &quot;02-25581177&quot; &quot;02-25581777&quot; &quot;02-25507985&quot; &quot;02-23256696&quot; &quot;02-27772151&quot;
+[16] &quot;02-27041995&quot; &quot;02-87327588&quot; &quot;02-23568851&quot; &quot;02-27014040&quot; &quot;02-23661900&quot;
+[21] &quot;02-27336155&quot; &quot;02-25335922&quot; &quot;02-25330098&quot; &quot;02-25412121&quot; &quot;02-25860202&quot;
+[26] &quot;02-25423939&quot; &quot;02-27192519&quot; &quot;02-25007119&quot; &quot;02-27733737&quot; &quot;02-25042858&quot;
+[31] &quot;02-25991177&quot; &quot;02-23883315&quot; &quot;02-33225069&quot; &quot;02-23753889&quot; &quot;02-23675160&quot;
+[36] &quot;02-23710880&quot; &quot;02-23678838&quot; &quot;02-27940591&quot; &quot;02-87971968&quot; &quot;02-27996737&quot;
+[41] &quot;02-26306626&quot; &quot;02-27903186&quot; &quot;02-29366236&quot; &quot;02-89351381&quot; &quot;02-29342121&quot;
+[46] &quot;02-29305939&quot; &quot;02-28910379&quot; &quot;02-28917784&quot; &quot;02-28278806&quot; &quot;02-28978088&quot;
+[51] &quot;02-28286161&quot; &quot;02-28583399&quot; &quot;02-28223996&quot; &quot;02-25288288&quot; &quot;02-27531966&quot;
+[56] &quot;02-25775296&quot; &quot;02-27629786&quot; &quot;02-25212012&quot; &quot;02-27611525&quot; &quot;02-27323861&quot;
+[61] &quot;02-27677158&quot; &quot;02-27272373&quot; &quot;02-27587181&quot; &quot;02-27882811&quot; &quot;02-26532371&quot;
+[66] &quot;02-23091959&quot; &quot;02-23143280&quot; &quot;02-23111818&quot; &quot;02-23024378&quot; &quot;02-23026069&quot;
+[71] &quot;02-23328618&quot;</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch03: 條件判斷語句 - if</h2></hgroup><article  id="ch03----if">
+
+</article></slide><slide class=''><hgroup><h2>條件判斷1</h2></hgroup><article  id="1">
+
+<ul>
+<li>一般而言，R語言的程式碼是由上自下依序執行</li>
+<li>有時需要根據某些條件判斷執行某些分支</li>
+<li>在R中使用<code>if</code>來進行判斷</li>
+<li>將敘述內容寫在大括號<code>{ }</code>裡面</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 判斷x是否大於2, 如果是，則印出結果
+# cat是什麼？輸入：?cat
+x &lt;- 4
+if(x &gt; 2){
+  cat(x, &quot;is larger than 2&quot;)
+}</pre>
+
+<pre >4 is larger than 2</pre>
+
+</article></slide><slide class=''><hgroup><h2>條件判斷2</h2></hgroup><article  id="2">
+
+<ul>
+<li>在R中使用<code>if</code>來進行判斷</li>
+<li>將敘述內容寫在大括號<code>{ }</code>裡面</li>
+<li>當敘述句只有一行時，可以省略大括號</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 判斷x是否大於2, 如果是，則印出結果
+x &lt;- 4
+if(x &gt; 2) cat(x, &quot;is larger than 2&quot;)</pre>
+
+<pre >4 is larger than 2</pre>
+
+</article></slide><slide class=''><hgroup><h2>條件判斷3</h2></hgroup><article  id="3">
+
+<ul>
+<li>若需要兩個判斷分支時，加入<code>else</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>y &lt;- 1
+if(y &gt; 2){
+  cat(y, &quot;is larger than 2&quot;)
+}else{
+  cat(y, &quot;is smaller than 2&quot;)
+} </pre>
+
+<pre >1 is smaller than 2</pre>
+
+</article></slide><slide class=''><hgroup><h2>條件判斷4</h2></hgroup><article  id="4">
+
+<ul>
+<li>若需要兩個判斷分支時，加入<code>else</code></li>
+<li>可以使用<code>ifelse</code>函數進行簡化，而且該函數支援向量化運算 (後述)</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>y &lt;- 1
+ifelse(y &gt; 2, &quot;larger than 2&quot;, &quot;smaller than 2&quot;)</pre>
+
+<pre >[1] &quot;smaller than 2&quot;</pre>
+
+<pre class = 'prettyprint lang-r'>z &lt;- 1:5
+ifelse(z &gt; 2, &quot;larger than 2&quot;, &quot;smaller than 2&quot;)</pre>
+
+<pre >[1] &quot;smaller than 2&quot; &quot;smaller than 2&quot; &quot;larger than 2&quot;  &quot;larger than 2&quot; 
+[5] &quot;larger than 2&quot; </pre>
+
+</article></slide><slide class=''><hgroup><h2>條件判斷</h2></hgroup><article >
+
+<ul>
+<li>若需要多個判斷分支時，加入<code>else if</code>, &#8230;, <code>else</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>y &lt;- 1
+if(y &gt; 2){
+  cat(y, &quot;is larger than 2&quot;)
+}else if(y &lt; 2){
+  cat(y, &quot;is smaller than 2&quot;)
+}else{
+  cat(y, &quot;is equal to 2&quot;)
+}</pre>
+
+<pre >1 is smaller than 2</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch04: 自訂函數 - function</h2></hgroup><article  id="ch04----function">
+
+</article></slide><slide class=''><hgroup><h2>自訂函數 (<code>function</code>)</h2></hgroup><article  id="-function">
+
+<ul>
+<li>函數是R語言的基石，有利重複使用</li>
+<li>通過多個函數的組裝，可以完成更複雜的任務</li>
+<li>函數在子環境中執行，不對外產生影響</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>foo &lt;- function(x){ # 這個function有一個變數x
+   if(x &gt; 2){
+    cat(x, &quot;is larger than 2&quot;)
+  }else if(x &lt; 2){
+    cat(x, &quot;is smaller than 2&quot;)
+  }else{
+    cat(x, &quot;is equal to 2&quot;)
+  }  
+}
+foo(1); foo(2); foo(3)</pre>
+
+<pre >1 is smaller than 2</pre>
+
+<pre >2 is equal to 2</pre>
+
+<pre >3 is larger than 2</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch05: 循環語句 - for</h2></hgroup><article  id="ch05----for">
+
+</article></slide><slide class=''><hgroup><h2>循環語句</h2></hgroup><article >
+
+<ul>
+<li>可用來重複執行某段程式碼</li>
+<li><code>for loop</code>中，以‘足標’作為終止循環的條件</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>x &lt;- 0
+for(i in 1:10){
+  if(i %% 2 !=0) { # x是否為奇數，
+    x &lt;- x + i # 自身累加
+  }
+}
+x</pre>
+
+<pre >[1] 25</pre>
+
+<pre class = 'prettyprint lang-r'># 檢查
+1+3+5+7+9</pre>
+
+<pre >[1] 25</pre>
+
+</article></slide><slide class=''><hgroup><h2>雙重循環語句</h2></hgroup><article >
+
+<ul>
+<li>可用來重複執行某段程式碼</li>
+<li><code>\t</code> = tab鍵, <code>\n</code> = 空行</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>x &lt;- 0
+k &lt;- 0
+for(i in 1:3){
+  for(j in 1:3){
+    cat(paste(i, &quot;*&quot;, j,  &quot;=&quot;, i*j, &quot;,\t&quot;, sep=&quot;&quot;))
+    k &lt;- k + 1
+    x[k] &lt;- i*j
+  }
+  cat(&quot;\n&quot;)
+}</pre>
+
+<pre >1*1=1,  1*2=2,  1*3=3,  
+2*1=2,  2*2=4,  2*3=6,  
+3*1=3,  3*2=6,  3*3=9,  </pre>
+
+</article></slide><slide class=''><hgroup><h2>進階練習</h2></hgroup><article  id="-1">
+
+<ul>
+<li>請先下載 <a href='https://github.com/JohnsonHsieh/R-basic-for-social-science/raw/gh-pages/data/movies.zip' title=''>movies.zip</a> (解壓縮後有21個檔案)</li>
+<li>一口氣讀入全部的檔案 (Hint: <code>dir + for loop + list</code>)</li>
+<li>將檔案合併 (Hint: <code>do.call + rbind</code>)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>進階練習(1)</h2></hgroup><article  id="1">
+
+<pre class = 'prettyprint lang-r'># 展示movies資料夾下所有的檔案
+# dir是什麼？輸入：?dir
+fname &lt;- dir(&quot;data/movies/&quot;)
+fname</pre>
+
+<pre > [1] &quot;movies-1995.csv&quot; &quot;movies-1996.csv&quot; &quot;movies-1997.csv&quot;
+ [4] &quot;movies-1998.csv&quot; &quot;movies-1999.csv&quot; &quot;movies-2000.csv&quot;
+ [7] &quot;movies-2001.csv&quot; &quot;movies-2002.csv&quot; &quot;movies-2003.csv&quot;
+[10] &quot;movies-2004.csv&quot; &quot;movies-2005.csv&quot; &quot;movies-2006.csv&quot;
+[13] &quot;movies-2007.csv&quot; &quot;movies-2008.csv&quot; &quot;movies-2009.csv&quot;
+[16] &quot;movies-2010.csv&quot; &quot;movies-2011.csv&quot; &quot;movies-2012.csv&quot;
+[19] &quot;movies-2013.csv&quot; &quot;movies-2014.csv&quot; &quot;movies-2015.csv&quot;</pre>
+
+</article></slide><slide class=''><hgroup><h2>進階練習(2)</h2></hgroup><article  id="2">
+
+<pre class = 'prettyprint lang-r'># 展示movies資料夾下所有的檔案
+# 看一下fname的資料類型，class(fname)
+fname &lt;- dir(&quot;data/movies/&quot;)
+# 練習讀一個csv檔 (movies-1995.csv)
+path &lt;- paste(&quot;data/movies/&quot;, fname[1], sep=&quot;&quot;)
+mov95 &lt;- read.csv(path)
+head(mov95)</pre>
+
+<pre >  movieId                       title year
+1       1                   Toy Story 1995
+2       2                     Jumanji 1995
+3       3            Grumpier Old Men 1995
+4       4           Waiting to Exhale 1995
+5       5 Father of the Bride Part II 1995
+6       6                        Heat 1995</pre>
+
+</article></slide><slide class=''><hgroup><h2>進階練習(3)</h2></hgroup><article  id="3">
+
+<pre class = 'prettyprint lang-r'># 展示movies資料夾下所有的檔案
+fname &lt;- dir(&quot;data/movies/&quot;)
+# 練習讀多個csv檔
+mov &lt;- list() # 預設一個名為 mov 的list容器
+for(i in 1:length(fname)){
+  path &lt;- paste(&quot;data/movies/&quot;, fname[i], sep=&quot;&quot;)
+  mov[[i]] &lt;- read.csv(path)
+}
+head(mov[[1]])</pre>
+
+<pre >  movieId                       title year
+1       1                   Toy Story 1995
+2       2                     Jumanji 1995
+3       3            Grumpier Old Men 1995
+4       4           Waiting to Exhale 1995
+5       5 Father of the Bride Part II 1995
+6       6                        Heat 1995</pre>
+
+</article></slide><slide class=''><hgroup><h2>進階練習(4)</h2></hgroup><article  id="4">
+
+<pre class = 'prettyprint lang-r'># 將list用列合併(rbind)整合成data.frame
+# do.call是什麼？輸入：?do.call
+# df的資料類型？
+df &lt;- do.call(rbind, mov) 
+head(df)</pre>
+
+<pre >  movieId                       title year
+1       1                   Toy Story 1995
+2       2                     Jumanji 1995
+3       3            Grumpier Old Men 1995
+4       4           Waiting to Exhale 1995
+5       5 Father of the Bride Part II 1995
+6       6                        Heat 1995</pre>
+
+</article></slide><slide class=''><hgroup><h2>小挑戰</h2></hgroup><article  id="-2">
+
+<ul>
+<li>只讀取1995-1999電影資料</li>
+<li>提示：<code>gregexpr(&quot;movies-199[5-9]+.csv&quot;, fname)</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>小挑戰 (參考解答)</h2></hgroup><article  id="-">
+
+<ul>
+<li>只讀取1995-1999電影資料</li>
+<li>提示：<code>gregexpr(&quot;movies-199[5-9]+.csv&quot;, fname)</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>matches &lt;- gregexpr(&quot;movies-199[5-9]+.csv&quot;, fname)
+tmp &lt;- regmatches(fname, matches)
+fname90 &lt;- unlist(tmp)
+mov90 &lt;- list() # 預設一個名為 mov 的list容器
+for(i in 1:length(fname90)){
+  path &lt;- paste(&quot;data/movies/&quot;, fname90[i], sep=&quot;&quot;)
+  mov90[[i]] &lt;- read.csv(path)
+}
+df90 &lt;- do.call(rbind, mov90)
+# tail(df90) # 最後6筆</pre>
+
+</article></slide><slide class=''><hgroup><h2>練習寫一個批次讀檔函數</h2></hgroup><article >
+
+<pre class = 'prettyprint lang-r'>myRead &lt;- function(fname, path0=&quot;data/movies/&quot;){
+  mov &lt;- list()
+  for(i in 1:length(fname)){
+    path &lt;- paste(path0, fname[i], sep=&quot;&quot;)
+    mov[[i]] &lt;- read.csv(path)
+  }
+  do.call(rbind, mov)
+}
+df &lt;- myRead(fname90, path0=&quot;data/movies/&quot;)
+head(df)</pre>
+
+<pre >  movieId                       title year
+1       1                   Toy Story 1995
+2       2                     Jumanji 1995
+3       3            Grumpier Old Men 1995
+4       4           Waiting to Exhale 1995
+5       5 Father of the Bride Part II 1995
+6       6                        Heat 1995</pre>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Ch06: Pipe Line Coding Style</h2></hgroup><article  id="ch06-pipe-line-coding-style">
+
+</article></slide><slide class=''><hgroup><h2>2014 年最有影響的套件之一：magrittr</h2></hgroup><article  id="magrittr">
+
+<ul>
+<li>壓縮的程式碼不好讀</li>
+<li>展開的程式碼會產生很多暫存變數</li>
+<li>套件<code>magrittr</code>部份解決了這個問題</li>
+<li>基本算子 %&gt;%, %&lt;&gt;%, %T&gt;%, %$%（<a href='https://blog.gtwang.org/r/r-pipes-magrittr-package/' title=''>詳細說明</a>）</li>
+<li>Pipeline快捷鍵：ctrl / command + shift + M</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>基本算子 (<code>%&gt;%</code>)</h2></hgroup><article >
+
+<ul>
+<li>想像一下程式的寫作與閱讀邏輯
+
+<center>
+
+<img src='img/pipeline.jpg' height=400 align='center'>
+
+</center></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>基本算子 (<code>%&gt;%</code>)</h2></hgroup><article  id="-1">
+
+<ul>
+<li><code>%&gt;%</code> 會將算子左邊的物件 (object) 傳到右邊的函數 (function) 中第一個argument</li>
+<li>. 點號適合用在欲傳入變數不是在傳入函數的第一個位置時使用</li>
+<li>use <code>x %&gt;% f</code>, rather than <code>f(x)</code></li>
+<li>or use <code>x %&gt;% f(y, z)</code>, rather than <code>f(x, y, z)</code></li>
+<li>or <code>y %&gt;% f(x, ., z)</code>, rather than <code>f(x, y, z)</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># install.packages(&quot;magrittr&quot;)
+library(magrittr)
+x &lt;- 1:10
+mean(x)</pre>
+
+<pre >[1] 5.5</pre>
+
+<pre class = 'prettyprint lang-r'>x %&gt;% mean # 由左而右順序操作</pre>
+
+<pre >[1] 5.5</pre>
+
+</article></slide><slide class=''><hgroup><h2>幾種等價用法</h2></hgroup><article >
+
+<p>利用三角形面積公式說明%&gt;%算子的幾種等價用法</p>
+
+<pre class = 'prettyprint lang-r'>tri_area &lt;- function(a, h=5) a*h/2 # 大括號省略
+a &lt;- 10
+tri_area(a)</pre>
+
+<pre >[1] 25</pre>
+
+<pre class = 'prettyprint lang-r'>a %&gt;% tri_area          # 省略括號</pre>
+
+<pre >[1] 25</pre>
+
+<pre class = 'prettyprint lang-r'>a %&gt;% tri_area(h=5)     # 保留括號</pre>
+
+<pre >[1] 25</pre>
+
+<pre class = 'prettyprint lang-r'>a %&gt;% tri_area(., h=5)  # 以 `.` 來表示欲傳入的變數</pre>
+
+<pre >[1] 25</pre>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section">
+
+<pre class = 'prettyprint lang-r'># 指令壓縮
+plot(density(sample(mtcars$mpg, size=10000, replace=TRUE), kernel=&quot;gaussian&quot;), col=&quot;red&quot;, main=&quot;density of mpg&quot;)</pre>
+
+<p><img src="RProgramming_files/figure-html/unnamed-chunk-33-1.png" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article  id="section-1">
+
+<pre class = 'prettyprint lang-r'># Pipe Line
+mtcars$mpg %&gt;% 
+    sample(size=10000, replace=TRUE) %&gt;% 
+    density(kernel=&quot;gaussian&quot;) %&gt;% 
+    plot(col=&quot;red&quot;, main=&quot;density of mpg&quot;)</pre>
+
+<p><img src="RProgramming_files/figure-html/unnamed-chunk-34-1.png" width="720" /></p>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>資料處理</h2></hgroup><article >
+
+</article></slide><slide class=''><hgroup><h2>資料拉皮 <code>reshape2</code></h2></hgroup><article  id="-reshape2">
+
+<ul>
+<li><code>melt</code>: wide format -&gt; long format</li>
+<li><code>dcast</code>: long format -&gt; wide format
+
+<center>
+
+<img src='img/reshaping.png' height=400 align='center'>
+
+</center></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2><code>wide format</code>及<code>long format</code></h2></hgroup><article  id="wide-formatlong-format">
+
+</br> </br> </br>
+
+<center>
+
+<img src='img/wide-long.png' align='center'>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>資料拉皮 <code>reshape2</code></h2></hgroup><article  id="-reshape2-1">
+
+<ul>
+<li><code>melt</code>: wide format -&gt; long format</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># install.packages(&quot;reshape2&quot;)
+library(reshape2)
+WP.melt &lt;- data.frame(WorldPhones)
+WP.melt$year &lt;- rownames(WP.melt)  
+WP.melt &lt;- melt(WP.melt, id=&quot;year&quot;)
+head(WP.melt)</pre>
+
+<pre >  year variable value
+1 1951   N.Amer 45939
+2 1956   N.Amer 60423
+3 1957   N.Amer 64721
+4 1958   N.Amer 68484
+5 1959   N.Amer 71799
+6 1960   N.Amer 76036</pre>
+
+</article></slide><slide class=''><hgroup><h2>資料拉皮 <code>reshape2</code></h2></hgroup><article  id="-reshape2-2">
+
+<ul>
+<li><code>dcast</code>: long format -&gt; wide format</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>WP.cast &lt;- dcast(WP.melt, year~variable,value.var=&quot;value&quot;) 
+head(WP.cast)</pre>
+
+<pre >  year N.Amer Europe Asia S.Amer Oceania Africa Mid.Amer
+1 1951  45939  21574 2876   1815    1646     89      555
+2 1956  60423  29990 4708   2568    2366   1411      733
+3 1957  64721  32510 5230   2695    2526   1546      773
+4 1958  68484  35218 6662   2845    2691   1663      836
+5 1959  71799  37598 6856   3000    2868   1769      911
+6 1960  76036  40341 8220   3145    3054   1905     1008</pre>
+
+</article></slide><slide class=''><hgroup><h2>2014 年最有影響的套件之一：dplyr</h2></hgroup><article  id="dplyr">
+
+<ul>
+<li>讓R 使用者可以用更有彈性的方式來處理資料</li>
+<li>針對<code>data.frame</code>做設計（名稱中的<code>d</code>）</li>
+<li>設計理念
+
+<ul>
+<li>導入資料整理最重要的動作（非常類似SQL）</li>
+<li>快</li>
+<li>支援異質資料源（<code>data.frame</code>或資料庫中的表格）</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>學習dplyr的官方方式：<code>vignette</code></h2></hgroup><article  id="dplyrvignette">
+
+<pre class = 'prettyprint lang-r'>vignette(all = TRUE, package = &quot;dplyr&quot;)
+vignette(&quot;introduction&quot;, package = &quot;dplyr&quot;)</pre>
+
+<ul>
+<li>更詳細的dplyr介紹可以閱讀dplyr的小論文</li>
+<li>R 的開發者會針對一個主題撰寫小論文做介紹</li>
+<li>dplyr作弊懶人包</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>dplyr簡介</h2></hgroup><article  id="dplyr" class="columns-2">
+
+<ul>
+<li><code>arrange</code> 排列</li>
+<li><code>filter</code> 對列做篩選 (row)</li>
+<li><code>select</code> 對欄做篩選 (column)</li>
+<li><code>mutate</code> 更改欄或新增欄</li>
+<li><code>group_by</code> + <code>summarise</code> 分類</li>
+</ul>
+
+<center>
+
+<img src='img/R_ETL_Fn1.png' style='max-width: 100%;max-height: 100%'></img>
+
+</center>
+
+<p>出處：<a href='https://www.youtube.com/watch?v=JD1eDxxrur0' title=''>資料科學愛好者年會資料分析上手課程：ETL1</a></p>
+
+</article></slide><slide class=''><hgroup><h2>資料排序 <code>arrange</code></h2></hgroup><article  id="-arrange">
+
+<center>
+
+<img src='img/arrange.png' height=300 align='center'></img><img src='img/arranged.png' height=300 align='center'></img>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>資料排序</h2></hgroup><article >
+
+<ul>
+<li>arrange(dataframe, 要進行排序的項目,….)</li>
+<li>排序預設是由小到大</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>arrange(iris, Petal.Length) %&gt;% head</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          4.6         3.6          1.0         0.2  setosa
+2          4.3         3.0          1.1         0.1  setosa
+3          5.8         4.0          1.2         0.2  setosa
+4          5.0         3.2          1.2         0.2  setosa
+5          4.7         3.2          1.3         0.2  setosa
+6          5.4         3.9          1.3         0.4  setosa</pre>
+
+</article></slide><slide class=''><hgroup><h2>資料排序</h2></hgroup><article  id="-1">
+
+<ul>
+<li>arrange(dataframe, 要進行排序的項目,….)</li>
+<li>排序預設是由小到大，加上<code>desc</code>可使用遞增排列</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>arrange(iris, desc(Petal.Length)) %&gt;% head</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          7.7         2.6          6.9         2.3 virginica
+2          7.7         3.8          6.7         2.2 virginica
+3          7.7         2.8          6.7         2.0 virginica
+4          7.6         3.0          6.6         2.1 virginica
+5          7.9         3.8          6.4         2.0 virginica
+6          7.3         2.9          6.3         1.8 virginica</pre>
+
+</article></slide><slide class=''><hgroup><h2>資料排序</h2></hgroup><article  id="-2">
+
+<ul>
+<li>arrange(dataframe, 要進行排序的項目,….)</li>
+<li>排序預設是由小到大，加上<code>desc</code>可使用遞增排列</li>
+<li>排序的項目可以不只一項，只要依序將項目填入後方即可</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>arrange(iris, desc(Petal.Length), - Sepal.Length ) %&gt;% head</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          7.7         2.6          6.9         2.3 virginica
+2          7.7         3.8          6.7         2.2 virginica
+3          7.7         2.8          6.7         2.0 virginica
+4          7.6         3.0          6.6         2.1 virginica
+5          7.9         3.8          6.4         2.0 virginica
+6          7.3         2.9          6.3         1.8 virginica</pre>
+
+</article></slide><slide class=''><hgroup><h2>dplyr 常用函數</h2></hgroup><article  id="dplyr-">
+
+<ul>
+<li>移除重複資料: <code>distinct(iris)</code></li>
+<li>隨機抽取資料: <code>sample_n(iris, 5)</code></li>
+<li>抽取指定列: <code>slice(iris, c(1,3,4,5))</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>對列做篩選 <code>filter</code></h2></hgroup><article  id="-filter">
+
+<center>
+
+<img src='img/filter1.png' width=300 align='center'></img><img src='img/filter2.png' width=300 align='center'>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>對列做篩選 <code>filter</code></h2></hgroup><article  id="-filter-1">
+
+<pre class = 'prettyprint lang-r'>filter(iris,Sepal.Length == 7.7)</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          7.7         3.8          6.7         2.2 virginica
+2          7.7         2.6          6.9         2.3 virginica
+3          7.7         2.8          6.7         2.0 virginica
+4          7.7         3.0          6.1         2.3 virginica</pre>
+
+<pre class = 'prettyprint lang-r'>filter(iris,Sepal.Length == 7.7,Sepal.Width ==2.8)</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+1          7.7         2.8          6.7           2 virginica</pre>
+
+</article></slide><slide class=''><hgroup><h2>對行做選取 <code>select</code></h2></hgroup><article  id="-select">
+
+<center>
+
+<img src='img/select1.png' height=300 align='center'></img><img src='img/select2.png' height=300 align='center'>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>對行做選取 <code>select</code></h2></hgroup><article  id="-select-1">
+
+<pre class = 'prettyprint lang-r'>tmp &lt;- select(iris,c(Petal.Width, Species))
+head(tmp)</pre>
+
+<pre >  Petal.Width Species
+1         0.2  setosa
+2         0.2  setosa
+3         0.2  setosa
+4         0.2  setosa
+5         0.2  setosa
+6         0.4  setosa</pre>
+
+</article></slide><slide class=''><hgroup><h2>對行做選取</h2></hgroup><article >
+
+<p>用負號<code>-</code>執行反向選取</p>
+
+<pre class = 'prettyprint lang-r'>tmp &lt;- select(iris,c(-Petal.Width,-Species))
+head(tmp)</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length
+1          5.1         3.5          1.4
+2          4.9         3.0          1.4
+3          4.7         3.2          1.3
+4          4.6         3.1          1.5
+5          5.0         3.6          1.4
+6          5.4         3.9          1.7</pre>
+
+</article></slide><slide class=''><hgroup><h2>新增欄位 <code>mutate</code></h2></hgroup><article  id="-mutate">
+
+<center>
+
+<img src='img/origin.png' width=300 align='center'></img><img src='img/mutate.png' width=300 align='center'>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>新增欄位 <code>mutate</code></h2></hgroup><article  id="-mutate-1">
+
+<ul>
+<li>如果想要做不同欄位間計算後得到新的欄位該如何處理</li>
+<li>譬如 <code>Petal.Length * Petal.Width</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>tmpiris &lt;- mutate(iris, Petal.Vol = Petal.Length * Petal.Width)
+head(tmpiris)</pre>
+
+<pre >  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Petal.Vol
+1          5.1         3.5          1.4         0.2  setosa      0.28
+2          4.9         3.0          1.4         0.2  setosa      0.28
+3          4.7         3.2          1.3         0.2  setosa      0.26
+4          4.6         3.1          1.5         0.2  setosa      0.30
+5          5.0         3.6          1.4         0.2  setosa      0.28
+6          5.4         3.9          1.7         0.4  setosa      0.68</pre>
+
+</article></slide><slide class=''><hgroup><h2>樞紐分析 <code>group_by</code> + <code>summarise</code></h2></hgroup><article  id="-group_by-summarise">
+
+<center>
+
+<img src='img/origin.png' width=300 align='center'></img><img src='img/group_by.png' width=300 align='center'></img><img src='img/summarise.png' width=300 align='center'>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>樞紐分析</h2></hgroup><article >
+
+<ul>
+<li>如果想要 Sepal.Length 的 mean、Sepal.Width 的標準差、Petal.Length 的最大值</li>
+<li>利用<code>summarise</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>summarise(iris, SL.mean=mean(Sepal.Length), SW.sd=sd(Sepal.Width), PL.max=max(Petal.Length))</pre>
+
+<pre >   SL.mean     SW.sd PL.max
+1 5.843333 0.4358663    6.9</pre>
+
+</article></slide><slide class=''><hgroup><h2>樞紐分析</h2></hgroup><article  id="-1">
+
+<ul>
+<li>如果想要 Sepal.Length 的 mean、Sepal.Width 的標準差、Petal.Length 的最大值</li>
+<li>依照物種類別各自計算</li>
+<li>利用<code>group_by</code> + <code>summarise</code></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>group_by(iris, Species) %&gt;%
+  summarise(SL.mean=mean(Sepal.Length), SW.sd=sd(Sepal.Width), PL.max=max(Petal.Length))</pre>
+
+<pre ># A tibble: 3 × 4
+     Species SL.mean     SW.sd PL.max
+      &lt;fctr&gt;   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+1     setosa   5.006 0.3790644    1.9
+2 versicolor   5.936 0.3137983    5.1
+3  virginica   6.588 0.3224966    6.9</pre>
+
+</article></slide><slide class=''><hgroup><h2>資料表合併</h2></hgroup><article  class="columns-2">
+
+<ul>
+<li><code>bind_rows</code></li>
+</ul>
+
+<p><img src='img/bind_rows.png' height=400 align='center'></img></p>
+
+<ul>
+<li><code>bond_cols</code></li>
+</ul>
+
+<p><img src='img/bind_col.png' height=300 align='center'></img></p>
+
+</article></slide><slide class=''><hgroup><h2>資料表合併</h2></hgroup><article  id="-1">
+
+<ul>
+<li><code>left_join</code></li>
+<li><code>full_join</code></li>
+<li><code>inner_join</code></li>
+<li>&#8230;
+
+<center>
+
+<img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img>
+
+</center></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>補充資料</h2></hgroup><article >
+
+<ul>
+<li><a href='https://github.com/wush978/DataScienceAndR' title=''>Learn R in R (Swirls)</a></li>
+<li><a href='https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf' title=''>Data Wrangling Cheatsheet</a></li>
+<li><a href='https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html' title=''>Introduction to dplyr</a></li>
+<li><a href='http://seananderson.ca/2013/10/19/reshape.html' title=''>An Introduction to reshape2</a></li>
+<li><a href='http://www.cookbook-r.com/' title=''>Cookbook for R</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>繼續學習之路</h2></hgroup><article >
+
+<ul>
+<li>了解自己的需求，詢問關鍵字與函數</li>
+<li><a href='http://www.meetup.com/Taiwan-R' title=''>Taiwan R User Group</a>，mailing list: <a href='mailto:Taiwan-useR-Group-list@meetup.com' title=''>Taiwan-useR-Group-list@meetup.com</a></li>
+<li><a href='https://www.ptt.cc/bbs/R_Language/index.html' title=''>ptt R_Language版</a></li>
+<li><a href='https://groups.google.com/forum/#!forum/taiwanruser' title=''>R軟體使用者論壇</a></li>
+<li><a href='http://stackoverflow.com/' title=''>StackOverflow</a></li>
+<li>歡迎來信 <a href='mailto:ling32342@gmail.com' title=''>ling32342@gmail.com</a> 、 <a href='mailto:lillian60222@gmail.com' title=''>lillian60222@gmail.com</a> 與我們一起交流！</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
