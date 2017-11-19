@@ -1,6 +1,6 @@
 ---
 title: "R Programming"
-author: "LIYUN (Source from Johnson Hsieh)"
+author: "Peng-Wen Lin (Source from Johnson Hsieh)"
 output:
   ioslides_presentation:
     css: css/dsp.css
@@ -24,8 +24,6 @@ output:
 - 體會 R 語言的流程控制
 - 學習 R 語言的資料整理
 - 確立 R 語言的資料爬析概念
-
-
 
 ## 資料處理流程
 
