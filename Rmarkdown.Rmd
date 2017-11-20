@@ -1,8 +1,6 @@
 ---
 title: "Rmarkdown"
-author: "LIYUN (Source from DSP Data Lab)"
-#date: '2016-06-30'
-# subtitle:"EDA toturial with R"
+author: "Peng-Wen Lin (Source from DSP Data Lab)"
 output:
   ioslides_presentation:
     css: css/dsp.css
@@ -92,10 +90,7 @@ las2 <- theme(axis.text.x = element_text(angle = 90, hjust = 1))
 - 不用再把圖、表複製到其他文件編輯器中
 - Rmd -> md -> html (docx, pdf)
 
-
-
 ## Why we need R Markdown？
-
 
 > - 時間久了會忘記code的意思
 > - 要寫說明文件給同學、同事、教授、主管
@@ -188,7 +183,7 @@ rmarkdown::render("input.Rmd")
     - `###### Header 6`
 
 
-## 先來簡單的複製貼上！
+## 字體！
 
 - 粗體：使用`**bold**` 或 `__bold__` 
 - 斜體：使用 `*italics*` 或 `_italics_`
@@ -216,8 +211,7 @@ rmarkdown::render("input.Rmd")
 ## Exercise - 1
 <p style="color:#003E3E;">請大家以下面的文字為樣板，打出一篇簡短的自我介紹：</p>
 
-大家好，我是**LIYUN**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
-
+大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
 
 
 + 我爸 \
@@ -231,8 +225,7 @@ rmarkdown::render("input.Rmd")
 <img src="img/me.png" width="50px">
 (3.請放照片)
 
-想要和我做朋有的人可以加我[臉書](https://goo.gl/h39Soa)(4.請放你的臉書連結)
-
+想要和我做朋有的人可以加我[臉書](https://www.facebook.com/profile.php?id=100000344369057)(4.請放你的臉書連結)
 
 
 ## Answer - 1
@@ -250,7 +243,7 @@ rmarkdown::render("input.Rmd")
 有六個成員，我是女生，我長這樣：
 ![](你的圖片路徑) 
 
-想要和我做朋有的人可以加我[臉書](https://goo.gl/h39Soa)
+想要和我做朋有的人可以加我[臉書](臉書路徑)
 
 ```
 
@@ -599,7 +592,6 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
   theme_gray(base_family="STHeiti") # 顯示中文字 Mac user only
 ```
 
-
 ## Answer 3.3
 
 利用R Markdown 製作《一周天氣預報》書面報告。
@@ -797,8 +789,7 @@ https://www.youtube.com/watch?v=OHKZLeKlUsM
 - [ptt R_Language版](https://www.ptt.cc/bbs/R_Language/index.html)
 - [R軟體使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 - [StackOverflow](http://stackoverflow.com/) 
-- 歡迎來信  ling32342@gmail.com  、 lillian60222@gmail.com 與我們一起交流！
-
+- 歡迎來信  nicole19940331@gmail.com 與我們一起交流！
 
 ----
 
