@@ -184,7 +184,7 @@ Error in read.table(file = file, header = header, sep = sep, quote = quote,  :
 ## 排解疑難3 - 編碼錯誤 
 
 ```{r echo=TRUE}
-url <- "https://pongponglin.github.io/2017NCCU_R/%E8%B2%B7%E8%B3%A3st_A_10109_10109.csv"
+url <- "https://pongponglin.github.io/2017NCCU_R/data/%E8%B2%B7%E8%B3%A3st_A_10109_10109.csv"
 ```
 ```{r echo=TRUE, eval=FALSE}
 dat <- read.csv(url)
@@ -205,6 +205,19 @@ dat2 <- read.csv(url, fileEncoding = "utf8")
 利用`write.csv`將`data.frame`格式的R物件另存成csv檔
 ```{r echo=TRUE, eval=FALSE}
 write.csv(dat, "hsb_new.csv", row.names=FALSE, fileEncoding = "utf8")
+```
+
+## 逐行輸入與輸出
+- `readLines`也可以用來讀取檔案
+- `writeLines`
+
+```{r echo=TRUE}
+output <- file("data/output.txt")
+writeLines(as.character(1:12), con = output)
+input <- readLines(output)
+input
+
+readLines("data/hsb.csv", n=5, encoding = "utf-8")
 ```
 
 ## 讀取其他軟體資料集
@@ -231,64 +244,472 @@ airline <- read.sas7bdat("data/airline.sas7bdat")
 head(airline)
 ```
 
-# Ch02：讀取網頁內容(Lite)
+# Ch02: 條件判斷語句 - if
 
-## 逐行輸入與輸出
-- `readLines`
-- `writeLines`
-- 讀取網頁原始碼的好工具
-
-```{r echo=TRUE}
-output <- file("data/output.txt")
-writeLines(as.character(1:12), con = output)
-input <- readLines(output)
-input
-```
-
-## 逐行輸入與輸出
-- `readLines`也可以用來讀取檔案
-
-```{r echo=TRUE}
-readLines("data/hsb.csv", n=5, encoding = "utf8")
-```
-
-## 練習
-從[網頁中](http://www.buzzhand.com/post_365903.html)，找出藝人官方身高
+## 條件判斷1
+- 一般而言，R語言的程式碼是由上自下依序執行
+- 有時需要根據某些條件判斷執行某些分支
+- 在R中使用`if`來進行判斷
+- 將敘述內容寫在大括號`{ }`裡面
 ```{r}
-web_page <- readLines("http://www.buzzhand.com/post_365903.html")
-matches <- gregexpr("[\u4E00-\u9FA5]+官方身高：[0-9]+cm", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp)
+# 判斷x是否大於2, 如果是，則印出結果
+# cat是什麼？輸入：?cat
+x <- 4
+if(x > 2){
+  cat(x, "is larger than 2")
+}
 ```
 
->其中：
-[\u4E00-\u9FA5] 表示所有中文字符 ; [0-9] 含數字之字串 ; [a]+ 一或多個 a
+## 條件判斷2
+- 在R中使用`if`來進行判斷
+- 將敘述內容寫在大括號`{ }`裡面
+- 當敘述句只有一行時，可以省略大括號
+```{r}
+# 判斷x是否大於2, 如果是，則印出結果
+x <- 4
+if(x > 2) cat(x, "is larger than 2")
+```
+
+
+## 條件判斷3
+- 若需要兩個判斷分支時，加入`else`
+```{r}
+y <- 1
+if(y > 2){
+  cat(y, "is larger than 2")
+}else{
+  cat(y, "is smaller than 2")
+} 
+```
+
+## 條件判斷4
+- 若需要兩個判斷分支時，加入`else`
+- 可以使用`ifelse`函數進行簡化，而且該函數支援向量化運算 (後述)
+```{r}
+y <- 1
+ifelse(y > 2, "larger than 2", "smaller than 2")
+z <- 1:5
+ifelse(z > 2, "larger than 2", "smaller than 2")
+
+```
+
+## 條件判斷
+- 若需要多個判斷分支時，加入`else if`, ...,  `else`
+```{r}
+y <- 1
+if(y > 2){
+  cat(y, "is larger than 2")
+}else if(y < 2){
+  cat(y, "is smaller than 2")
+}else{
+  cat(y, "is equal to 2")
+}
+```
+
+# Ch03: 循環語句 - for
+
+## 循環語句
+- 可用來重複執行某段程式碼
+- `for loop`中，以‘足標’作為終止循環的條件
+```{r}
+x <- 0
+for (i in 1:10) {
+  x <- x+i
+  print(x)
+}
+# 檢查
+cumsum(1:10)
+```
+
+## 循環語句
+- 循環語句內加上條件判斷
+```{r}
+x <- 0
+for(i in 1:10){
+  if(i %% 2 !=0) { # x是否為奇數，
+    x <- x + i # 自身累加
+  }
+}
+x
+# 檢查
+1+3+5+7+9
+```
+
+## 雙重循環語句
+- 可用來重複執行某段程式碼
+- `\t` = tab鍵, `\n` = 空行
+```{r}
+x <- 0
+k <- 0
+for(i in 1:3){
+  for(j in 1:3){
+    cat(paste(i, "*", j,  "=", i*j, ",\t", sep=""))
+    k <- k + 1
+    x[k] <- i*j
+  }
+  cat("\n")
+}
+```
+
+# Ch04: 自訂函數 - function
+
+## 自訂函數 (`function`)
+- 函數是R語言的基石，有利重複使用
+- 通過多個函數的組裝，可以完成更複雜的任務
+- 函數在子環境中執行，不對外產生影響
+- 當有需要經常做這件事的時候，可以考慮寫成一個函式
+```{r eval=FALSE}
+myfun <- function(x){
+  # 函式內容
+}
+```
+
+## 自訂函數
+- 條件判斷
+
+```{r}
+myif <- function(x){ # 這個function有一個變數x
+   if(x > 2){
+    cat(x, "is larger than 2")
+  }else if(x < 2){
+    cat(x, "is smaller than 2")
+  }else{
+    cat(x, "is equal to 2")
+  }  
+}
+myif(1); myif(2); myif(3)
+```
+
+## 自訂函數
+- 循環語句
+
+```{r}
+myfun <- function(x){ # 這個function有一個變數x
+  x <- pi*x
+  for (i in 1:5) {
+    x <- x+i
+  }
+  sqrt(x)
+  return(x)
+  }
+
+myfun(2)
+```
 
 ## 進階練習
-找出[清心福全](http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html)台北市南港店的地址
+
+- 請先下載 [movies.zip](https://pongponglin.github.io/2017NCCU_R/data/movies.zip)
+- 下載下來的檔案解壓縮後有21個檔案
+- 一口氣讀入全部的檔案 (Hint: `dir + for loop + list`)
+- 將檔案合併 (Hint: `do.call + rbind`)
+
+## 進階練習(1)
 ```{r echo=TRUE}
-# gregexpr要怎麼用？輸入：?gregexpr
-web_page <- readLines("http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html")
-matches <- gregexpr("台北市南港區[\u4E00-\u9FA5|0-9|(|)]+", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp) # 把 list 轉成 vector
+# 展示movies資料夾下所有的檔案
+# dir是什麼？輸入：?dir
+fname <- dir("data/movies/")
+fname
+```
+
+## 進階練習(2)
+```{r echo=TRUE}
+# 展示movies資料夾下所有的檔案
+# 看一下fname的資料類型，class(fname)
+fname <- dir("data/movies/")
+# 練習讀一個csv檔 (movies-1995.csv)
+path <- paste("data/movies/", fname[1], sep="")
+mov95 <- read.csv(path)
+head(mov95)
+```
+
+## 進階練習(3)
+```{r echo=TRUE}
+# 展示movies資料夾下所有的檔案
+fname <- dir("data/movies/")
+# 練習讀多個csv檔
+mov <- list() # 預設一個名為 mov 的list容器
+for(i in 1:length(fname)){
+  path <- paste("data/movies/", fname[i], sep="")
+  mov[[i]] <- read.csv(path)
+}
+head(mov[[1]])
+```
+
+## 進階練習(4)
+```{r echo=TRUE}
+# 將list用列合併(rbind)整合成data.frame
+# do.call是什麼？輸入：?do.call
+# df的資料類型？
+df <- do.call(rbind, mov) 
+head(df)
 ```
 
 ## 小挑戰
-- 找出清心福全台北市門市的電話號碼
-- 提示：`"02-[0-9]+"`
+- 只讀取1995-1999電影資料
+- 提示：`gregexpr("movies-199[5-9]+.csv", fname)`
 
-## 小挑戰
-- 找出清心福全台北市門市的電話號碼
-- 提示：`"02-[0-9]+"`
-
-### 參考解答
-```{r echo=TRUE}
-web_page <- readLines("http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html")
-matches <- gregexpr("02-[0-9]+", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp) 
+## 小挑戰 (參考解答)
+- 只讀取1995-1999電影資料
+- 提示：`gregexpr("movies-199[5-9]+.csv", fname)`
+```{r}
+matches <- gregexpr("movies-199[5-9]+.csv", fname)
+tmp <- regmatches(fname, matches)
+fname90 <- unlist(tmp)
+mov90 <- list() # 預設一個名為 mov 的list容器
+for(i in 1:length(fname90)){
+  path <- paste("data/movies/", fname90[i], sep="")
+  mov90[[i]] <- read.csv(path)
+}
+df90 <- do.call(rbind, mov90)
+# tail(df90) # 最後6筆
 ```
+
+## 練習寫一個批次讀檔函數
+```{r}
+myRead <- function(fname, path0="data/movies/"){
+  mov <- list()
+  for(i in 1:length(fname)){
+    path <- paste(path0, fname[i], sep="")
+    mov[[i]] <- read.csv(path)
+  }
+  do.call(rbind, mov)
+}
+df <- myRead(fname90, path0="data/movies/")
+head(df)
+```
+
+# Ch05: Pipe Line Coding Style
+
+## 2014 年最有影響的套件之一：magrittr
+- 壓縮的程式碼不好讀
+- 展開的程式碼會產生很多暫存變數
+- 套件`magrittr`部份解決了這個問題
+- 基本算子 %>%, %<>%, %T>%, %$%（[詳細說明](https://blog.gtwang.org/r/r-pipes-magrittr-package/)）
+- Pipeline快捷鍵：ctrl / command + shift + M
+
+## 基本算子 (`%>%`)
+- 想像一下程式的寫作與閱讀邏輯
+<center>
+<img src='img/pipeline.jpg' height=400 align='center'>
+</center>
+
+## 基本算子 (`%>%`)
+- `%>%` 會將算子左邊的物件 (object) 傳到右邊的函數 (function) 中第一個argument
+- . 點號適合用在欲傳入變數不是在傳入函數的第一個位置時使用
+- use `x %>% f`, rather than `f(x)`
+- or use `x %>% f(y, z)`, rather than `f(x, y, z)`
+- or `y %>% f(x, ., z)`, rather than `f(x, y, z)`
+```{r}
+# install.packages("magrittr")
+library(magrittr)
+x <- 1:10
+mean(x)
+x %>% mean # 由左而右順序操作
+```
+
+## 幾種等價用法
+利用三角形面積公式說明%>%算子的幾種等價用法
+```{r}
+tri_area <- function(a, h=5) a*h/2 # 大括號省略
+a <- 10
+tri_area(a)
+a %>% tri_area          # 省略括號
+a %>% tri_area(h=5)     # 保留括號
+a %>% tri_area(., h=5)  # 以 `.` 來表示欲傳入的變數
+```
+
+## 壓縮的指令
+```{r}
+plot(density(sample(mtcars$mpg, size=10000, replace=TRUE), kernel="gaussian"), col="red", main="density of mpg")
+```
+
+##Pipe Line
+```{r}
+mtcars$mpg %>% 
+    sample(size=10000, replace=TRUE) %>% 
+    density(kernel="gaussian") %>% 
+    plot(col="red", main="density of mpg")
+```
+
+# 資料處理
+
+## 資料拉皮 `reshape2`
+- `melt`: wide format -> long format
+- `dcast`: long format -> wide format
+<center>
+<img src='img/reshaping.png' height=400 align='center'>
+</center>
+
+## `wide format`及`long format`
+</br>
+</br>
+</br>
+<center>
+<img src='img/wide-long.png' align='center'>
+</center>
+
+
+## 資料拉皮 `reshape2`
+- `melt`: wide format -> long format
+```{r}
+# install.packages("reshape2")
+library(reshape2)
+WP.melt <- data.frame(WorldPhones)
+WP.melt$year <- rownames(WP.melt)  
+WP.melt <- melt(WP.melt, id="year")
+head(WP.melt)
+```
+
+## 資料拉皮 `reshape2`
+- `dcast`: long format -> wide format
+```{r}
+WP.cast <- dcast(WP.melt, year~variable,value.var="value") 
+head(WP.cast)
+```
+## 2014 年最有影響的套件之一：dplyr
+- 讓R 使用者可以用更有彈性的方式來處理資料
+- 針對`data.frame`做設計（名稱中的`d`）
+- 設計理念
+    - 導入資料整理最重要的動作（非常類似SQL）
+    - 快
+    - 支援異質資料源（`data.frame`或資料庫中的表格）
+
+## 學習dplyr的官方方式：`vignette`
+
+```{r dplyr-vignette, echo = TRUE, eval=FALSE}
+vignette(all = TRUE, package = "dplyr")
+vignette("dplyr", package = "dplyr")
+```
+- [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+- 更詳細的dplyr介紹可以閱讀dplyr的小論文
+- R 的開發者會針對一個主題撰寫小論文做介紹
+- dplyr作弊懶人包
+
+## dplyr簡介 {.columns-2}
+
+- `arrange` 排列
+- `filter` 對列做篩選 (row)
+- `select` 對欄做篩選 (column)
+- `mutate` 更改欄或新增欄
+- `group_by` + `summarise` 分類
+
+<center>`r fig("R_ETL_Fn1.png")`</center>
+出處：[資料科學愛好者年會資料分析上手課程：ETL1](https://www.youtube.com/watch?v=JD1eDxxrur0)
+
+## 資料排序 `arrange`
+<center>
+<img src='img/arrange.png' height=300 align='center'></img><img src='img/arranged.png' height=300 align='center'></img>
+</center>
+
+## 資料排序
+- arrange(dataframe, 要進行排序的項目,….)
+- 排序預設是由小到大
+```{r}
+arrange(iris, Petal.Length) %>% head
+```
+
+## 資料排序
+- arrange(dataframe, 要進行排序的項目,….)
+- 排序預設是由小到大，加上`desc`可使用遞減排列
+```{r}
+arrange(iris, desc(Petal.Length)) %>% head
+```
+
+## 資料排序
+- arrange(dataframe, 要進行排序的項目,….)
+- 排序預設是由小到大，加上`desc`可使用遞減排列
+- 排序的項目可以不只一項，只要依序將項目填入後方即可
+
+```{r}
+arrange(iris, desc(Petal.Length), - Sepal.Length ) %>% head
+```
+
+## 對列做篩選 `filter`
+<center>
+<img src='img/filter1.png' width=300 align='center'></img><img src='img/filter2.png' width=300 align='center'>
+</center>
+
+## 對列做篩選 `filter`
+```{r}
+filter(iris,Sepal.Length == 7.7)
+filter(iris,Sepal.Length == 7.7,Sepal.Width ==2.8)
+```
+
+## 對行做選取 `select`
+<center>
+<img src='img/select1.png' height=300 align='center'></img><img src='img/select2.png' height=300 align='center'>
+</center>
+
+## 對行做選取 `select`
+```{r}
+tmp <- select(iris,c(Petal.Width, Species))
+head(tmp)
+```
+
+## 對行做選取
+用負號`-`執行反向選取
+```{r}
+tmp <- select(iris,c(-Petal.Width,-Species))
+head(tmp)
+```
+
+## 新增欄位 `mutate`
+<center>
+<img src='img/origin.png' width=300 align='center'></img><img src='img/mutate.png' width=300 align='center'>
+</center>
+
+
+## 新增欄位 `mutate`
+- 如果想要做不同欄位間計算後得到新的欄位該如何處理
+- 譬如 `Petal.Length * Petal.Width`
+```{r}
+tmpiris <- mutate(iris, Petal.Vol = Petal.Length * Petal.Width)
+head(tmpiris)
+```
+
+## 樞紐分析 `group_by` + `summarise`
+<center>
+<img src='img/origin.png' width=300 align='center'></img><img src='img/group_by.png' width=300 align='center'></img><img src='img/summarise.png' width=300 align='center'>
+</center>
+
+## 樞紐分析
+- 如果想要 Sepal.Length 的 mean、Sepal.Width 的標準差、Petal.Length 的最大值
+- 利用`summarise`
+```{r}
+summarise(iris, SL.mean=mean(Sepal.Length), SW.sd=sd(Sepal.Width), PL.max=max(Petal.Length))
+```
+
+## 樞紐分析
+- 如果想要 Sepal.Length 的 mean、Sepal.Width 的標準差、Petal.Length 的最大值
+- 依照物種類別各自計算
+- 利用`group_by` + `summarise`
+```{r}
+group_by(iris, Species) %>%
+  summarise(SL.mean=mean(Sepal.Length), SW.sd=sd(Sepal.Width), PL.max=max(Petal.Length))
+```
+
+## dplyr 常用函數
+- 移除重複資料: `distinct(iris)`
+- 隨機抽取資料: `sample_n(iris, 5)`
+- 抽取指定列: `slice(iris, c(1,3,4,5))`
+
+## 資料表合併 {.columns-2}
+- `bind_rows`
+
+<img src='img/bind_rows.png' height=400 align='center'></img>
+
+- `bond_cols`
+
+<img src='img/bind_col.png' height=300 align='center'></img>
+
+## 資料表合併
+- `left_join`
+- `full_join`
+- `inner_join`
+- ...
+<center>
+<img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img>
+</center>
 
 ## 補充資料
 - [Learn R in R (Swirls)](https://github.com/wush978/DataScienceAndR)
@@ -303,4 +724,4 @@ unlist(tmp)
 - [ptt R_Language版](https://www.ptt.cc/bbs/R_Language/index.html)
 - [R軟體使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 - [StackOverflow](http://stackoverflow.com/) 
-- 歡迎來信  ling32342@gmail.com  、 lillian60222@gmail.com 與我們一起交流！
+- 歡迎來信  nicole19940331@gmail.com 與我們一起交流！
