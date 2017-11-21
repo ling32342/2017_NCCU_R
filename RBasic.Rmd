@@ -42,6 +42,10 @@ library(ggplot2)
 
 opts_chunk$set(echo = FALSE, cache=TRUE, comment="", cache.path = ".cache-EDA/")
 
+
+
+
+
 fig <- function(path, size = 100) {
   sprintf("<img src='img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
           path, size, size)
