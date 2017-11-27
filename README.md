@@ -10,7 +10,7 @@
 
 - 講師：
   - [林芃彣](https://www.linkedin.com/in/peng-wen-lin-309839153/)
-  - [楊佩雯]()
+  - [楊佩雯](https://www.linkedin.com/in/%E4%BD%A9%E9%9B%AF-%E6%A5%8A-950844b4/)
 - 講師現職：政大統計所碩士生、資料科學愛好者
 - 善用工具：R、SQL
 
@@ -29,7 +29,7 @@
 - Data manipulations
     + list and data.frame
     
-### 課程主題：[R programming]()
+### 課程主題：[R programming](https://pongponglin.github.io/2017NCCU_R/RProgramming.html)
 
 ### Day2 課程大綱
 - I/O
