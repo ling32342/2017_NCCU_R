@@ -1,6 +1,6 @@
 ---
 title: "Quick R Introduction"
-author: "Ling Hsu (Source from Johnson Hsieh)"
+author: "Pei-Wen, Yang (Source from Johnson Hsieh)"
 output:
   ioslides_presentation:
     css: css/dsp.css
@@ -14,12 +14,13 @@ __國立政治大學統計所碩二__
 
 #### __Experience__
 <p>
-  * 國泰人壽企業精算科實習生(2016.07-2016.08)
-  * 資料科學年會R系列課程助教
-  * R 語言翻轉教室教學助教
-  * 2016暑期資料工作坊R講師
+  * Lalamove數據分析部門 Intern 2016.2-2016.9
+  * 2017暑期資料工作坊SQL講師
   * 健保資料庫分析團隊
-  * D4SG資料英雄#1
+  * D4SG資料英雄專案計畫 #3
+  * 2017 政大統計系資料競賽 亞軍 
+  * 2017 Asia Open Data HACKATHON 最佳黑客獎
+  * 2017 台電能源永續黑客松 第三名 
   
 </div>
 
@@ -32,6 +33,16 @@ __國立政治大學統計所碩二__
   * SQL Server
 </div>
 
+#### __Contact me__
+<p>
+   [Github](https://github.com/ert5612p)
+   <br>
+   [Linkin](https://www.linkedin.com/in/佩雯-楊-950844b4/)
+   yangpennyjijc@gmail.com
+</div>
+<div style='float:left;width:30%;'>
+<br>
+
 # Ch01：為何要學 R 語言？
 ```{r setup, include=FALSE, cache=FALSE}
 library(knitr)
@@ -41,6 +52,10 @@ library(dplyr)
 library(ggplot2)
 
 opts_chunk$set(echo = FALSE, cache=TRUE, comment="", cache.path = ".cache-EDA/")
+
+
+
+
 
 fig <- function(path, size = 100) {
   sprintf("<img src='img/%s' style='max-width: %d%%;max-height: %d%%'></img>", 
@@ -174,7 +189,7 @@ dat1 <- data.frame(date=c("11/29","11/30","12/01","12/02","12/03","12/04","12/05
 dat1 # print R object
 ```
 ```{r echo=TRUE, eval=FALSE}
-dat1[1, 1]  # 取值
+dat1[1, 1]  # 取值 #[列,欄]
 dat1[, 1]   
 dat1[1:2,] 
 ```
@@ -221,6 +236,7 @@ cbind(dat1,temp=dat2$temp)[dat2$temp<20,]
 - 敘述句以**斷行 (Enter)** 或**分號 ( ; )** 作結尾
 - 未完成的敘述句，命令列開頭會變成 `+`
 - 可以用 **Esc** 中斷敘述句
+- R 會把單引號 'apple' 或雙引號 "apple" 所包覆的敘述當成字串
 
 ## 敘述句2 {.columns-2}
 
