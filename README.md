@@ -16,7 +16,7 @@
 
 # 授課大綱
 
-### 課程主題：[Quick R Introduction]()
+## 課程主題：[Quick R Introduction](https://pongponglin.github.io/2017NCCU_R/RBasic.html#1)
 
 ### Day1 課程大綱
 
@@ -29,12 +29,12 @@
 - Data manipulations
     + list and data.frame
     
-### 課程主題：[R programming](https://pongponglin.github.io/2017NCCU_R/RProgramming.html)
+## 課程主題：[R programming](https://pongponglin.github.io/2017NCCU_R/RProgramming.html)
 
 ### Day2 課程大綱
 - I/O
-  - ReadLines
-  - Read / Write table
+  - Read table/csv 
+  - Write table
 - Control flow
   - If...else…
   - for loop
@@ -43,7 +43,7 @@
 - Data ETL 
   - dplyr and reshape2
   
-### 課程主題：[Data ETL & Data visualization in R]()
+## 課程主題：[Data ETL & Data visualization in R]()
 
 ### Day3 課程大綱
 - Review Data ETL
@@ -57,7 +57,7 @@
   - Interactive plot (plotly)
 
 
-### 課程主題：[Data ETL & Data visualization in R]()
+## 課程主題：[Data ETL & Data visualization in R]()
 
 ### Day4 課程大綱
 - Reproducible research in R
