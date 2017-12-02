@@ -9,7 +9,7 @@
 
 - 講師：
     + [林芃彣](https://www.linkedin.com/in/peng-wen-lin-309839153/)
-        - Email: nicole19940331@gmail.com
+        - Email: nicole19940331@gmail.com
     + [楊佩雯](https://www.linkedin.com/in/%E4%BD%A9%E9%9B%AF-%E6%A5%8A-950844b4/)
         - Email: yangpennyjijc@gmail.com   
 - 講師現職：政大統計所碩士生、資料科學愛好者
