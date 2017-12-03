@@ -33,15 +33,16 @@ __國立政治大學統計所碩二__
   * SQL Server
 </div>
 
+<div style='float:left;width:40%;'>
+<br>
+
 #### __Contact me__
 <p>
-   [Github](https://github.com/ert5612p)
-   <br>
-   [Linkin](https://www.linkedin.com/in/佩雯-楊-950844b4/)
-   yangpennyjijc@gmail.com
+  * [Github](https://github.com/ert5612p)
+  * [Linkin](https://www.linkedin.com/in/佩雯-楊-950844b4/)
+  * yangpennyjijc@gmail.com
 </div>
-<div style='float:left;width:30%;'>
-<br>
+
 
 # Ch01：為何要學 R 語言？
 ```{r setup, include=FALSE, cache=FALSE}
@@ -50,6 +51,10 @@ library(magrittr)
 library(xtable)
 library(dplyr)
 library(ggplot2)
+library(sessioninfo)
+library(httpuv)
+library(caTools)
+library(rmarkdown)
 
 opts_chunk$set(echo = FALSE, cache=TRUE, comment="", cache.path = ".cache-EDA/")
 
@@ -127,7 +132,7 @@ sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 
 # Ch02：建立 R 的使用環境
 
-## 傢俬準備好 {.columns-2}
+## 傢俬準備好 {.columns-1}
 
 ### 環境安裝
 - 主程式：[R](https://www.r-project.org/)（R-3.2.5 以上版本）
@@ -218,19 +223,20 @@ cbind(dat1,temp=dat2$temp)[dat2$temp<20,]
 
 # Ch04：基礎教學 - 敘述句與數列
 
-## 敘述句 {.columns-2}
+## 敘述句
+
+<div style='float:left;width:48.5%;'>
 
 ```{r echo=TRUE}
 1
-2
-1; 2
+1 + 1
+1 ; 2
+1 + 1 ; 1 + 2
 ``` 
-<br>
-<p>
-<br>
-<p>
-<p>
 
+</div>
+
+<div style='float:left;width:48.5%;'>
 ### 筆記
 - 灰底的區塊為程式碼 (輸入)，[1] 為運算結果 (輸出)
 - 敘述句以**斷行 (Enter)** 或**分號 ( ; )** 作結尾
@@ -238,20 +244,24 @@ cbind(dat1,temp=dat2$temp)[dat2$temp<20,]
 - 可以用 **Esc** 中斷敘述句
 - R 會把單引號 'apple' 或雙引號 "apple" 所包覆的敘述當成字串
 
-## 敘述句2 {.columns-2}
+</div>
 
+
+## 敘述句2
+
+<div style='float:left;width:48.5%;'>
 ```{r echo=TRUE}
 # 基礎運算
 1 + 2 + 3
 1 +       2 + 3
-x <- 10
+x <- 1 + 2
 y <- 4
 (x + y) / 2 # 簡單的公式運算
 ```
-<br>
-<p>
-<p>
-<br>
+
+</div>
+
+<div style='float:left;width:48.5%;'>
 
 ### 筆記
 - 基本數學運算符號 (`+`, `-`, `*`, `/`, ...)
@@ -261,7 +271,12 @@ y <- 4
 - 在RStudio中，想要一次註解多行可用 **ctrl + shift + c**
 - 在命令列中按 **ctrl + l** 可以清除當前畫面
 
-## 最基礎的物件：數值型向量 (數列) {.columns-2}
+</div>
+
+## 最基礎的物件：數值型向量 (數列)
+
+<div style='float:left;width:48.5%;'>
+
 ```{r echo=TRUE}
 # basic expression of integer vector
 c(1, 2, 3, 4)
@@ -270,28 +285,31 @@ c(1, 2, 3, 4)
 1:4
 4:1
 ```
-<br>
-<p>
-<p>
+
+</div>
+
+<div style='float:left;width:48.5%;'>
+
 ### 筆記
 - 以 `c(...)` 表示 (c 取自combine之意), 整個函數內容以 `() `包括起來，元素以逗號分隔。
 - 連續整數向量可以利用 `:` (冒號) 簡記，譬如數列 (1, 2, 3, 4) 在 R 語言中可利用 `1:4` 簡記
 - 也可以使用 `4:1` 的簡記方式來產生 (4, 3, 2, 1) 的向量
 
-## 如何生成有序的數值向量 {.columns-2}
+</div>
+
+## 如何生成有序的數值向量
+
+<div style='float:left;width:48.5%;'>
+
 ```{r echo=TRUE}
 seq(1, 4)
 seq(1, 9, by = 2) # 間隔為2
 seq(1, 9, length.out = 5) # 分割長度為5
 ```
 
-<p>
-<p>
-<p>
-<p>
-<p>
-<p>
-<p>
+</div>
+
+<div style='float:left;width:48.5%;'>
 
 ### 筆記
 - 除了冒號簡記法外，可以透過`seq`函數生成有規則的數值向量(序列)  
@@ -299,6 +317,9 @@ seq(1, 9, length.out = 5) # 分割長度為5
 - `by` 表示數列間隔，預設為1
 - `length.out` 表示數列長度
 
+</div>
+
+<div style='float:left;width:48.5%;'>
 
 ## 小挑戰
 - 利用簡記法列出 1 ~ 10的數列
@@ -323,7 +344,7 @@ seq(1, 10, length.out=5)
 
 
 # Ch05：基礎教學 - 數列的運算
-## 數列的運算 {.columns-2}
+## 數列的運算 {.columns-1}
 R的數列運算滿足 **recycling properties**
 ```{r echo=TRUE}
 c(1, 2, 3) * c(2, 2, 2)
@@ -338,7 +359,7 @@ c(0.5, 1.5, 2.5, 3.5) * c(2, 1)
 <p>
 <p>
 
-### 小挑戰
+## 小挑戰
 向量的四則運算，請計算以下五位女藝人的BMI
 
 Hint: BMI = 體重 / (身高/100)^2
@@ -378,7 +399,8 @@ x[-c(1, 3, 4)]
 ```
 </div>
 
-## 向量的取值2  {.columns-2}
+## 向量的取值2 
+
 給定條件進行取值
 
 - 比較運算子(`>`, `<`, `>=`, `<=`, `==`, `!=`)
@@ -391,8 +413,12 @@ x > 160
 index <- which(x > 160) 
 index 
 x[index]
+```
 
-# 指令壓縮，將指令寫在 [ ] 中，以達到縮短程式碼的功效
+## 向量的取值3
+
+指令壓縮，將指令寫在 [ ] 中，以達到縮短程式碼的功效
+```{r echo=TRUE}
 x[which(x > 160)]
 
 # 配合邏輯算子進行多條件的取值
@@ -454,7 +480,9 @@ x
 ```
 </div>
 # Ch06：查詢說明檔
-## 在 R 中查詢說明文件 {.columns-2}
+## 在 R 中查詢說明文件
+
+<div style='float:left;width:48.5%;'>
 
 各種自救措施
 ```{r echo=TRUE, eval=FALSE}
@@ -465,15 +493,9 @@ ab # 輸入`ab`後 按下tab
 vignette()
 vignette("Introduction", "Matrix")
 ```
-<br>
-<br>
-<p>
-<br>
-<br>
-<br>
-<br>
-<p>
-<p>
+</div>
+
+<div style='float:left;width:48.5%;'>
 
 ### 筆記
 
@@ -485,6 +507,8 @@ vignette("Introduction", "Matrix")
 - example : 執行特定函數的使用範例
 - vignette : 查詢R環境中各種介紹文件
 
+</div>
+
 # Ch07：資料測量的尺度
 
 ## R 的資料形態分類
@@ -493,7 +517,7 @@ vignette("Introduction", "Matrix")
 knitr::kable(data.frame("資料衡量尺度"=c("連續資料","比例資料","區間資料","順序資料","名目資料","布林資料","文字資料"),
            "R變數形態"=c("numeric","numeric","numeric","factor","factor","logical","character"),
            "特性"=c("數值","比值","大小距離","優先順序","類別","邏輯值","文字"),
-           "範例"=c("身高","流失率","溫度","名次","國家","性別","電話號碼")))
+           "範例"=c("身高","流失率","溫度","名次","國家","True & False","電話號碼")))
 ```
 
 
@@ -512,7 +536,7 @@ x <= 1
 - 常用的Character處理函數 
 
 <div style='float:left;width:48.5%;'>
-字串的剪接：`paste`
+字串的連接：`paste`
 ```{r echo=TRUE}
 x <- "bubble"
 y <- "bobble"
@@ -558,36 +582,35 @@ tmp[[1]][2]
 ```
 
 
-## Factor (類別) {.columns-2}
-
+## Factor (類別)
 如何處理名目變數?
+
+<div style='float:left;width:48.5%;'>
+
 ```{r  echo=TRUE}
 x <- c("F","M","F","F")
 x
 x <- factor(c("F","M","F","F"), levels=c("F","M"))
 x
+```
+
+</div>
+
+<div style='float:left;width:48.5%;'>
+
+```{r echo=TRUE}
 x <- factor(c("F","M","F","F"), levels=c("F"))
+x
 levels(x)
 as.integer(x)
 ```
 
+</div>
+
 ## 如何處理順序資料?
 
-```{r  echo=TRUE}
-#農業社會 男尊女卑
-Argri <- factor(c("F","M","F","F"), order=TRUE, levels=c("F","M"))
-
-#阿美族 女尊男卑
-Amis <- factor(c("F","M","F","F"), order=FALSE, levels=c("F","M"))
-
-#應該要用
-Amis <- factor(c("F","M","F","F"), order=TRUE, levels=c("M","F"))
-```
-
-## 換個例子
-
 ```{r echo=TRUE}
-#舉一個認真的例子 - 班上一號到六號分別拿到A, B, C的級別
+#舉個例子 - 班上一號到六號分別拿到A, B, C的級別
 rank=factor(c("C","A","B","B","C","C"), order=TRUE, level=c("C","B","A"))
 rank
 rank[1] < rank[2]
@@ -598,53 +621,84 @@ rank[1] < rank[2]
 
 ## 向量有同質性 Vector 
 
-Character > Numeric > Integer > Logical
+向量元素必須是同個資料屬性
 ```{r echo=TRUE}
 x <- c(1, 2.0, "3")
 x
 ```
 
-## 資料型態的轉換 {.columns-2}
+## 資料型態的轉換 
+
+
 
 - 利用以下函數自行轉換向量型態： `as.character`, `as.numeric`, `as.logical`。
 
+<div style='float:left;width:48.5%;'>
 ```{r echo=TRUE}
-as.numeric("2")
 x <- c(1, 2.0, "3")
-as.numeric(x)
+x <- as.numeric(x)
+x
+```
+<p>
+<p>
+<p>
+<p>
+<p>
 
+</div>
+
+<div style='float:left;width:48.5%;'>
+
+```{r echo=TRUE}
 y <- c("1", "2", "3", "2", "a")
-as.numeric(y)
+y <- as.numeric(y)
+y
 ```
 
 - `NA`代表Not available，代表著**missing value**
 
+</div>
 
-## 資料型態的轉換2 {.columns-2}
+## 資料型態的轉換2
+
+<div style='float:left;width:48.5%;'>
 
 ```{r echo=TRUE, eval=TRUE}
 # 字串轉數字
 a1 <- c("89", "91", "102")
-as.numeric(a1)
-
+a1 <- as.numeric(a1)
+a1
 # 布林轉數字
 a2 <- c(TRUE, TRUE, FALSE)
-as.numeric(a2)
+a2 <- as.numeric(a2)
+a2
 ```
+</div>
+
+<div style='float:left;width:48.5%;'>
+
 ```{r echo=TRUE, eval=TRUE}
 # 數字轉布林
-a3 <- c(-2, -1, 0, 1, 2) # 只有0會被轉成FALSE
-as.logical(a3)
-
+a3 <- c(-2, -1, 0, 1, 2) 
+# 只有0會被轉成FALSE
+a3 <- as.logical(a3)
+a3
 # 數字轉字串
-as.character(a3)
+a3 <- as.character(a3)
+a3
 ```
+</div>
+
+## 資料型態的轉換3
 
 ```{r as.character, echo = TRUE}
 z <- c(1, 2, 3, 2, 3, 2, 1)
-as.character(z) # 字串
-factor(z) # 轉類別
+z <- as.numeric(z) # 數值
+z
+z <- factor(z) # 轉類別
+z
 ```
+
 
 # Ch09: List 存放異質性資料的容器
 
@@ -656,19 +710,27 @@ x2 <- list("林志玲", 174, 52, TRUE) # 保留資料型態
 str(x2)
 ```
 
-## List 賦值/取值 {.columns-2}
+## List 賦值/取值
+
 ```{r echo=TRUE}
 x3 <- list(name=c("林志玲", "隋棠", "蔡依林"), 
            height=c(174, 173, 158),
            weight=c(52, 48, 39),
            model=c(TRUE, TRUE, FALSE))
+x3
+```
 
+## List 賦值/取值2
+
+```{r echo=TRUE}
 x3[[1]]
 x3$name
 x3[["name"]]
 names(x3)
-# names(x3) <- c("Name", "Height", "Weight", "Model")
+names(x3) <- c("Name", "Height", "Weight", "Model")
+names(x3)
 ```
+
 
 # Ch10：DataFrame 資料表
 
@@ -750,6 +812,11 @@ matches <- gregexpr("[0-9]+", txt)
 regmatches(txt, matches)
 ```
 
+### 筆記
+- `"[0-9]"`  -> 0|1|2|3|4|5|6|7|8|9
+- `"[0-9]+"` -> 一或多個0|1|2|3|4|5|6|7|8|9
+- [正規表示法](http://www.victorgau.com/?p=4724)
+
 
 ## Recape
 - 取代：`gsub`
@@ -769,4 +836,4 @@ regmatches(txt, matches)
 - [ptt R_Language版](https://www.ptt.cc/bbs/R_Language/index.html)
 - [R軟體使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 - [StackOverflow](http://stackoverflow.com/) 
-- 歡迎來信 ling32342@gmail.com 與我一起交流！
+- 歡迎來信 yangpennyjijc@gmail.com 與我一起交流！
