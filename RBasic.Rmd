@@ -815,10 +815,10 @@ regmatches(txt, matches)
 ### 筆記
 - `[0-9]`  -> 0|1|2|3|4|5|6|7|8|9
 - `[0-9]+` -> 一或多個0|1|2|3|4|5|6|7|8|9
-- [正規表示法](http://www.victorgau.com/?p=4724)
+- [正規表示法](https://atedev.wordpress.com/2007/11/23/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-regular-expression/)
 
 
-## Recape
+## Recap
 - 取代：`gsub`
 - 查找位置：`grep(value=FALSE)`, `grep(value=TRUE)`, `grepl`
 - 查找結果：`grepexpr`
