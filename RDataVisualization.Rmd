@@ -23,7 +23,6 @@ library(data.table)
 library(devtools)
 library(plotly)
 library(xtable)
-
 library(tidyr)
 library(DT)
 library(RColorBrewer)
