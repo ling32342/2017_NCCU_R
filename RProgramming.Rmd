@@ -317,8 +317,6 @@ for (i in 1:10) {
   x <- x+i
   print(x)
 }
-# 檢查
-cumsum(1:10)
 ```
 
 ## 循環語句
@@ -352,7 +350,8 @@ for(i in 1:3){
 ```
 
 ## 簡易練習
-- 利用雙重循環語句畫出如下的圖案
+- 利用雙重循環語句畫出如下的兩個圖案
+- 聖誕樹的難度加高（三個循環語句）
 ```{r, echo=FALSE}
 for (i in 1:5) {
   for (j in 1:i){
@@ -361,7 +360,6 @@ for (i in 1:5) {
   cat("\n")
 }
 
-### 難度加高（三個循環語句）
 for (i in 1:10){
   for (j in 10:i){
     cat(" ")
@@ -671,7 +669,7 @@ head(tmp)
 ## 對行做選取
 用負號`-`執行反向選取
 ```{r}
-tmp <- select(iris,c(-Petal.Width,-Species))
+tmp <- select(iris,-Petal.Width,-Species)
 head(tmp)
 ```
 
@@ -732,6 +730,14 @@ group_by(iris, Species) %>%
 <center>
 <img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img>
 </center>
+
+## 資料表合併
+- 使用`merge`
+```{r}
+data1 <- data.frame(x1 = c("A","B","C", "D"), x2=c(11,12,13,14))
+data2 <- data.frame(x1 = c("A","B","C", "E" ), x3=c("f","g","h","i"))
+merge(data1, data2, by="x1", all = T)
+```
 
 ## 補充資料
 - [Learn R in R (Swirls)](https://github.com/wush978/DataScienceAndR)
