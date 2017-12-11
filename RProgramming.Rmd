@@ -223,7 +223,7 @@ readLines("data/hsb.csv", n=5, encoding = "utf-8")
 ## 讀取其他軟體資料集
 - For SPSS and Stata datasets, use the `foreign` package
 - Cars: [Cars.sav](http://calcnet.mth.cmich.edu/org/spss/V16_materials/DataSets_v16/Cars.sav)
-- Milk Production: [p004.dat](https://pongponglin.github.io/2017NCCU_R/data/p004.dta)
+- Milk Production: [p004.dat](https://stats.idre.ucla.edu/stat/stata/examples/chp/p004.dta)
 ```{r}
 # install.packages("foreign") # 安裝R套件 foreign
 library(foreign) # 載入套件 
@@ -502,7 +502,7 @@ head(df)
 
 # Ch05: Pipe Line Coding Style
 
-## 2014 年最有影響的套件之一：magrittr
+## 2014 年起最有影響的套件之一：magrittr
 - 壓縮的程式碼不好讀
 - 展開的程式碼會產生很多暫存變數
 - 套件`magrittr`部份解決了這個問題
@@ -576,20 +576,20 @@ mtcars$mpg %>%
 ```{r}
 # install.packages("reshape2")
 library(reshape2)
-WP.melt <- data.frame(WorldPhones)
-WP.melt$year <- rownames(WP.melt)  
-WP.melt <- melt(WP.melt, id="year")
+WP <- data.frame(WorldPhones)
+WP$year <- rownames(WP)  
+WP.melt <- melt(WP, id="year")
 head(WP.melt)
 ```
 
 ## 資料拉皮 `reshape2`
 - `dcast`: long format -> wide format
 ```{r}
-WP.cast <- dcast(WP.melt, year~variable,value.var="value") 
+WP.cast <- dcast(WP.melt, year~variable, value.var="value") 
 head(WP.cast)
 ```
-## 2014 年最有影響的套件之一：dplyr
-- 讓R 使用者可以用更有彈性的方式來處理資料
+## 超高人氣的實用套件：dplyr
+- 讓 R 使用者可以用更有彈性的方式來處理資料
 - 針對`data.frame`做設計（名稱中的`d`）
 - 設計理念
     - 導入資料整理最重要的動作（非常類似SQL）
