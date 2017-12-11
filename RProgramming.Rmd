@@ -18,9 +18,9 @@ __國立政治大學統計所碩二  林芃彣__
   * 健保資料庫分析團隊
   * 給軟體工程師的R語言精要班助教
   * D4SG資料英雄計畫 #3
-  * 無象限有限公司實習生(2017.10-now)
+  * 無象限有限公司Intern (2017.10-now)
   * 2017 第一屆政大資料競賽 亞軍
-  * 2017 亞洲跨國黑客松決賽 最佳黑客獎
+  * 2017 Asia Open Data HACKATHON 最佳黑客獎
   * 2017 台電能源永續黑客松 第三名
 </div>
 
@@ -38,7 +38,7 @@ __國立政治大學統計所碩二  林芃彣__
 #### __Contact me__
 <p>
   * [Github](https://github.com/pongponglin)
-  * [Linkin](https://www.linkedin.com/in/peng-wen-lin-309839153/)
+  * [Linkedin](https://www.linkedin.com/in/peng-wen-lin-309839153/)
   * nicole19940331@gmail.com
 </div>
 
@@ -223,7 +223,7 @@ readLines("data/hsb.csv", n=5, encoding = "utf-8")
 ## 讀取其他軟體資料集
 - For SPSS and Stata datasets, use the `foreign` package
 - Cars: [Cars.sav](http://calcnet.mth.cmich.edu/org/spss/V16_materials/DataSets_v16/Cars.sav)
-- Milk Production: [p004.dat](http://www.ats.ucla.edu/stat/stata/examples/chp/p004.dta)
+- Milk Production: [p004.dat](https://stats.idre.ucla.edu/stat/stata/examples/chp/p004.dta)
 ```{r}
 # install.packages("foreign") # 安裝R套件 foreign
 library(foreign) # 載入套件 
@@ -293,10 +293,10 @@ ifelse(z > 2, "larger than 2", "smaller than 2")
 
 ```
 
-## 條件判斷
-- 若需要多個判斷分支時，加入`else if`, ...,  `else`
+## 條件判斷5
+- 若需要多個判斷分支時，加入`if`, `else if`, ...,  `else`
 ```{r}
-y <- 1
+y <- 2
 if(y > 2){
   cat(y, "is larger than 2")
 }else if(y < 2){
@@ -309,16 +309,14 @@ if(y > 2){
 # Ch03: 循環語句 - for
 
 ## 循環語句
-- 可用來重複執行某段程式碼
-- `for loop`中，以‘足標’作為終止循環的條件
+- `for loop`:可用來重複執行某段程式碼
+
 ```{r}
 x <- 0
 for (i in 1:10) {
   x <- x+i
   print(x)
 }
-# 檢查
-cumsum(1:10)
 ```
 
 ## 循環語句
@@ -326,8 +324,8 @@ cumsum(1:10)
 ```{r}
 x <- 0
 for(i in 1:10){
-  if(i %% 2 !=0) { # x是否為奇數，
-    x <- x + i # 自身累加
+  if(i %% 2 !=0) { # x是否為奇數
+    x <- x + i 
   }
 }
 x
@@ -337,7 +335,7 @@ x
 
 ## 雙重循環語句
 - 可用來重複執行某段程式碼
-- `\t` = tab鍵, `\n` = 空行
+- `\t` = tab鍵, `\n` = 換行
 ```{r}
 x <- 0
 k <- 0
@@ -346,6 +344,28 @@ for(i in 1:3){
     cat(paste(i, "*", j,  "=", i*j, ",\t", sep=""))
     k <- k + 1
     x[k] <- i*j
+  }
+  cat("\n")
+}
+```
+
+## 簡易練習
+- 利用雙重循環語句畫出如下的兩個圖案
+- 聖誕樹的難度加高（三個循環語句）
+```{r, echo=FALSE}
+for (i in 1:5) {
+  for (j in 1:i){
+    cat("*")
+  }
+  cat("\n")
+}
+
+for (i in 1:10){
+  for (j in 10:i){
+    cat(" ")
+  }
+  for (k in 1:(2*i-1)){
+    cat("*")
   }
   cat("\n")
 }
@@ -382,14 +402,14 @@ myif(1); myif(2); myif(3)
 
 ## 自訂函數
 - 循環語句
-
+- 我發明了一個運算法則：一個數字`x`:$\sqrt{(x*\pi)+1+2+3+4+5}$，
 ```{r}
 myfun <- function(x){ # 這個function有一個變數x
   x <- pi*x
   for (i in 1:5) {
     x <- x+i
   }
-  sqrt(x)
+  x <- sqrt(x)
   return(x)
   }
 
@@ -480,7 +500,7 @@ head(df)
 
 # Ch05: Pipe Line Coding Style
 
-## 2014 年最有影響的套件之一：magrittr
+## 2014 年起最有影響的套件之一：magrittr
 - 壓縮的程式碼不好讀
 - 展開的程式碼會產生很多暫存變數
 - 套件`magrittr`部份解決了這個問題
@@ -554,20 +574,20 @@ mtcars$mpg %>%
 ```{r}
 # install.packages("reshape2")
 library(reshape2)
-WP.melt <- data.frame(WorldPhones)
-WP.melt$year <- rownames(WP.melt)  
-WP.melt <- melt(WP.melt, id="year")
+WP <- data.frame(WorldPhones)
+WP$year <- rownames(WP)  
+WP.melt <- melt(WP, id="year")
 head(WP.melt)
 ```
 
 ## 資料拉皮 `reshape2`
 - `dcast`: long format -> wide format
 ```{r}
-WP.cast <- dcast(WP.melt, year~variable,value.var="value") 
+WP.cast <- dcast(WP.melt, year~variable, value.var="value") 
 head(WP.cast)
 ```
-## 2014 年最有影響的套件之一：dplyr
-- 讓R 使用者可以用更有彈性的方式來處理資料
+## 超高人氣的實用套件：dplyr
+- 讓 R 使用者可以用更有彈性的方式來處理資料
 - 針對`data.frame`做設計（名稱中的`d`）
 - 設計理念
     - 導入資料整理最重要的動作（非常類似SQL）
@@ -649,7 +669,7 @@ head(tmp)
 ## 對行做選取
 用負號`-`執行反向選取
 ```{r}
-tmp <- select(iris,c(-Petal.Width,-Species))
+tmp <- select(iris,-Petal.Width,-Species)
 head(tmp)
 ```
 
@@ -698,7 +718,7 @@ group_by(iris, Species) %>%
 
 <img src='img/bind_rows.png' height=400 align='center'></img>
 
-- `bond_cols`
+- `bind_cols`
 
 <img src='img/bind_col.png' height=300 align='center'></img>
 
@@ -710,6 +730,14 @@ group_by(iris, Species) %>%
 <center>
 <img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img>
 </center>
+
+## 資料表合併
+- 使用`merge`
+```{r}
+data1 <- data.frame(x1 = c("A","B","C", "D"), x2=c(11,12,13,14))
+data2 <- data.frame(x1 = c("A","B","C", "E" ), x3=c("f","g","h","i"))
+merge(data1, data2, by="x1", all = T)
+```
 
 ## 補充資料
 - [Learn R in R (Swirls)](https://github.com/wush978/DataScienceAndR)
