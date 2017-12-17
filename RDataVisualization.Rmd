@@ -357,7 +357,7 @@ ggplot(aes(x = city, y = rate, fill = use_type)) +
   geom_bar(stat = 'identity', position = 'dodge')  + # dodge類別並排
   thm() + 
   scale_fill_discrete(name  ="使用分區或編定") + # 設定圖例的顯示
-  scale_fill_manual(values = c("#FFCDB2", "#FFB4A2", "#E5989B","#B5838D","#6D6875")) # 改變顏色
+  scale_fill_manual(values = c("#FFCDB2", "#FFB4A2", "#E5989B","#B5838D","#6D6875")) 
 ```
 
 ## How to choose colors?
