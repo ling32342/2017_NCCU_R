@@ -45,7 +45,7 @@
 - Data ETL 
   - dplyr and reshape2
   
-## 課程主題：[Data ETL & Data visualization in R]()
+## 課程主題：[Data ETL & Data visualization in R](https://pongponglin.github.io/2017NCCU_R/RDataVisualization.html)
 
 ### Day3 課程大綱
 - Review Data ETL
@@ -56,7 +56,9 @@
 - Data visualization in R
   - ggplot2 for beginer
   - Application
-  - Interactive plot (plotly)
+  - Interactive plot 
+      - plotly
+      - highcharter
 
 
 ## 課程主題：[Data ETL & Data visualization in R]()
