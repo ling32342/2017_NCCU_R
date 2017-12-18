@@ -301,7 +301,7 @@ table %>%
 ```
 
 
-## Reoder x
+## Reorder x
 ```{r ,warning=FALSE,fig.align='center', message=FALSE}
 table %>% 
   ggplot(aes(x=reorder(district,-amount), y=amount)) +
@@ -396,17 +396,6 @@ table %>%
   ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
   geom_line() + geom_point() + thm() + 
   labs(x = "交易月份" , y = "交易數量")
-```
-
-## Change range!
-```{r,warning=FALSE,fig.align='center', message=FALSE}
-table %>% 
-  ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
-  geom_line() + 
-  geom_point() + 
-  thm() + 
-  labs(x = "交易月份" , y = "交易數量")+
-  coord_cartesian(ylim = c(1000, 8000)) 
 ```
 
 
@@ -698,6 +687,7 @@ head(data)
   hc_add_series(name = "教授人數" ,data =data$教授 ,color="#DB3A34") %>% 
   hc_add_series(name = "助教人數" ,data =data$助教 ,color="#FFC857")
 ```
+
 
 ## Plot in highcharter
 ```{r, echo=FALSE,warning=FALSE,fig.align='center', message=FALSE}
