@@ -44,7 +44,7 @@
 - Pipe coding style
 - Data ETL 
   - dplyr and reshape2
-  
+
 ## 課程主題：[Data ETL & Data visualization in R](https://pongponglin.github.io/2017NCCU_R/RDataVisualization.html)
 
 ### Day3 課程大綱
@@ -59,7 +59,6 @@
   - Interactive plot 
       - plotly
       - highcharter
-
 
 ## 課程主題：[Rmarkdown]()
 
