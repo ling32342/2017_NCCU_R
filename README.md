@@ -61,7 +61,7 @@
       - highcharter
 
 
-## 課程主題：[Data ETL & Data visualization in R]()
+## 課程主題：[Rmarkdown]()
 
 ### Day4 課程大綱
 - Reproducible research in R
