@@ -211,25 +211,24 @@ rmarkdown::render("input.Rmd")
 ## Exercise - 1
 <p style="color:#003E3E;">請大家以下面的文字為樣板，打出一篇簡短的自我介紹：</p>
 
-大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
+大家好，我是**Nicole**`(1.使用粗體)`，目前就讀於國立政治大學，家裡共有： \
 
-
+`(2.請列點)`
 + 我爸 \
 + 我媽 \
 + 我哥 \
 + 我大弟 \
 + 我小弟 \
-(2.請列點)
 
 有六個成員，我是女生，我長這樣：
+`(3.請放照片)`
 <img src="img/me.png" width="50px">
-(3.請放照片)
 
-想要和我做朋有的人可以加我[臉書](https://www.facebook.com/profile.php?id=100000344369057)(4.請放你的臉書連結)
+`(4.請放你的臉書連結)`
+想要和我做朋有的人可以加我[臉書](https://www.facebook.com/profile.php?id=100000344369057)
 
 
 ## Answer - 1
-
 
 ```
 大家好，我是**LIYUN**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
@@ -285,7 +284,6 @@ plot(cars)
 - `warning`(TRUE): whether to preserve warnings in the output 
 - `comment`("##"): set to comment notation 
 
-
 ## Basic Chunk Options - 2
 
 利用每個chunk右上的設定鍵
@@ -308,7 +306,7 @@ plot(cars)
 
 ## Exercise - 2.1
 
-請大家利用 iris 的資料依照不同的品種，畫出 Sepal.Length 及 Petal.Length 的散點圖
+##### 請大家利用 iris 的資料依照不同的品種，畫出 Sepal.Length 及 Petal.Length 的 scatter plot
 
 
 ## Answer - 2.1
@@ -322,8 +320,7 @@ iris %>%
 
 ## Exercise - 2.2
 
-請大家在 Rmarkdown 中產出將剛剛的散點圖
-
+##### 請大家在 Rmarkdown 中產出將剛剛的 scatter plot
 
 ## Answer - 2.2
 
@@ -344,22 +341,19 @@ iris %>%
 &#96;&#96;&#96;
 </code></pre>
 
-
-
 ## Exercise - 3
 
 利用R Markdown 製作《一周天氣預報》書面報告。
 
 - [原始出處](http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm)
-- [參考範本](https://github.com/dspim/a1-basic-data-analysis-course/blob/master/RmdExQue.Rmd)
-- [範例資料](https://lucy0222.github.io/2017_NCCU_R/data/weatherbig5.csv)
+- [範例資料下載](https://pongponglin.github.io/2017NCCU_R/data/weatherbig5.csv)
 
 ## 原始網頁  
 
 <center><img  src="img/RMDexercise3.1.png" width="800"></center>  
 
 ## Rmarkdown 呈現
-[範例連結](https://lucy0222.github.io/2017_NCCU_R/RMDsample.html)
+[範例連結](https://pongponglin.github.io/2017NCCU_R/RMDsample.html)
 <center><img  src="img/exam_q1_1.png" width="750"></center>  
 
 ## Exercise - 3.1
@@ -444,6 +438,18 @@ datatable(head(iris))
 
 ## 呈現表格 in Rmarkdown - 2
 
+- 調整表格呈現的列數
+- 使用 `options = list(pageLength = 數字)` 參數調整
+
+```{r, eval=FALSE}
+# 呈現三列
+datatable(iris, options = list(pageLength = 3))
+# 呈現五列
+datatable(cars, options = list(pageLength = 5)) 
+```
+
+## 呈現表格 in Rmarkdown - 2
+
 - 可以利用 html 語法修改字體
 - 標記特殊欄或列
 - 調整欄
@@ -477,22 +483,7 @@ datatable(cars, options = list(pageLength = 5)) %>% formatStyle( 'dist' ,
   target = 'row',
   backgroundColor = styleEqual(c(10), c('pink'))
 )
-
-
 ```
-
-## 呈現表格 in Rmarkdown - 2
-
-- 調整表格呈現的列數
-- 使用 `options = list(pageLength = 數字)` 參數調整
-
-```{r, eval=FALSE}
-# 呈現三列
-datatable(iris, options = list(pageLength = 3))
-# 呈現五列
-datatable(cars, options = list(pageLength = 5)) 
-```
-
 
 
 ## Exercise - 3.2
