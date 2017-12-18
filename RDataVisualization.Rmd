@@ -398,17 +398,6 @@ table %>%
   labs(x = "交易月份" , y = "交易數量")
 ```
 
-## Change colors!
-```{r,warning=FALSE,fig.align='center', message=FALSE}
-table %>% 
-  ggplot(aes(x=trac_month,y=amount,group=city,color=city)) +
-  geom_line() + 
-  geom_point() + 
-  thm() + 
-  labs(x = "交易月份" , y = "交易數量")+
-  scale_colour_manual(values = c("#006BA6", "#FFBC42", "#D81159","#8F2D56"))
-```
-
 ## Change range!
 ```{r,warning=FALSE,fig.align='center', message=FALSE}
 table %>% 
@@ -417,7 +406,6 @@ table %>%
   geom_point() + 
   thm() + 
   labs(x = "交易月份" , y = "交易數量")+
-  scale_colour_manual(values = c("#006BA6", "#FFBC42", "#D81159","#8F2D56")) +
   coord_cartesian(ylim = c(1000, 8000)) 
 ```
 
@@ -525,7 +513,7 @@ iris %>%
 iris %>%  
 ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
   geom_point(shape=1, size=2) + # shape控制圖示；size控制點的大小
-  geom_vline( xintercept = 5.0 ,colour = "black",linetype = "dashed", size = 1)
+  geom_vline( xintercept = 5.0, colour = "black",linetype = "dashed", size = 1)
 ```
 
 </div>
