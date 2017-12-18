@@ -169,7 +169,7 @@ library(reshape2)
 ```{r,eval=FALSE}
 ############### 絕對路徑 ###############
 # 請輸入完整的檔案路徑
-data <- read.csv("/Users/hsiaoling/Desktop/data/transaction.csv") #如果你是mac
+data <- read.csv("/Users/yangpeiwen/Desktop/data/transaction.csv") #如果你是mac
 data <- read.csv("C:\\Users\\transaction.csv") #如果你是windows
 
 ############### 相對路徑 ###############
@@ -354,10 +354,9 @@ table %>%
 ```{r,warning=FALSE,fig.align='center', message=FALSE,fig.height=4}
 table %>% 
 ggplot(aes(x = city, y = rate, fill = use_type)) +
-  geom_bar(stat = 'identity', position = 'dodge')  + # dodge類別並排
+  geom_bar(stat = 'identity', position = 'dodge')  +
   thm() + 
-  scale_fill_discrete(name  ="使用分區或編定") + # 設定圖例的顯示
-  scale_fill_manual(values = c("#FFCDB2", "#FFB4A2", "#E5989B","#B5838D","#6D6875")) 
+  scale_fill_manual(values = c("#FFCDB2", "#FFB4A2", "#E5989B","#B5838D","#6D6875"))
 ```
 
 ## How to choose colors?
