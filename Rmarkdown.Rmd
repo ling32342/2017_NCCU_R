@@ -185,6 +185,7 @@ rmarkdown::render("input.Rmd")
 
 ## 字體！
 
+- 我是正常文字
 - 粗體：使用`**bold**` 或 `__bold__` 
 - 斜體：使用 `*italics*` 或 `_italics_`
 - 刪除線：使用`~~我是豬~~`
@@ -195,6 +196,17 @@ rmarkdown::render("input.Rmd")
  *斜體：italics* \
  刪除線：~~我是豬~~
 
+## Attach pictures
+- 貼上照片
+- [img](http://www.w3schools.com/tags/tag_img.asp): inserting images into an HTML document.
+    
+    Much easier for adjusting width and height.
+```html
+<img  src="img/me.png" width="80">
+<img  src="img/me.png" height="100" width="500">
+```
+<center><img  src="img/me.png" width="80"></center>  
+<center><img  src="img/me.png" height="100" width="500"></center>  
 
 ## 先來簡單的複製貼上！
 - 利用`+`、`*`、`-`，列點文字
@@ -231,20 +243,28 @@ rmarkdown::render("input.Rmd")
 ## Answer - 1
 
 ```
-大家好，我是**LIYUN**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
+大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
 
 + 我爸 \
 + 我媽 \
-+ 我哥 \
-+ 我大弟 \
-+ 我小弟 \
++ 我 \
++ 我妹妹 \
 
-有六個成員，我是女生，我長這樣：
+有四個成員，我是女生，我長這樣：
 ![](你的圖片路徑) 
 
 想要和我做朋有的人可以加我[臉書](臉書路徑)
 
 ```
+
+## 補充
+- 連結網站
+- [iframe](http://www.w3schools.com/tags/tag_iframe.asp): displaying a web page within a web page
+```html
+<iframe src="https://dsp.im/" height=600 width=800></iframe>
+```
+<iframe src="https://dsp.im/" height=600 width=800></iframe>
+
 
 # R Code Chunks
 
@@ -258,7 +278,7 @@ summary(cars$dist)
 &#96;&#96;&#96;
 </code></pre>
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 summary(cars$dist)
 ```
 
@@ -285,6 +305,13 @@ plot(cars)
 - `comment`("##"): set to comment notation 
 
 ## Basic Chunk Options - 2
+#### 常用
+- defult：show code and output 
+- `echo = FALSE` only show output
+- `eval = FALSE` only show code
+- `include = FALSE` don't show code and output
+
+## Basic Chunk Options - 3
 
 利用每個chunk右上的設定鍵
 <center>
@@ -306,7 +333,8 @@ plot(cars)
 
 ## Exercise - 2.1
 
-##### 請大家利用 iris 的資料依照不同的品種，畫出 Sepal.Length 及 Petal.Length 的 scatter plot
+<center> **請大家利用 iris 的資料依照不同的品種，**</center>
+<center> **畫出 Sepal.Length 及 Petal.Length 的 scatter plot** </center>
 
 
 ## Answer - 2.1
@@ -320,7 +348,7 @@ iris %>%
 
 ## Exercise - 2.2
 
-##### 請大家在 Rmarkdown 中產出將剛剛的 scatter plot
+<center>**請大家在 Rmarkdown 中產出將剛剛的 scatter plot**</center>
 
 ## Answer - 2.2
 
@@ -402,6 +430,7 @@ min(dat[1:2, 4:5])
 print(head(women))
 ```
 
+# Table in Rmarkdown
 
 ## 呈現表格 in Rmarkdown - 1
 
@@ -424,8 +453,9 @@ knitr::kable(head(women))
 
 ## 呈現表格 in Rmarkdown - 2
 
-- 安裝 DT 套件，請執行 `install.packages("DT")`
-- 記得 `library(DT)`
+- **DT 套件**
+- 未安裝者記得先安裝 `install.packages("DT")`
+- 使用前記得 `library(DT)`
 - 易於呈現、美化表格
 - [DT使用手冊](https://rstudio.github.io/DT/)
 
@@ -489,16 +519,13 @@ datatable(cars, options = list(pageLength = 5)) %>% formatStyle( 'dist' ,
 ## Exercise - 3.2
 
 利用R Markdown 製作《一周天氣預報》書面報告。
-
 - 製作未來七天天氣預報表
 
-```{r eval=FALSE}
-# Hint：
-# 你可能需要dplyr套件
-# 可以先用filter把白天、晚上分開處理
-# 利用 paste(低溫,高溫,sep="-") 來製作溫度區間, i.e. 16-17
-# 利用colnames, rownames來對整理好的資料表的行與列命名
-```
+#### Hint：
+- 你可能需要dplyr套件
+- 可以先用filter把白天、晚上分開處理
+- 利用 paste(低溫,高溫,sep="-") 來製作溫度區間, i.e. 16-17
+- 利用colnames, rownames來對整理好的資料表的行與列命名
 
 
 ## Answer - 3.2
@@ -528,15 +555,9 @@ rownames(out) <- c("白天天氣","白天溫度","晚上天氣","晚上溫度")
 
 - 製作未來七天天氣預報表
 
-<pre class="prettyprint lang-r"><code>&#96;&#96;&#96;{r results='asis', echo=FALSE}
-knitr::kable(out)
-&#96;&#96;&#96;</code></pre>
-
 ```{r eval=F}
 knitr::kable(out)
 ```
-
-## Exercise A2 (conti.)
 
 |         |05/23      |05/24      |05/25      |05/26      |05/27    |05/28 |05/29 |
 |:--------|:----------|:----------|:----------|:----------|:--------|:-----|:-----|
@@ -546,23 +567,15 @@ knitr::kable(out)
 |晚上溫度 |28-23      |27-23      |24-23      |25-23      |25-23    |25-23 |26-23 |
 
 
-
-
-
 ## Exercise - 3.3
 
 利用R Markdown 製作《一周天氣預報》書面報告。
 
 - 製作未來七天天氣預報圖
 
-```{r eval=FALSE}
-# Hint：
-# 你可能需要ggplot2套件
-# Mac顯示中文需設置字型
-# http://equation85.github.io/blog/graph-font-of-r-in-mac-os-x/
-# par(family='STHeiti')
-```
-
+#### Hint：
+- 你可能需要`ggplot2`套件
+- Mac顯示中文需設置字型: par(family='STHeiti')
 
 ## Answer 3.3
 
@@ -586,18 +599,15 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
 ## Answer 3.3
 
 利用R Markdown 製作《一周天氣預報》書面報告。
+- 以上參考解答code的產出參考報告
+- [參考示範連結](https://pongponglin.github.io/2017NCCU_R/RMDsample.html#1)
 
-- [原始出處](http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm)
-- [參考範本](https://github.com/dspim/a1-basic-data-analysis-course/blob/master/RmdExQue.Rmd)
-- [範例資料](https://lucy0222.github.io/2017_NCCU_R/data/weatherbig5.csv)
-- [參考解答](https://github.com/lucy0222/2017_NCCU_R/blob/master/RMDsample.Rmd)
+# Table of Contents
 
-
-##  新增目錄
+##  目錄
 - Rmarkdown 有提供目錄的功能
 - 文件長時方便尋找
 <center><img  src="img/RMDcatlog.png" width="800"></center>  
-
 
 ##  新增目錄
 
@@ -619,12 +629,10 @@ output:
 
 ##  新增目錄
 
-- 目錄的長寬可以變動
-- 透過`fig_width`以及`fig_height: 7.5`參數調整
+- 目錄的長寬可以變動：透過`fig_width`以及`fig_height: 7.5`參數調整
 - `toc_depth`表示顯示到多大的標題
     - ex:`toc_depth: 4`會顯示有少於或等於四個井字號`####`的標題
     
-
 ```
 ---
 title: "你Rmarkdown的名稱"
@@ -641,9 +649,6 @@ output:
 ---
 ```
 
-
-
-
 ##  Rmarkdown 內建主題選擇
 
 - 可以透過點選的方式選則整個 RMD 的主題
@@ -652,7 +657,30 @@ output:
 
 <center><img  src="img/RMDOutputOptions.png" width="600"></center>  
 
+# 除了輸出 HTML
 
+## Persentation - 1
+- Rmarkdown 除了可以輸出 HTML 文件外，可以生成投影片
+
+<center><img  src="img/RMDslide.png" width="800"></center>  
+
+## Persentation - 2
+- `##` 代表一張投影片
+- `#` 主題黑幕
+- 要注意因為每張頭影片長度限制，所以須控制內容
+
+## Flexdashboard - 1
+
+- 安裝套件 `install.packages("flexdashboard")`
+- 使用前 `install(flexdashboard)`
+- [flexdashboard 使用手冊](http://rmarkdown.rstudio.com/flexdashboard/)
+
+<center><img  src="img/RMDflexdashboard_example.png" width="800"></center>  
+
+## Flexdashboard - 2
+
+<center><img  src="img/RMDflexdashboard.png" width="800"></center>  
+- [2017 Asia Open Data Hackthon Dashboard](https://pongponglin.github.io/2017Taiwan-power-data/%E8%B7%A8%E5%9C%8B%E9%BB%91%E5%AE%A2%E6%9D%BE.html)
 
 # Appendiex
 
@@ -690,36 +718,6 @@ for (color in colors){
     cat("\n")
 }
 &#96;&#96;&#96;</code></pre>
-
-
-## Some Useful HTML
-- 連結網站
-- [iframe](http://www.w3schools.com/tags/tag_iframe.asp): displaying a web page within a web page
-```html
-<iframe src="https://dsp.im/" height=600 width=800></iframe>
-```
-<iframe src="https://dsp.im/" height=600 width=800></iframe>
-
-
-## Some Useful HTML
-- 貼上照片
-- [img](http://www.w3schools.com/tags/tag_img.asp): inserting images into an HTML document.
-    
-    Much easier for adjusting width and height.
-```html
-<img  src="img/me.png" height="100" width="500">
-```
-<center><img  src="img/me.png" width="80"></center>  
-<center><img  src="img/me.png" height="100" width="500"></center>  
-
-
-##  除了輸出 HTML
-
-- Rmarkdown 除了可以輸出 HTML 文件外，可以生成投影片
-
-<center><img  src="img/RMDslide.png" width="800"></center>  
-
-
 
 ## Interactive Documents
 
@@ -784,7 +782,4 @@ https://www.youtube.com/watch?v=OHKZLeKlUsM
 
 ----
 
-<br><br><br><br><br>
-<div align = 'center'>
-<hh>Thank You!</hh>
-</div>
+# Thank You!
