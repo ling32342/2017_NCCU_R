@@ -13,13 +13,15 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_2.2.1 dplyr_0.7.4   xtable_1.8-2  magrittr_1.5  knitr_1.17   
+[1] DT_0.2              data.table_1.10.4-3 xtable_1.8-2       
+[4] ggplot2_2.2.1       dplyr_0.7.4         magrittr_1.5       
+[7] knitr_1.17         
 
 loaded via a namespace (and not attached):
  [1] Rcpp_0.12.13     bindr_0.1        munsell_0.4.3    colorspace_1.3-2
  [5] R6_2.2.2         rlang_0.1.2      plyr_1.8.4       stringr_1.2.0   
  [9] tools_3.4.2      grid_3.4.2       gtable_0.2.0     htmltools_0.3.6 
-[13] lazyeval_0.2.1   yaml_2.1.14      rprojroot_1.2    digest_0.6.12   
-[17] assertthat_0.2.0 tibble_1.3.4     bindrcpp_0.2     glue_1.2.0      
-[21] evaluate_0.10.1  rmarkdown_1.6    stringi_1.1.5    compiler_3.4.2  
-[25] scales_0.5.0     backports_1.1.1  pkgconfig_2.0.1 
+[13] lazyeval_0.2.1   yaml_2.1.14      assertthat_0.2.0 rprojroot_1.2   
+[17] digest_0.6.12    tibble_1.3.4     bindrcpp_0.2     htmlwidgets_0.9 
+[21] glue_1.2.0       evaluate_0.10.1  rmarkdown_1.6    stringi_1.1.5   
+[25] compiler_3.4.2   scales_0.5.0     backports_1.1.1  pkgconfig_2.0.1 
