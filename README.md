@@ -60,7 +60,7 @@
       - plotly
       - highcharter
 
-## 課程主題：[Rmarkdown]()
+## 課程主題：[Rmarkdown](https://pongponglin.github.io/2017NCCU_R/Rmarkdown.html#1)
 
 ### Day4 課程大綱
 - Reproducible research in R
