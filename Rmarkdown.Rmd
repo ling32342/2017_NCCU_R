@@ -61,10 +61,10 @@ las2 <- theme(axis.text.x = element_text(angle = 90, hjust = 1))
     * 參數調整
 
 ##  資料分析流程
-> - 資料採集
-> - 資料清洗處理
-> - 統計及分析
-> - 視覺呈現
+- 資料採集
+- 資料清洗處理
+- 統計及分析
+- 視覺呈現
 > - <p style="color:#750000;font-size:36px;">報告產出</p>
 
 ## 資料分析 in R 
@@ -92,10 +92,11 @@ las2 <- theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 ## Why we need R Markdown？
 
-> - 時間久了會忘記code的意思
-> - 要寫說明文件給同學、同事、教授、主管
-> - 教授很有想法，想嘗試新方法 <br> (~~FK！又要重跑一份~~)
-> - 老闆說要改流程 <br> (~~MD!之前貼到簡報上的圖又要重貼一份~~)
+- 時間久了會忘記code的意思
+- 要寫說明文件給同學、同事、教授、主管
+- 教授很有想法，想嘗試新方法 <br> (~~FK！又要重跑一份~~)
+- 老闆說要改流程 <br> (~~MD!之前貼到簡報上的圖又要重貼一份~~)
+
 > - **專案報告要呈現，code改了，但是文件無法同時修改！** <br> 
 
 
@@ -119,6 +120,7 @@ install.packages("rmarkdown")
 
 ## 打開你第一個RMarkdown
 
+`Document`
 <center>
 <img src="img/openRMD.png" width="600px">
 </center>
@@ -151,6 +153,7 @@ install.packages("rmarkdown")
 - for example :
     - 這是DSP推出的第 `r  3+1` 門課程
     - 熵指標的公式為$-\sum{p_i \log{p_i}}$ ，表示系統的亂度
+    - [markdown 公式輸入參考](http://oiltang.com/2014/05/04/markdown-and-mathjax/)
     
 `r fig("InlineEx.png", 80)`  
 
@@ -167,11 +170,12 @@ rmarkdown::render("input.Rmd")
 ## Markdown Quick Reference
 
 在RStudio中，也可以找到RMarkdown的作弊小文件！
+
 <center>
 <img src="img/MdRef_1.png" width="800px">
 </center>
 
-## 先來簡單的複製貼上！
+## 標題！
 
 ### Headers
 - 字體大小：使用井字號
@@ -190,11 +194,11 @@ rmarkdown::render("input.Rmd")
 - 斜體：使用 `*italics*` 或 `_italics_`
 - 刪除線：使用`~~我是豬~~`
 
-<p style="color:#003E3E;">結果：</p>
- 我是正常文字\
- **粗體：bold** \
- *斜體：italics* \
- 刪除線：~~我是豬~~
+<p style="color:#0000C6;">結果：</p>
+- 我是正常文字\
+- **粗體：bold** \
+- *斜體：italics* \
+- 刪除線：~~我是豬~~
 
 ## Attach pictures
 - 貼上照片
@@ -223,16 +227,15 @@ rmarkdown::render("input.Rmd")
 ## Exercise - 1
 <p style="color:#003E3E;">請大家以下面的文字為樣板，打出一篇簡短的自我介紹：</p>
 
-大家好，我是**Nicole**`(1.使用粗體)`，目前就讀於國立政治大學，家裡共有： \
+大家好，我是**Nicole**`(1.使用粗體)`，目前就讀於國立政治大學，家裡共有：
 
 `(2.請列點)`
-+ 我爸 \
-+ 我媽 \
-+ 我哥 \
-+ 我大弟 \
-+ 我小弟 \
++ 我爸
++ 我媽
++ 我
++ 我妹妹
 
-有六個成員，我是女生，我長這樣：
+有四個成員，我是女生，我長這樣：
 `(3.請放照片)`
 <img src="img/me.png" width="50px">
 
@@ -243,15 +246,14 @@ rmarkdown::render("input.Rmd")
 ## Answer - 1
 
 ```
-大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
+大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有：\
 
 + 我爸 \
 + 我媽 \
 + 我 \
 + 我妹妹 \
 
-有四個成員，我是女生，我長這樣：
-![](你的圖片路徑) 
+有四個成員，我是女生，我長這樣：![](你的圖片路徑) 
 
 想要和我做朋有的人可以加我[臉書](臉書路徑)
 
@@ -260,6 +262,7 @@ rmarkdown::render("input.Rmd")
 ## 補充
 - 連結網站
 - [iframe](http://www.w3schools.com/tags/tag_iframe.asp): displaying a web page within a web page
+
 ```html
 <iframe src="https://dsp.im/" height=600 width=800></iframe>
 ```
@@ -271,14 +274,15 @@ rmarkdown::render("input.Rmd")
 ## Overview
 - 在 R Code Chunk 中，code可以被執行
 - code會被```{r}及```包圍
-- 快捷鍵（for windows、mac）：alt + control + i
+- 快捷鍵（for windows、mac）：alt + control/command + i
 - 將下列文字複製貼上並Knit：
+
 <pre class="markdown"><code>&#96;&#96;&#96;{r}
 summary(cars$dist)
 &#96;&#96;&#96;
 </code></pre>
 
-```{r eval=FALSE, include=FALSE}
+```{r plot}
 summary(cars$dist)
 ```
 
@@ -305,19 +309,19 @@ plot(cars)
 - `comment`("##"): set to comment notation 
 
 ## Basic Chunk Options - 2
-#### 常用
-- defult：show code and output 
-- `echo = FALSE` only show output
-- `eval = FALSE` only show code
-- `include = FALSE` don't show code and output
+### 常用
+- `defult`：show code and output 
+- `echo = FALSE` ：only show output
+- `eval = FALSE` ：only show code
+- `include = FALSE` ：don't show code and output
 
 ## Basic Chunk Options - 3
 
 利用每個chunk右上的設定鍵
+
 <center>
 <img src="img/RMDchunksetting.png" width="700px">
 </center>
-
 
 ## 執行部分chunk
 在編輯 RMarkdown 的過程中，想要測試 chunk 中的 code 是否成功，但又不想要每次檢查都 knit，不僅花費太多不必要的時間也浪費系統資源
@@ -327,14 +331,14 @@ plot(cars)
 - 快捷鍵：Alt + Ctrl + C
 
 <center>
-<img src="img/RMDruncurrent.png" width="400px">
+<img src="img/RMDruncurrent.png" width="500px">
 </center>
 
 
 ## Exercise - 2.1
 
-<center> **請大家利用 iris 的資料依照不同的品種，**</center>
-<center> **畫出 Sepal.Length 及 Petal.Length 的 scatter plot** </center>
+<center><p style="color:#0000C6;font-size:32px;"> 請大家利用 iris 的資料依照不同的品種，</p></center>
+<center><p style="color:#0000C6;font-size:32px;"> 畫出 Sepal.Length 及 Petal.Length 的 scatter plot</p></center>
 
 
 ## Answer - 2.1
@@ -348,7 +352,7 @@ iris %>%
 
 ## Exercise - 2.2
 
-<center>**請大家在 Rmarkdown 中產出將剛剛的 scatter plot**</center>
+<center><p style="color:#0000C6;font-size:32px;"> 請大家在 Rmarkdown 中產出將剛剛的 scatter plot </p></center>
 
 ## Answer - 2.2
 
@@ -390,15 +394,13 @@ iris %>%
 
 - 計算05/23日當日的最高溫與最低溫度
 
-```{r eval=FALSE}
-# Hint：
-# 1. 下載weatherbig5.csv到自己的電腦上
-# 2. 在R chunk中，利用read.csv()讀取檔案進行分析
-  #  MAC : read.csv(,fileEncoding="big5")
-# 3. 找出05/23當日最高溫 max()
-# 4. 找出05/23當日最低溫 min()
-# 5. use inline R chunk `r max(...)` 
-```
+### **Hint：**
+1. 下載weatherbig5.csv到自己的電腦上
+2. 在R chunk中，利用read.csv()讀取檔案進行分析
+    - MAC : read.csv(,fileEncoding="big5")
+3. 找出05/23當日最高溫 max()
+4. 找出05/23當日最低溫 min()
+5. use inline R chunk `r max(...)` 
 
 ## Answer - 3.1
 
@@ -406,7 +408,7 @@ iris %>%
 
 - 計算05/23日當日的最高溫與最低溫度
 
-```{r eval=FALSE}
+```{r}
 # Hint for Linu& Mac：
 dat <- read.csv("data/weatherbig5.csv", fileEncoding="big5") 
 max(dat[1:2, 4:5])
@@ -489,7 +491,6 @@ datatable(iris) %>%
   formatStyle('Sepal.Length',  color = 'red', backgroundColor = 'orange', fontWeight = 'bold')
 ```
 
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 datatable(iris, options = list(pageLength = 3)) %>%
   formatStyle('Sepal.Length',  color = 'red', backgroundColor = 'orange', fontWeight = 'bold')
@@ -504,7 +505,6 @@ datatable(cars) %>% formatStyle( 'dist' ,
   target = 'row',
   backgroundColor = styleEqual(c(10), c('pink'))
 )
-
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -521,7 +521,7 @@ datatable(cars, options = list(pageLength = 5)) %>% formatStyle( 'dist' ,
 利用R Markdown 製作《一周天氣預報》書面報告。
 - 製作未來七天天氣預報表
 
-#### Hint：
+### Hint：
 - 你可能需要dplyr套件
 - 可以先用filter把白天、晚上分開處理
 - 利用 paste(低溫,高溫,sep="-") 來製作溫度區間, i.e. 16-17
@@ -534,7 +534,7 @@ datatable(cars, options = list(pageLength = 5)) %>% formatStyle( 'dist' ,
 
 - 製作未來七天天氣預報表
 
-```{r eval=FALSE}
+```{r}
 day1 <- filter(dat, 早晚=="白天")
 day2 <- mutate(day1, 溫度=paste(高溫,低溫,sep="-"))
 day3 <- select(day2, 天氣, 溫度)
@@ -555,10 +555,11 @@ rownames(out) <- c("白天天氣","白天溫度","晚上天氣","晚上溫度")
 
 - 製作未來七天天氣預報表
 
-```{r eval=F}
+```{r}
 knitr::kable(out)
 ```
 
+## ...
 |         |05/23      |05/24      |05/25      |05/26      |05/27    |05/28 |05/29 |
 |:--------|:----------|:----------|:----------|:----------|:--------|:-----|:-----|
 |白天天氣 |陰短暫雨   |多雲短暫雨 |多雲短暫雨 |陰短暫雨   |多雲時陰 |多雲  |多雲  |
@@ -573,7 +574,7 @@ knitr::kable(out)
 
 - 製作未來七天天氣預報圖
 
-#### Hint：
+### Hint：
 - 你可能需要`ggplot2`套件
 - Mac顯示中文需設置字型: par(family='STHeiti')
 
@@ -598,7 +599,8 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
 
 ## Answer 3.3
 
-利用R Markdown 製作《一周天氣預報》書面報告。
+### 利用R Markdown 製作《一周天氣預報》書面報告。
+
 - 以上參考解答code的產出參考報告
 - [參考示範連結](https://pongponglin.github.io/2017NCCU_R/RMDsample.html#1)
 
@@ -612,7 +614,7 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
 ##  新增目錄
 
 - 將以下複製貼上到Rmarkdown的開頭
-- `theme: united`表示目錄的主題選擇為`united`，可以變動
+- `theme: united` 表示目錄的主題選擇為 `united`，可以變動
 
 ```
 ---
@@ -631,7 +633,7 @@ output:
 
 - 目錄的長寬可以變動：透過`fig_width`以及`fig_height: 7.5`參數調整
 - `toc_depth`表示顯示到多大的標題
-    - ex:`toc_depth: 4`會顯示有少於或等於四個井字號`####`的標題
+    - ex: `toc_depth: 4` 會顯示有少於或等於四個井字號 `####` 的標題
     
 ```
 ---
@@ -653,7 +655,7 @@ output:
 
 - 可以透過點選的方式選則整個 RMD 的主題
 - 改變項目包含目錄、顏色、字體
-- 設定小圖示 -> Output Options...
+- 設定小圖示 -> `Output Options`...
 
 <center><img  src="img/RMDOutputOptions.png" width="600"></center>  
 
@@ -667,12 +669,12 @@ output:
 ## Persentation - 2
 - `##` 代表一張投影片
 - `#` 主題黑幕
-- 要注意因為每張頭影片長度限制，所以須控制內容
+- 要注意因為每張投影片長度限制，所以須控制內容
 
 ## Flexdashboard - 1
 
 - 安裝套件 `install.packages("flexdashboard")`
-- 使用前 `install(flexdashboard)`
+- 使用前 `library(flexdashboard)`
 - [flexdashboard 使用手冊](http://rmarkdown.rstudio.com/flexdashboard/)
 
 <center><img  src="img/RMDflexdashboard_example.png" width="800"></center>  
@@ -680,7 +682,15 @@ output:
 ## Flexdashboard - 2
 
 <center><img  src="img/RMDflexdashboard.png" width="800"></center>  
-- [2017 Asia Open Data Hackthon Dashboard](https://pongponglin.github.io/2017Taiwan-power-data/%E8%B7%A8%E5%9C%8B%E9%BB%91%E5%AE%A2%E6%9D%BE.html)
+
+## 參考作品
+- [實價登錄資料](https://lucy0222.github.io/2017_NCCU_R/%E5%AF%A6%E5%83%B9%E7%99%BB%E9%8C%84%E8%B3%87%E6%96%99.html) Li-yun 周立筠
+- [互動式地圖教學](https://pongponglin.github.io/Playground/%E4%BA%92%E5%8B%95%E5%BC%8F%E5%9C%B0%E5%9C%96%E6%95%99%E5%AD%B8leaflet_plotly.html) Peng-Wen, Lin 林芃彣
+- [2017 Asia Open Data Hackthon Dashboard](https://pongponglin.github.io/2017Taiwan-power-data/%E8%B7%A8%E5%9C%8B%E9%BB%91%E5%AE%A2%E6%9D%BE.html) (Flexdashboard) Life is struggle.
+- [2017 TPC Hackthon](https://patrick501004123854.shinyapps.io/final/) (Shiny dashboard) Life is struggle.
+
+### Shiny
+- [Shiny Tutorial](https://shiny.rstudio.com/tutorial/)
 
 # Appendiex
 
@@ -779,7 +789,5 @@ https://www.youtube.com/watch?v=OHKZLeKlUsM
 - [R軟體使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 - [StackOverflow](http://stackoverflow.com/) 
 - 歡迎來信  nicole19940331@gmail.com 與我們一起交流！
-
-----
 
 # Thank You!
