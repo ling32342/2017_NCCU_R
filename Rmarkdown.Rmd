@@ -65,6 +65,7 @@ las2 <- theme(axis.text.x = element_text(angle = 90, hjust = 1))
 - 資料清洗處理
 - 統計及分析
 - 視覺呈現
+
 > - <p style="color:#750000;font-size:36px;">報告產出</p>
 
 ## 資料分析 in R 
@@ -230,10 +231,11 @@ rmarkdown::render("input.Rmd")
 大家好，我是**Nicole**`(1.使用粗體)`，目前就讀於國立政治大學，家裡共有：
 
 `(2.請列點)`
-+ 我爸
-+ 我媽
-+ 我
-+ 我妹妹
+
+- 我爸\
+- 我媽\
+- 我\
+- 我妹妹\
 
 有四個成員，我是女生，我長這樣：
 `(3.請放照片)`
@@ -313,7 +315,7 @@ plot(cars)
 - `defult`：show code and output 
 - `echo = FALSE` ：only show output
 - `eval = FALSE` ：only show code
-- `include = FALSE` ：don't show code and output
+- `include = FALSE` ： run code and don't show output
 
 ## Basic Chunk Options - 3
 
@@ -347,8 +349,8 @@ plot(cars)
 iris %>% 
   ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
   geom_point(shape=1, size=2) # shape控制圖示；size控制點的大小
-```
 
+```
 
 ## Exercise - 2.2
 
@@ -396,11 +398,11 @@ iris %>%
 
 ### **Hint：**
 1. 下載weatherbig5.csv到自己的電腦上
-2. 在R chunk中，利用read.csv()讀取檔案進行分析
-    - MAC : read.csv(,fileEncoding="big5")
+2. 在R chunk中，利用read.csv()讀取檔案進行分析\
+MAC : read.csv(,fileEncoding="big5")
 3. 找出05/23當日最高溫 max()
 4. 找出05/23當日最低溫 min()
-5. use inline R chunk `r max(...)` 
+5. use inline R chunk `r max()` 
 
 ## Answer - 3.1
 
@@ -408,7 +410,7 @@ iris %>%
 
 - 計算05/23日當日的最高溫與最低溫度
 
-```{r}
+```{r include=FALSE}
 # Hint for Linu& Mac：
 dat <- read.csv("data/weatherbig5.csv", fileEncoding="big5") 
 max(dat[1:2, 4:5])
@@ -439,6 +441,7 @@ print(head(women))
 - 不用手動 key in 表格
 - 在 Chunk 後面的參數多加上`results='asis'` 
 - 在 Chunk 裡面打上`knitr::kable`，呈現表格在output上 
+  
   <pre class="markdown"><code>&#96;&#96;&#96;{r, results='asis'}
   knitr::kable(women)
   &#96;&#96;&#96;
@@ -549,7 +552,7 @@ rownames(out) <- c("白天天氣","白天溫度","晚上天氣","晚上溫度")
 ```
 
 
-## Answer A2 
+## Answer 3.2
 
 利用R Markdown 製作《一周天氣預報》書面報告。
 
