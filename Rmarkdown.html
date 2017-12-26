@@ -158,9 +158,11 @@
 <li>資料採集</li>
 <li>資料清洗處理</li>
 <li>統計及分析</li>
-<li>視覺呈現 &gt; -
+<li>視覺呈現</li>
+</ul>
 
-<p style="color:#750000;font-size:36px;">
+<ul class = 'build'>
+<li><p style="color:#750000;font-size:36px;">
 
 報告產出
 
@@ -206,7 +208,11 @@
 <li>時間久了會忘記code的意思</li>
 <li>要寫說明文件給同學、同事、教授、主管</li>
 <li>教授很有想法，想嘗試新方法 <br> (<del>FK！又要重跑一份</del>)</li>
-<li>老闆說要改流程 <br> (<del>MD!之前貼到簡報上的圖又要重貼一份</del>) &gt; - <strong>專案報告要呈現，code改了，但是文件無法同時修改！</strong> <br></li>
+<li>老闆說要改流程 <br> (<del>MD!之前貼到簡報上的圖又要重貼一份</del>)</li>
+</ul>
+
+<ul class = 'build'>
+<li><strong>專案報告要呈現，code改了，但是文件無法同時修改！</strong> <br></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Why we need R Markdown？</h2></hgroup><article  id="why-we-need-r-markdown-1">
@@ -233,15 +239,13 @@
 
 </article></slide><slide class=''><hgroup><h2>打開你第一個RMarkdown</h2></hgroup><article  id="rmarkdown">
 
-<ul>
-<li>Document
+<code>Document</code>
 
 <center>
 
 <img src="img/openRMD.png" width="600px">
 
-</center></li>
-</ul>
+</center>
 
 </article></slide><slide class=''><hgroup><h2>Overview</h2></hgroup><article  id="overview">
 
@@ -282,9 +286,11 @@
 <ul>
 <li>這是DSP推出的第 4 門課程</li>
 <li>熵指標的公式為\(-\sum{p_i \log{p_i}}\) ，表示系統的亂度</li>
-<li><a href='http://oiltang.com/2014/05/04/markdown-and-mathjax/' title=''>markdown 公式輸入參考</a> <img src="img/InlineEx.png" style="max-width:80%;max-height:80%;" /></li>
+<li><a href='http://oiltang.com/2014/05/04/markdown-and-mathjax/' title=''>markdown 公式輸入參考</a></li>
 </ul></li>
 </ul>
+
+<p><img src="img/InlineEx.png" style="max-width:80%;max-height:80%;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>Rendering Output</h2></hgroup><article  id="rendering-output">
 
@@ -392,7 +398,18 @@
 
 </p>
 
-<p>大家好，我是<strong>Nicole</strong><code>(1.使用粗體)</code>，目前就讀於國立政治大學，家裡共有：<br/><code>(2.請列點)</code><br/>+ 我爸<br/>+ 我媽<br/>+ 我<br/>+ 我妹妹<br/>有四個成員，我是女生，我長這樣： <code>(3.請放照片)</code> <img src="img/me.png" width="50px"></p>
+<p>大家好，我是<strong>Nicole</strong><code>(1.使用粗體)</code>，目前就讀於國立政治大學，家裡共有：</p>
+
+<p><code>(2.請列點)</code></p>
+
+<ul>
+<li>我爸<br/></li>
+<li>我媽<br/></li>
+<li>我<br/></li>
+<li>我妹妹<br/></li>
+</ul>
+
+<p>有四個成員，我是女生，我長這樣： <code>(3.請放照片)</code> <img src="img/me.png" width="50px"></p>
 
 <p><code>(4.請放你的臉書連結)</code> 想要和我做朋有的人可以加我<a href='https://www.facebook.com/profile.php?id=100000344369057' title=''>臉書</a></p>
 
@@ -405,8 +422,7 @@
 + 我 \
 + 我妹妹 \
 
-有四個成員，我是女生，我長這樣：
-![](你的圖片路徑) 
+有四個成員，我是女生，我長這樣：![](你的圖片路徑) 
 
 想要和我做朋有的人可以加我[臉書](臉書路徑)
 </pre>
@@ -431,7 +447,7 @@
 <ul>
 <li>在 R Code Chunk 中，code可以被執行</li>
 <li>code會被<code>{r}及</code>包圍</li>
-<li>快捷鍵（for windows、mac）：alt + control + i</li>
+<li>快捷鍵（for windows、mac）：alt + control/command + i</li>
 <li>將下列文字複製貼上並Knit：</li>
 </ul>
 
@@ -476,15 +492,15 @@ plot(cars)
 <h3>常用</h3>
 
 <ul>
-<li>defult：show code and output</li>
+<li><code>defult</code>：show code and output</li>
 <li><code>echo = FALSE</code> ：only show output</li>
 <li><code>eval = FALSE</code> ：only show code</li>
-<li><code>include = FALSE</code> ：don&#39;t show code and output</li>
+<li><code>include = FALSE</code> ： run code and don&#39;t show output</li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Basic Chunk Options - 3</h2></hgroup><article  id="basic-chunk-options---3">
 
-利用每個chunk右上的設定鍵
+<p>利用每個chunk右上的設定鍵</p>
 
 <center>
 
@@ -504,7 +520,7 @@ plot(cars)
 
 <center>
 
-<img src="img/RMDruncurrent.png" width="400px">
+<img src="img/RMDruncurrent.png" width="500px">
 
 </center>
 
@@ -606,13 +622,15 @@ iris %>%
 <li>計算05/23日當日的最高溫與最低溫度</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'># Hint：
-# 1. 下載weatherbig5.csv到自己的電腦上
-# 2. 在R chunk中，利用read.csv()讀取檔案進行分析
-  #  MAC : read.csv(,fileEncoding=&quot;big5&quot;)
-# 3. 找出05/23當日最高溫 max()
-# 4. 找出05/23當日最低溫 min()
-# 5. use inline R chunk `r max(...)` </pre>
+<h3><strong>Hint：</strong></h3>
+
+<ol>
+<li>下載weatherbig5.csv到自己的電腦上</li>
+<li>在R chunk中，利用read.csv()讀取檔案進行分析<br/>MAC : read.csv(,fileEncoding=&quot;big5&quot;)</li>
+<li>找出05/23當日最高溫 max()</li>
+<li>找出05/23當日最低溫 min()</li>
+<li>use inline R chunk -</li>
+</ol>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 3.1</h2></hgroup><article  id="answer---3.1">
 
@@ -621,18 +639,6 @@ iris %>%
 <ul>
 <li>計算05/23日當日的最高溫與最低溫度</li>
 </ul>
-
-<pre class = 'prettyprint lang-r'># Hint for Linu&amp; Mac：
-dat &lt;- read.csv(&quot;data/weatherbig5.csv&quot;, fileEncoding=&quot;big5&quot;) 
-max(dat[1:2, 4:5])</pre>
-
-<pre >[1] 32</pre>
-
-<pre class = 'prettyprint lang-r'>min(dat[1:2, 4:5])</pre>
-
-<pre >[1] 24</pre>
-
-<pre class = 'prettyprint lang-r'># 預測高溫約`r max(dat[1:2,4:5])`度，低溫約`r min(dat[1:2,4:5])`度</pre>
 
 <pre class = 'prettyprint lang-r'># Hint for Windows：
 dat &lt;- read.csv(&quot;data/weatherbig5.csv&quot;) 
@@ -663,7 +669,8 @@ min(dat[1:2, 4:5])
 <ul>
 <li>不用手動 key in 表格</li>
 <li>在 Chunk 後面的參數多加上<code>results=&#39;asis&#39;</code></li>
-<li>在 Chunk 裡面打上<code>knitr::kable</code>，呈現表格在output上
+<li>在 Chunk 裡面打上<code>knitr::kable</code>，呈現表格在output上</li>
+</ul>
 
 <pre class="markdown"><code>&#96;&#96;&#96;{r, results='asis'}
   knitr::kable(women)
@@ -674,8 +681,7 @@ min(dat[1:2, 4:5])
 
 <img  src="img/RMDtable.png" width="600">
 
-</center></li>
-</ul>
+</center>
 
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 1</h2></hgroup><article  id="-in-rmarkdown---1-2">
 
@@ -751,8 +757,8 @@ datatable(cars, options = list(pageLength = 5)) </pre>
 <pre class = 'prettyprint lang-r'>datatable(iris) %&gt;%
   formatStyle(&#39;Sepal.Length&#39;,  color = &#39;red&#39;, backgroundColor = &#39;orange&#39;, fontWeight = &#39;bold&#39;)</pre>
 
-<div id="htmlwidget-6a5c596aabd13569caa1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6a5c596aabd13569caa1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[1]; if (value!==null) $(this.api().cell(row, 1).node()).css({'font-weight':'bold','color':'red','background-color':'orange'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-98c3638126ac45732573" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98c3638126ac45732573">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[1]; if (value!==null) $(this.api().cell(row, 1).node()).css({'font-weight':'bold','color':'red','background-color':'orange'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-3">
 
@@ -765,8 +771,8 @@ datatable(cars, options = list(pageLength = 5)) </pre>
   backgroundColor = styleEqual(c(10), c(&#39;pink&#39;))
 )</pre>
 
-<div id="htmlwidget-bd8ea9eca66fdd3d4dc6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bd8ea9eca66fdd3d4dc6">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speed<\/th>\n      <th>dist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[2]; if (value!==null) $(row).css({'background-color':value == '10' ? 'pink' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-cbedb172ef1337824c7e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbedb172ef1337824c7e">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speed<\/th>\n      <th>dist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[2]; if (value!==null) $(row).css({'background-color':value == '10' ? 'pink' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Exercise - 3.2</h2></hgroup><article  id="exercise---3.2">
 
@@ -801,7 +807,7 @@ out &lt;- data.frame(t(bind_cols(day3, night3)))
 colnames(out) &lt;- day1$日期
 rownames(out) &lt;- c(&quot;白天天氣&quot;,&quot;白天溫度&quot;,&quot;晚上天氣&quot;,&quot;晚上溫度&quot;)</pre>
 
-</article></slide><slide class=''><hgroup><h2>Answer A2</h2></hgroup><article  id="answer-a2">
+</article></slide><slide class=''><hgroup><h2>Answer 3.2</h2></hgroup><article  id="answer-3.2">
 
 <p>利用R Markdown 製作《一周天氣預報》書面報告。</p>
 
