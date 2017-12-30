@@ -30,7 +30,7 @@
       // Author information
       presenters: [
             {
-        name:  'LIYUN (Source from DSP Data Lab)' ,
+        name:  'Peng-Wen Lin (Source from DSP Data Lab)' ,
         company: '',
         gplus: '',
         twitter: '',
@@ -51,7 +51,7 @@
   <script src="Rmarkdown_files/ioslides-13.5.1/js/hammer.js"></script>
   <script src="Rmarkdown_files/ioslides-13.5.1/js/slide-controller.js"></script>
   <script src="Rmarkdown_files/ioslides-13.5.1/js/slide-deck.js"></script>
-  <script src="Rmarkdown_files/htmlwidgets-0.8/htmlwidgets.js"></script>
+  <script src="Rmarkdown_files/htmlwidgets-0.9/htmlwidgets.js"></script>
   <script src="Rmarkdown_files/jquery-1.12.4/jquery.min.js"></script>
   <script src="Rmarkdown_files/datatables-binding-0.2/datatables.js"></script>
   <link href="Rmarkdown_files/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -154,11 +154,14 @@
 
 </article></slide><slide class=''><hgroup><h2>資料分析流程</h2></hgroup><article >
 
-<ul class = 'build'>
+<ul>
 <li>資料採集</li>
 <li>資料清洗處理</li>
 <li>統計及分析</li>
 <li>視覺呈現</li>
+</ul>
+
+<ul class = 'build'>
 <li><p style="color:#750000;font-size:36px;">
 
 報告產出
@@ -201,11 +204,14 @@
 
 </article></slide><slide class=''><hgroup><h2>Why we need R Markdown？</h2></hgroup><article  id="why-we-need-r-markdown">
 
-<ul class = 'build'>
+<ul>
 <li>時間久了會忘記code的意思</li>
 <li>要寫說明文件給同學、同事、教授、主管</li>
 <li>教授很有想法，想嘗試新方法 <br> (<del>FK！又要重跑一份</del>)</li>
 <li>老闆說要改流程 <br> (<del>MD!之前貼到簡報上的圖又要重貼一份</del>)</li>
+</ul>
+
+<ul class = 'build'>
 <li><strong>專案報告要呈現，code改了，但是文件無法同時修改！</strong> <br></li>
 </ul>
 
@@ -232,6 +238,8 @@
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>R Markdown 快速導覽</h2></hgroup><article  id="r-markdown-">
 
 </article></slide><slide class=''><hgroup><h2>打開你第一個RMarkdown</h2></hgroup><article  id="rmarkdown">
+
+<code>Document</code>
 
 <center>
 
@@ -278,6 +286,7 @@
 <ul>
 <li>這是DSP推出的第 4 門課程</li>
 <li>熵指標的公式為\(-\sum{p_i \log{p_i}}\) ，表示系統的亂度</li>
+<li><a href='http://oiltang.com/2014/05/04/markdown-and-mathjax/' title=''>markdown 公式輸入參考</a></li>
 </ul></li>
 </ul>
 
@@ -296,7 +305,7 @@
 
 </article></slide><slide class=''><hgroup><h2>Markdown Quick Reference</h2></hgroup><article  id="markdown-quick-reference">
 
-在RStudio中，也可以找到RMarkdown的作弊小文件！
+<p>在RStudio中，也可以找到RMarkdown的作弊小文件！</p>
 
 <center>
 
@@ -304,7 +313,7 @@
 
 </center>
 
-</article></slide><slide class=''><hgroup><h2>先來簡單的複製貼上！</h2></hgroup><article >
+</article></slide><slide class=''><hgroup><h2>標題！</h2></hgroup><article >
 
 <h3>Headers</h3>
 
@@ -321,23 +330,53 @@
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>先來簡單的複製貼上！</h2></hgroup><article  id="-1">
+</article></slide><slide class=''><hgroup><h2>字體！</h2></hgroup><article >
 
 <ul>
+<li>我是正常文字</li>
 <li>粗體：使用<code>**bold**</code> 或 <code>__bold__</code></li>
 <li>斜體：使用 <code>*italics*</code> 或 <code>_italics_</code></li>
 <li>刪除線：使用<code>~~我是豬~~</code></li>
 </ul>
 
-<p style="color:#003E3E;">
+<p style="color:#0000C6;">
 
 結果：
 
 </p>
 
-<p>我是正常文字<br/><strong>粗體：bold</strong><br/><em>斜體：italics</em><br/>刪除線：<del>我是豬</del></p>
+<ul>
+<li>我是正常文字<br/></li>
+<li><strong>粗體：bold</strong><br/></li>
+<li><em>斜體：italics</em><br/></li>
+<li>刪除線：<del>我是豬</del></li>
+</ul>
 
-</article></slide><slide class=''><hgroup><h2>先來簡單的複製貼上！</h2></hgroup><article  id="-2">
+</article></slide><slide class=''><hgroup><h2>Attach pictures</h2></hgroup><article  id="attach-pictures">
+
+<ul>
+<li>貼上照片</li>
+<li><p><a href='http://www.w3schools.com/tags/tag_img.asp' title=''>img</a>: inserting images into an HTML document.</p>
+
+<p>Much easier for adjusting width and height.</p>
+
+<pre class = 'prettyprint lang-html'>&lt;img  src=&quot;img/me.png&quot; width=&quot;80&quot;&gt;
+&lt;img  src=&quot;img/me.png&quot; height=&quot;100&quot; width=&quot;500&quot;&gt;</pre>
+
+<center>
+
+<img  src="img/me.png" width="80">
+
+</center>
+
+<center>
+
+<img  src="img/me.png" height="100" width="500">
+
+</center></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>先來簡單的複製貼上！</h2></hgroup><article >
 
 <ul>
 <li>利用<code>+</code>、<code>*</code>、<code>-</code>，列點文字</li>
@@ -359,35 +398,47 @@
 
 </p>
 
-<p>大家好，我是<strong>LIYUN</strong>(1.使用粗體)，目前就讀於國立政治大學，家裡共有：<br/></p>
+<p>大家好，我是<strong>Nicole</strong><code>(1.使用粗體)</code>，目前就讀於國立政治大學，家裡共有：</p>
+
+<p><code>(2.請列點)</code></p>
 
 <ul>
 <li>我爸<br/></li>
 <li>我媽<br/></li>
-<li>我哥<br/></li>
-<li>我大弟<br/></li>
-<li>我小弟<br/>(2.請列點)</li>
+<li>我<br/></li>
+<li>我妹妹<br/></li>
 </ul>
 
-<p>有六個成員，我是女生，我長這樣： <img src="img/me.png" width="50px"> (3.請放照片)</p>
+<p>有四個成員，我是女生，我長這樣： <code>(3.請放照片)</code> <img src="img/me.png" width="50px"></p>
 
-<p>想要和我做朋有的人可以加我<a href='https://goo.gl/h39Soa' title=''>臉書</a>(4.請放你的臉書連結)</p>
+<p><code>(4.請放你的臉書連結)</code> 想要和我做朋有的人可以加我<a href='https://www.facebook.com/profile.php?id=100000344369057' title=''>臉書</a></p>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 1</h2></hgroup><article  id="answer---1">
 
-<pre >大家好，我是**LIYUN**(1.使用粗體)，目前就讀於國立政治大學，家裡共有： \
+<pre >大家好，我是**Nicole**(1.使用粗體)，目前就讀於國立政治大學，家裡共有：\
 
 + 我爸 \
 + 我媽 \
-+ 我哥 \
-+ 我大弟 \
-+ 我小弟 \
++ 我 \
++ 我妹妹 \
 
-有六個成員，我是女生，我長這樣：
-![](你的圖片路徑) 
+有四個成員，我是女生，我長這樣：![](你的圖片路徑) 
 
-想要和我做朋有的人可以加我[臉書](https://goo.gl/h39Soa)
+想要和我做朋有的人可以加我[臉書](臉書路徑)
 </pre>
+
+</article></slide><slide class=''><hgroup><h2>補充</h2></hgroup><article >
+
+<ul>
+<li>連結網站</li>
+<li><a href='http://www.w3schools.com/tags/tag_iframe.asp' title=''>iframe</a>: displaying a web page within a web page</li>
+</ul>
+
+<pre class = 'prettyprint lang-html'>&lt;iframe src=&quot;https://dsp.im/&quot; height=600 width=800&gt;&lt;/iframe&gt;</pre>
+
+<iframe src="https://dsp.im/" height="600" width="800">
+
+</iframe>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>R Code Chunks</h2></hgroup><article  id="r-code-chunks-1">
 
@@ -396,14 +447,14 @@
 <ul>
 <li>在 R Code Chunk 中，code可以被執行</li>
 <li>code會被<code>{r}及</code>包圍</li>
-<li>快捷鍵（for windows、mac）：alt + control + i</li>
-<li>將下列文字複製貼上並Knit：
+<li>快捷鍵（for windows、mac）：alt + control/command + i</li>
+<li>將下列文字複製貼上並Knit：</li>
+</ul>
 
 <pre class="markdown"><code>&#96;&#96;&#96;{r}
 summary(cars$dist)
 &#96;&#96;&#96;
-</code></pre></li>
-</ul>
+</code></pre>
 
 <pre class = 'prettyprint lang-r'>summary(cars$dist)</pre>
 
@@ -438,7 +489,18 @@ plot(cars)
 
 </article></slide><slide class=''><hgroup><h2>Basic Chunk Options - 2</h2></hgroup><article  id="basic-chunk-options---2">
 
-利用每個chunk右上的設定鍵
+<h3>常用</h3>
+
+<ul>
+<li><code>defult</code>：show code and output</li>
+<li><code>echo = FALSE</code> ：only show output</li>
+<li><code>eval = FALSE</code> ：only show code</li>
+<li><code>include = FALSE</code> ： run code and don&#39;t show output</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Basic Chunk Options - 3</h2></hgroup><article  id="basic-chunk-options---3">
+
+<p>利用每個chunk右上的設定鍵</p>
 
 <center>
 
@@ -458,13 +520,31 @@ plot(cars)
 
 <center>
 
-<img src="img/RMDruncurrent.png" width="400px">
+<img src="img/RMDruncurrent.png" width="500px">
 
 </center>
 
 </article></slide><slide class=''><hgroup><h2>Exercise - 2.1</h2></hgroup><article  id="exercise---2.1">
 
-<p>請大家利用 iris 的資料依照不同的品種，畫出 Sepal.Length 及 Petal.Length 的散點圖</p>
+<center>
+
+<p style="color:#0000C6;font-size:32px;">
+
+請大家利用 iris 的資料依照不同的品種，
+
+</p>
+
+</center>
+
+<center>
+
+<p style="color:#0000C6;font-size:32px;">
+
+畫出 Sepal.Length 及 Petal.Length 的 scatter plot
+
+</p>
+
+</center>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 2.1</h2></hgroup><article  id="answer---2.1">
 
@@ -472,11 +552,19 @@ plot(cars)
   ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
   geom_point(shape=1, size=2) # shape控制圖示；size控制點的大小</pre>
 
-<p><img src="Rmarkdown_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="Rmarkdown_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
 
 </article></slide><slide class=''><hgroup><h2>Exercise - 2.2</h2></hgroup><article  id="exercise---2.2">
 
-<p>請大家在 Rmarkdown 中產出將剛剛的散點圖</p>
+<center>
+
+<p style="color:#0000C6;font-size:32px;">
+
+請大家在 Rmarkdown 中產出將剛剛的 scatter plot
+
+</p>
+
+</center>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 2.2</h2></hgroup><article  id="answer---2.2">
 
@@ -505,8 +593,7 @@ iris %>%
 
 <ul>
 <li><a href='http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm' title=''>原始出處</a></li>
-<li><a href='https://github.com/dspim/a1-basic-data-analysis-course/blob/master/RmdExQue.Rmd' title=''>參考範本</a></li>
-<li><a href='https://lucy0222.github.io/2017_NCCU_R/data/weatherbig5.csv' title=''>範例資料</a></li>
+<li><a href='https://pongponglin.github.io/2017NCCU_R/data/weatherbig5.csv' title=''>範例資料下載</a></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>原始網頁</h2></hgroup><article >
@@ -519,7 +606,7 @@ iris %>%
 
 </article></slide><slide class=''><hgroup><h2>Rmarkdown 呈現</h2></hgroup><article  id="rmarkdown-">
 
-<a href='https://lucy0222.github.io/2017_NCCU_R/RMDsample.html' title=''>範例連結</a>
+<a href='https://pongponglin.github.io/2017NCCU_R/RMDsample.html' title=''>範例連結</a>
 
 <center>
 
@@ -535,13 +622,15 @@ iris %>%
 <li>計算05/23日當日的最高溫與最低溫度</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'># Hint：
-# 1. 下載weatherbig5.csv到自己的電腦上
-# 2. 在R chunk中，利用read.csv()讀取檔案進行分析
-  #  MAC : read.csv(,fileEncoding=&quot;big5&quot;)
-# 3. 找出05/23當日最高溫 max()
-# 4. 找出05/23當日最低溫 min()
-# 5. use inline R chunk `r max(...)` </pre>
+<h3><strong>Hint：</strong></h3>
+
+<ol>
+<li>下載weatherbig5.csv到自己的電腦上</li>
+<li>在R chunk中，利用read.csv()讀取檔案進行分析<br/>MAC : read.csv(,fileEncoding=&quot;big5&quot;)</li>
+<li>找出05/23當日最高溫 max()</li>
+<li>找出05/23當日最低溫 min()</li>
+<li>use inline R chunk -</li>
+</ol>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 3.1</h2></hgroup><article  id="answer---3.1">
 
@@ -550,12 +639,6 @@ iris %>%
 <ul>
 <li>計算05/23日當日的最高溫與最低溫度</li>
 </ul>
-
-<pre class = 'prettyprint lang-r'># Hint for Linu&amp; Mac：
-dat &lt;- read.csv(&quot;data/weatherbig5.csv&quot;, fileEncoding=&quot;big5&quot;) 
-max(dat[1:2, 4:5])
-min(dat[1:2, 4:5])
-# 預測高溫約`r max(dat[1:2,4:5])`度，低溫約`r min(dat[1:2,4:5])`度</pre>
 
 <pre class = 'prettyprint lang-r'># Hint for Windows：
 dat &lt;- read.csv(&quot;data/weatherbig5.csv&quot;) 
@@ -579,12 +662,15 @@ min(dat[1:2, 4:5])
 5     62    126
 6     63    129</pre>
 
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Table in Rmarkdown</h2></hgroup><article  id="table-in-rmarkdown">
+
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 1</h2></hgroup><article  id="-in-rmarkdown---1-1">
 
 <ul>
 <li>不用手動 key in 表格</li>
 <li>在 Chunk 後面的參數多加上<code>results=&#39;asis&#39;</code></li>
-<li>在 Chunk 裡面打上<code>knitr::kable</code>，呈現表格在output上
+<li>在 Chunk 裡面打上<code>knitr::kable</code>，呈現表格在output上</li>
+</ul>
 
 <pre class="markdown"><code>&#96;&#96;&#96;{r, results='asis'}
   knitr::kable(women)
@@ -595,8 +681,7 @@ min(dat[1:2, 4:5])
 
 <img  src="img/RMDtable.png" width="600">
 
-</center></li>
-</ul>
+</center>
 
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 1</h2></hgroup><article  id="-in-rmarkdown---1-2">
 
@@ -634,8 +719,9 @@ min(dat[1:2, 4:5])
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2">
 
 <ul>
-<li>安裝 DT 套件，請執行 <code>install.packages(&quot;DT&quot;)</code></li>
-<li>記得 <code>library(DT)</code></li>
+<li><strong>DT 套件</strong></li>
+<li>未安裝者記得先安裝 <code>install.packages(&quot;DT&quot;)</code></li>
+<li>使用前記得 <code>library(DT)</code></li>
 <li>易於呈現、美化表格</li>
 <li><a href='https://rstudio.github.io/DT/' title=''>DT使用手冊</a></li>
 </ul>
@@ -651,6 +737,18 @@ datatable(head(iris))
 </article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-1">
 
 <ul>
+<li>調整表格呈現的列數</li>
+<li>使用 <code>options = list(pageLength = 數字)</code> 參數調整</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># 呈現三列
+datatable(iris, options = list(pageLength = 3))
+# 呈現五列
+datatable(cars, options = list(pageLength = 5)) </pre>
+
+</article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-2">
+
+<ul>
 <li>可以利用 html 語法修改字體</li>
 <li>標記特殊欄或列</li>
 <li>調整欄</li>
@@ -659,10 +757,10 @@ datatable(head(iris))
 <pre class = 'prettyprint lang-r'>datatable(iris) %&gt;%
   formatStyle(&#39;Sepal.Length&#39;,  color = &#39;red&#39;, backgroundColor = &#39;orange&#39;, fontWeight = &#39;bold&#39;)</pre>
 
-<div id="htmlwidget-eacfba29e38fcb011dc1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-eacfba29e38fcb011dc1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[1]; if (value!==null) $(this.api().cell(row, 1).node()).css({'font-weight':'bold','color':'red','background-color':'orange'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-98c3638126ac45732573" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98c3638126ac45732573">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2,1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3,2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","versicolor","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica","virginica"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[1]; if (value!==null) $(this.api().cell(row, 1).node()).css({'font-weight':'bold','color':'red','background-color':'orange'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
-</article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-2">
+</article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-3">
 
 <ul>
 <li>調整列</li>
@@ -673,34 +771,21 @@ datatable(head(iris))
   backgroundColor = styleEqual(c(10), c(&#39;pink&#39;))
 )</pre>
 
-<div id="htmlwidget-f773258440e3672d1291" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f773258440e3672d1291">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speed<\/th>\n      <th>dist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[2]; if (value!==null) $(row).css({'background-color':value == '10' ? 'pink' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
-
-</article></slide><slide class=''><hgroup><h2>呈現表格 in Rmarkdown - 2</h2></hgroup><article  id="-in-rmarkdown---2-3">
-
-<ul>
-<li>調整表格呈現的列數</li>
-<li>使用 <code>options = list(pageLength = 數字)</code> 參數調整</li>
-</ul>
-
-<pre class = 'prettyprint lang-r'># 呈現三列
-datatable(iris, options = list(pageLength = 3))
-# 呈現五列
-datatable(cars, options = list(pageLength = 5)) </pre>
+<div id="htmlwidget-cbedb172ef1337824c7e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbedb172ef1337824c7e">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>speed<\/th>\n      <th>dist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100],"rowCallback":"function(row, data) {\nvar value=data[2]; if (value!==null) $(row).css({'background-color':value == '10' ? 'pink' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
 </article></slide><slide class=''><hgroup><h2>Exercise - 3.2</h2></hgroup><article  id="exercise---3.2">
 
-<p>利用R Markdown 製作《一周天氣預報》書面報告。</p>
+<p>利用R Markdown 製作《一周天氣預報》書面報告。 - 製作未來七天天氣預報表</p>
+
+<h3>Hint：</h3>
 
 <ul>
-<li>製作未來七天天氣預報表</li>
+<li>你可能需要dplyr套件</li>
+<li>可以先用filter把白天、晚上分開處理</li>
+<li>利用 paste(低溫,高溫,sep=&quot;-&quot;) 來製作溫度區間, i.e. 16-17</li>
+<li>利用colnames, rownames來對整理好的資料表的行與列命名</li>
 </ul>
-
-<pre class = 'prettyprint lang-r'># Hint：
-# 你可能需要dplyr套件
-# 可以先用filter把白天、晚上分開處理
-# 利用 paste(低溫,高溫,sep=&quot;-&quot;) 來製作溫度區間, i.e. 16-17
-# 利用colnames, rownames來對整理好的資料表的行與列命名</pre>
 
 </article></slide><slide class=''><hgroup><h2>Answer - 3.2</h2></hgroup><article  id="answer---3.2">
 
@@ -722,7 +807,7 @@ out &lt;- data.frame(t(bind_cols(day3, night3)))
 colnames(out) &lt;- day1$日期
 rownames(out) &lt;- c(&quot;白天天氣&quot;,&quot;白天溫度&quot;,&quot;晚上天氣&quot;,&quot;晚上溫度&quot;)</pre>
 
-</article></slide><slide class=''><hgroup><h2>Answer A2</h2></hgroup><article  id="answer-a2">
+</article></slide><slide class=''><hgroup><h2>Answer 3.2</h2></hgroup><article  id="answer-3.2">
 
 <p>利用R Markdown 製作《一周天氣預報》書面報告。</p>
 
@@ -730,13 +815,62 @@ rownames(out) &lt;- c(&quot;白天天氣&quot;,&quot;白天溫度&quot;,&quot;�
 <li>製作未來七天天氣預報表</li>
 </ul>
 
-<pre class="prettyprint lang-r"><code>&#96;&#96;&#96;{r results='asis', echo=FALSE}
-knitr::kable(out)
-&#96;&#96;&#96;</code></pre>
-
 <pre class = 'prettyprint lang-r'>knitr::kable(out)</pre>
 
-</article></slide><slide class=''><hgroup><h2>Exercise A2 (conti.)</h2></hgroup><article  id="exercise-a2-conti.">
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left"></th>
+<th align="left">5/23</th>
+<th align="left">5/24</th>
+<th align="left">5/25</th>
+<th align="left">5/26</th>
+<th align="left">5/27</th>
+<th align="left">5/28</th>
+<th align="left">5/29</th>
+</tr>
+<tr class="odd">
+<td align="left">白天天氣</td>
+<td align="left">多雲午後短暫雷陣雨</td>
+<td align="left">多雲時陰短暫陣雨或雷雨</td>
+<td align="left">陰短暫陣雨或雷雨</td>
+<td align="left">多雲短暫陣雨</td>
+<td align="left">多雲時陰短暫陣雨</td>
+<td align="left">多雲時陰短暫陣雨</td>
+<td align="left">多雲時陰短暫陣雨</td>
+</tr>
+<tr class="even">
+<td align="left">白天溫度</td>
+<td align="left">32-24</td>
+<td align="left">30-25</td>
+<td align="left">26-23</td>
+<td align="left">27-23</td>
+<td align="left">27-23</td>
+<td align="left">28-23</td>
+<td align="left">28-23</td>
+</tr>
+<tr class="odd">
+<td align="left">晚上天氣</td>
+<td align="left">多雲短暫陣雨或雷雨</td>
+<td align="left">陰短暫陣雨或雷雨</td>
+<td align="left">多雲短暫陣雨</td>
+<td align="left">多雲</td>
+<td align="left">多雲時陰</td>
+<td align="left">多雲時晴</td>
+<td align="left">晴時多雲</td>
+</tr>
+<tr class="even">
+<td align="left">晚上溫度</td>
+<td align="left">29-25</td>
+<td align="left">27-23</td>
+<td align="left">24-23</td>
+<td align="left">25-23</td>
+<td align="left">25-23</td>
+<td align="left">25-23</td>
+<td align="left">26-23</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>&#8230;</h2></hgroup><article  id="section">
 
 <table class = 'rmdtable'>
 <tr class="header">
@@ -799,11 +933,12 @@ knitr::kable(out)
 <li>製作未來七天天氣預報圖</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'># Hint：
-# 你可能需要ggplot2套件
-# Mac顯示中文需設置字型
-# http://equation85.github.io/blog/graph-font-of-r-in-mac-os-x/
-# par(family=&#39;STHeiti&#39;)</pre>
+<h3>Hint：</h3>
+
+<ul>
+<li>你可能需要<code>ggplot2</code>套件</li>
+<li>Mac顯示中文需設置字型: par(family=&#39;STHeiti&#39;)</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>Answer 3.3</h2></hgroup><article  id="answer-3.3">
 
@@ -826,16 +961,16 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
 
 </article></slide><slide class=''><hgroup><h2>Answer 3.3</h2></hgroup><article  id="answer-3.3-1">
 
-<p>利用R Markdown 製作《一周天氣預報》書面報告。</p>
+<h3>利用R Markdown 製作《一周天氣預報》書面報告。</h3>
 
 <ul>
-<li><a href='http://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm' title=''>原始出處</a></li>
-<li><a href='https://github.com/dspim/a1-basic-data-analysis-course/blob/master/RmdExQue.Rmd' title=''>參考範本</a></li>
-<li><a href='https://lucy0222.github.io/2017_NCCU_R/data/weatherbig5.csv' title=''>範例資料</a></li>
-<li><a href='https://github.com/lucy0222/2017_NCCU_R/blob/master/RMDsample.Rmd' title=''>參考解答</a></li>
+<li>以上參考解答code的產出參考報告</li>
+<li><a href='https://pongponglin.github.io/2017NCCU_R/RMDsample.html#1' title=''>參考示範連結</a></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>新增目錄</h2></hgroup><article >
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Table of Contents</h2></hgroup><article  id="table-of-contents">
+
+</article></slide><slide class=''><hgroup><h2>目錄</h2></hgroup><article >
 
 <ul>
 <li>Rmarkdown 有提供目錄的功能</li>
@@ -848,11 +983,11 @@ ggplot(dat3, aes(x=時間, y=value, group=variable, colour=variable)) +
 </center></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>新增目錄</h2></hgroup><article  id="-1">
+</article></slide><slide class=''><hgroup><h2>新增目錄</h2></hgroup><article >
 
 <ul>
 <li>將以下複製貼上到Rmarkdown的開頭</li>
-<li><code>theme: united</code>表示目錄的主題選擇為<code>united</code>，可以變動</li>
+<li><code>theme: united</code> 表示目錄的主題選擇為 <code>united</code>，可以變動</li>
 </ul>
 
 <pre >---
@@ -866,15 +1001,14 @@ output:
     toc_float: true
 ---</pre>
 
-</article></slide><slide class=''><hgroup><h2>新增目錄</h2></hgroup><article  id="-2">
+</article></slide><slide class=''><hgroup><h2>新增目錄</h2></hgroup><article  id="-1">
 
 <ul>
-<li>目錄的長寬可以變動</li>
-<li>透過<code>fig_width</code>以及<code>fig_height: 7.5</code>參數調整</li>
+<li>目錄的長寬可以變動：透過<code>fig_width</code>以及<code>fig_height: 7.5</code>參數調整</li>
 <li><code>toc_depth</code>表示顯示到多大的標題
 
 <ul>
-<li>ex:<code>toc_depth: 4</code>會顯示有少於或等於四個井字號<code>####</code>的標題</li>
+<li>ex: <code>toc_depth: 4</code> 會顯示有少於或等於四個井字號 <code>####</code> 的標題</li>
 </ul></li>
 </ul>
 
@@ -897,7 +1031,7 @@ output:
 <ul>
 <li>可以透過點選的方式選則整個 RMD 的主題</li>
 <li>改變項目包含目錄、顏色、字體</li>
-<li>設定小圖示 -&gt; Output Options&#8230;</li>
+<li>設定小圖示 -&gt; <code>Output Options</code>&#8230;</li>
 </ul>
 
 <center>
@@ -905,6 +1039,65 @@ output:
 <img  src="img/RMDOutputOptions.png" width="600">
 
 </center>
+
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>除了輸出 HTML</h2></hgroup><article  id="-html">
+
+</article></slide><slide class=''><hgroup><h2>Persentation - 1</h2></hgroup><article  id="persentation---1">
+
+<ul>
+<li>Rmarkdown 除了可以輸出 HTML 文件外，可以生成投影片</li>
+</ul>
+
+<center>
+
+<img  src="img/RMDslide.png" width="800">
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>Persentation - 2</h2></hgroup><article  id="persentation---2">
+
+<ul>
+<li><code>##</code> 代表一張投影片</li>
+<li><code>#</code> 主題黑幕</li>
+<li>要注意因為每張投影片長度限制，所以須控制內容</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Flexdashboard - 1</h2></hgroup><article  id="flexdashboard---1">
+
+<ul>
+<li>安裝套件 <code>install.packages(&quot;flexdashboard&quot;)</code></li>
+<li>使用前 <code>library(flexdashboard)</code></li>
+<li><a href='http://rmarkdown.rstudio.com/flexdashboard/' title=''>flexdashboard 使用手冊</a></li>
+</ul>
+
+<center>
+
+<img  src="img/RMDflexdashboard_example.png" width="800">
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>Flexdashboard - 2</h2></hgroup><article  id="flexdashboard---2">
+
+<center>
+
+<img  src="img/RMDflexdashboard.png" width="800">
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>參考作品</h2></hgroup><article >
+
+<ul>
+<li><a href='https://lucy0222.github.io/2017_NCCU_R/%E5%AF%A6%E5%83%B9%E7%99%BB%E9%8C%84%E8%B3%87%E6%96%99.html' title=''>實價登錄資料</a> Li-yun 周立筠</li>
+<li><a href='https://pongponglin.github.io/Playground/%E4%BA%92%E5%8B%95%E5%BC%8F%E5%9C%B0%E5%9C%96%E6%95%99%E5%AD%B8leaflet_plotly.html' title=''>互動式地圖教學</a> Peng-Wen, Lin 林芃彣</li>
+<li><a href='https://pongponglin.github.io/2017Taiwan-power-data/%E8%B7%A8%E5%9C%8B%E9%BB%91%E5%AE%A2%E6%9D%BE.html' title=''>2017 Asia Open Data Hackthon Dashboard</a> (Flexdashboard) Life is struggle.</li>
+<li><a href='https://patrick501004123854.shinyapps.io/final/' title=''>2017 TPC Hackthon</a> (Shiny dashboard) Life is struggle.</li>
+</ul>
+
+<h3>Shiny</h3>
+
+<ul>
+<li><a href='https://shiny.rstudio.com/tutorial/' title=''>Shiny Tutorial</a></li>
+</ul>
 
 </article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Appendiex</h2></hgroup><article  id="appendiex">
 
@@ -945,54 +1138,6 @@ for (color in colors){
     cat("\n")
 }
 &#96;&#96;&#96;</code></pre>
-
-</article></slide><slide class=''><hgroup><h2>Some Useful HTML</h2></hgroup><article  id="some-useful-html">
-
-<ul>
-<li>連結網站</li>
-<li><p><a href='http://www.w3schools.com/tags/tag_iframe.asp' title=''>iframe</a>: displaying a web page within a web page</p>
-
-<pre class = 'prettyprint lang-html'>&lt;iframe src=&quot;https://dsp.im/&quot; height=600 width=800&gt;&lt;/iframe&gt;</pre>
-
-<iframe src="https://dsp.im/" height="600" width="800">
-
-</iframe></li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Some Useful HTML</h2></hgroup><article  id="some-useful-html-1">
-
-<ul>
-<li>貼上照片</li>
-<li><p><a href='http://www.w3schools.com/tags/tag_img.asp' title=''>img</a>: inserting images into an HTML document.</p>
-
-<p>Much easier for adjusting width and height.</p>
-
-<pre class = 'prettyprint lang-html'>&lt;img  src=&quot;img/me.png&quot; height=&quot;100&quot; width=&quot;500&quot;&gt;</pre>
-
-<center>
-
-<img  src="img/me.png" width="80">
-
-</center>
-
-<center>
-
-<img  src="img/me.png" height="100" width="500">
-
-</center></li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>除了輸出 HTML</h2></hgroup><article  id="-html">
-
-<ul>
-<li>Rmarkdown 除了可以輸出 HTML 文件外，可以生成投影片</li>
-</ul>
-
-<center>
-
-<img  src="img/RMDslide.png" width="800">
-
-</center>
 
 </article></slide><slide class=''><hgroup><h2>Interactive Documents</h2></hgroup><article  id="interactive-documents">
 
@@ -1055,15 +1200,10 @@ publish_gist(&quot;title&quot;,file=&quot;file_name.html&quot;,publish=TRUE)</pr
 <li><a href='https://www.ptt.cc/bbs/R_Language/index.html' title=''>ptt R_Language版</a></li>
 <li><a href='https://groups.google.com/forum/#!forum/taiwanruser' title=''>R軟體使用者論壇</a></li>
 <li><a href='http://stackoverflow.com/' title=''>StackOverflow</a></li>
-<li>歡迎來信 <a href='mailto:ling32342@gmail.com' title=''>ling32342@gmail.com</a> 、 <a href='mailto:lillian60222@gmail.com' title=''>lillian60222@gmail.com</a> 與我們一起交流！</li>
+<li>歡迎來信 <a href='mailto:nicole19940331@gmail.com' title=''>nicole19940331@gmail.com</a> 與我們一起交流！</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
-
-<br><br><br><br><br>
-
-<div align="center">
-<p><hh>Thank You!</hh></p></div></article></slide>
+</article></slide><slide class='segue dark nobackground level1'><hgroup class = 'auto-fadein'><h2>Thank You!</h2></hgroup><article  id="thank-you"></article></slide>
 
 
   <slide class="backdrop"></slide>

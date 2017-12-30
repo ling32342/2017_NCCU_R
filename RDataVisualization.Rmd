@@ -1,8 +1,8 @@
 ---
 title: "EDA with R"
 subtitle: Data Visualization with **ggplot** & **dplyr**
-author: "Ling Hsu (Source from DSP Data Lab)"
-date: '2017.05.17'
+author: "Pei-Wen, Yang (Source from DSP Data Lab)"
+date: '2017.12.18'
 output:
   ioslides_presentation:
     css: css/dsp.css
@@ -23,7 +23,6 @@ library(data.table)
 library(devtools)
 library(plotly)
 library(xtable)
-library(rCharts)
 library(tidyr)
 library(DT)
 library(RColorBrewer)
@@ -69,13 +68,13 @@ library(dtplyr)
 </div>   
 
 <div style='float:right;width:48%;'>
-<img src='/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/img/most_download_in_R.png' width=420 align='center'></img>
+<img src='/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/img/most_download_in_R.png' width=420 align='center'></img>
 </div> 
 
 ## The Anatomy of a Plot 
 
 <center>
-<img src='/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/img/anatomy.png' width=750 align='center'></img>
+<img src='/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/img/anatomy.png' width=750 align='center'></img>
 </center>
 
 ## ggplot2基本架構
@@ -92,7 +91,7 @@ library(dtplyr)
 ## ggplot2基本架構(2)
 
 <center>
-<img src='/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/img/ggplot.jpeg' width=550 align='center'></img>
+<img src='/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/img/ggplot.jpeg' width=550 align='center'></img>
 </br>
 source: http://goo.gl/Odt2Rs
 </center>
@@ -129,7 +128,7 @@ ls(pattern = '^geom_', env = as.environment('package:ggplot2'))
 
 </br>
 
-<center>![](/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/img/wide-long.png)</center>
+<center>![](/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/img/wide-long.png)</center>
 
 ## 馬上來個範例 {data-background="a.jpeg"}
 
@@ -170,7 +169,7 @@ library(reshape2)
 ```{r,eval=FALSE}
 ############### 絕對路徑 ###############
 # 請輸入完整的檔案路徑
-data <- read.csv("/Users/hsiaoling/Desktop/data/transaction.csv") #如果你是mac
+data <- read.csv("/Users/yangpeiwen/Desktop/data/transaction.csv") #如果你是mac
 data <- read.csv("C:\\Users\\transaction.csv") #如果你是windows
 
 ############### 相對路徑 ###############
@@ -187,7 +186,7 @@ data <- read.csv("transaction.csv",fileEncoding = 'utf-8') #如果你是windows
 
 
 ```{r,echo=FALSE}
-data <- read.csv("/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/data/transaction.csv") %>% as.data.frame()
+data <- read.csv("/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/data/transaction.csv") %>% as.data.frame()
 data <- data[,-1]
 data$trac_month <- factor(data$trac_month)
 ```
@@ -302,7 +301,7 @@ table %>%
 ```
 
 
-## Reoder x
+## Reorder x
 ```{r ,warning=FALSE,fig.align='center', message=FALSE}
 table %>% 
   ggplot(aes(x=reorder(district,-amount), y=amount)) +
@@ -350,6 +349,13 @@ table %>%
   geom_bar(stat = 'identity', position = 'dodge')  + # dodge類別並排
   thm() + scale_fill_discrete(name  ="使用分區或編定")  # 設定圖例的顯示
 ```
+
+## How to choose colors?
+
+- [http://colorbrewer2.org/](http://colorbrewer2.org/)
+- [http://colorsupplyyy.com/app/](http://colorsupplyyy.com/app/)
+- [https://coolors.co/](https://coolors.co/)
+
 
 # Line chart
 
@@ -475,7 +481,7 @@ iris %>%
 
 ## point shape types in `ggplot2`
 
-<center><img src='/Users/hsiaoling/Desktop/Code/Program/R語言集訓班/img/point_shape_types.png' style='height: 500px' align="middle"></img></center>
+<center><img src='/Users/yangpeiwen/Documents/GitHub/2017NCCU_R/img/point_shape_types.png' style='height: 500px' align="middle"></img></center>
 
 ## Scatter plot
 
@@ -487,6 +493,29 @@ iris %>%
   scale_shape_manual(values=c(1,5,7)) +  # 控制 shape 顯示圖示
   scale_size_manual(values=c(1,2,3))   # 控制圖示 size 顯示大小
 ```
+
+## Scatter plot
+
+<div style='float:left;width:75%;'>
+
+```{r,warning=FALSE,fig.align='center', message=FALSE}
+iris %>%  
+ggplot(aes(x=Sepal.Length, y=Petal.Length, color=Species)) + 
+  geom_point(shape=1, size=2) + # shape控制圖示；size控制點的大小
+  geom_vline( xintercept = 5.0, colour = "black",linetype = "dashed", size = 1)
+```
+
+</div>
+
+<div style='float:left;width:25%;'>
+
+### 小筆記
+- `geom_abline`斜線
+- `geom_vline`垂直線
+- `geom_hline`平行線
+
+</div>
+
 
 # 進階技巧
 
@@ -597,6 +626,79 @@ a
 ggplotly(a)
 ```
 
+## package：`Highcharter`
+
+- 使用`data.frame`
+- 使用`wide format` (與ggplot相反!)
+- [highcharter套件介紹](http://jkunst.com/highcharter/oldindex.html#shiny-integration)
+- [更多highcharter圖形](http://jkunst.com/highcharter/)
+
+## 套件安裝
+
+- 直接從`CRAN`內下載
+
+```{r echo=TRUE,eval=FALSE}
+# Plotly is now on CRAN!
+install.packages("highcharter")
+# install the latest development version (on GitHub) via devtools
+```
+
+</br>
+
+- 安裝完，一樣別忘了要`library`！
+```{r}
+library(highcharter)
+```
+
+## Wide format data
+
+```{r echo=TRUE, echo=TRUE}
+data <- data.frame(
+  年份 = c(2002,2003,2004,2005,2006),
+  大學部 = c(500,150,200,150,100),
+  研究所 = c(100,63,89,47,26),
+  教授 = c(25,20,15,17,10),
+  助教 = c(7,5,6,4,2))
+head(data)
+```
+
+## `Highcharter`基本語法
+
+```{r echo=TRUE, eval=FALSE}
+  highchart() %>% 
+  hc_title(text = ...) %>% 
+  hc_xAxis(categories = ...) %>% 
+  hc_add_series(name = ..., data =...,color=...) %>% 
+  hc_add_series(name = ..., data = ...,color=...) 
+```
+
+- `highchart()`一定要有的主體
+- `hc_title`描述標題名稱
+- `hc_xAxis`描述以哪一個變數當x軸
+- `hc_add_series`每增加一條線就需要一個
+
+## Plot in highcharter
+```{r, eval=FALSE}
+  highchart() %>% 
+  hc_title(text = data ) %>% 
+  hc_xAxis(categories = data$年份) %>% 
+  hc_add_series(name = "大學部人數" ,data =data$大學部 ,color="#177E89") %>% 
+  hc_add_series(name = "研究所人數" ,data =data$研究所 ,color="#084C61") %>% 
+  hc_add_series(name = "教授人數" ,data =data$教授 ,color="#DB3A34") %>% 
+  hc_add_series(name = "助教人數" ,data =data$助教 ,color="#FFC857")
+```
+
+
+## Plot in highcharter
+```{r, echo=FALSE,warning=FALSE,fig.align='center', message=FALSE}
+  highchart() %>% 
+  hc_title(text = "每年學校學生與教職人數" ) %>% 
+  hc_xAxis(categories = data$年份) %>% 
+  hc_add_series(name = "大學部人數" ,data =data$大學部 ,color="#177E89") %>% 
+  hc_add_series(name = "研究所人數" ,data =data$研究所 ,color="#084C61") %>% 
+  hc_add_series(name = "教授人數" ,data =data$教授 ,color="#DB3A34") %>% 
+  hc_add_series(name = "助教人數" ,data =data$助教 ,color="#FFC857")
+```
 
 ## 學習資源
 
@@ -609,8 +711,6 @@ ggplotly(a)
 - [Rcolorbrewer調色盤](http://docs.ggplot2.org/current/scale_brewer.html)
 
 - [Plotly ggplot2 Library](https://plot.ly/ggplot2/)
-
-- [highcharter套件介紹](http://jkunst.com/highcharter/oldindex.html#shiny-integration)
 
 
 ## 掌握心法後，如何自行利用R解決問題
@@ -625,5 +725,5 @@ ggplotly(a)
 
 - [StackOverflow](http://stackoverflow.com/) 
 
-- 歡迎來信 <ling32342@gmail.com> 與我一起交流！
+- 歡迎來信 <yangpennyjijc@gmail.com> 與我一起交流！
 
