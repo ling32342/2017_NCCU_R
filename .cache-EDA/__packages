@@ -1,0 +1,10 @@
+base
+knitr
+magrittr
+xtable
+dplyr
+ggplot2
+foreign
+sas7bdat
+reshape2
+bindrcpp
