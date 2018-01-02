@@ -1,6 +1,6 @@
 ---
 title: "R Programming"
-author: "LIYUN (Source from Johnson Hsieh)"
+author: "Peng-Wen Lin (Source from Johnson Hsieh)"
 output:
   ioslides_presentation:
     css: css/dsp.css
@@ -8,6 +8,39 @@ output:
     widescreen: yes
   slidy_presentation: default
 ---
+
+## About me
+<div style='float:left;width:60%;'>
+__國立政治大學統計所碩二  林芃彣__
+
+#### __Experience__
+<p>
+  * 健保資料庫分析團隊
+  * 給軟體工程師的R語言精要班助教
+  * D4SG資料英雄計畫 #3
+  * 無象限有限公司Intern (2017.10-now)
+  * 2017 第一屆政大資料競賽 亞軍
+  * 2017 Asia Open Data HACKATHON 最佳黑客獎
+  * 2017 台電能源永續黑客松 第三名
+</div>
+
+<div style='float:left;width:40%;'>
+<br>
+
+#### __Skills__
+<p>
+  * R
+  * SQL Server
+</div>
+
+<div style='float:left;width:40%;'>
+
+#### __Contact me__
+<p>
+  * [Github](https://github.com/pongponglin)
+  * [Linkedin](https://www.linkedin.com/in/peng-wen-lin-309839153/)
+  * nicole19940331@gmail.com
+</div>
 
 ## 上禮拜要會的事
 
@@ -24,8 +57,6 @@ output:
 - 體會 R 語言的流程控制
 - 學習 R 語言的資料整理
 - 確立 R 語言的資料爬析概念
-
-
 
 ## 資料處理流程
 
@@ -60,45 +91,16 @@ sys_encode <- c("utf8", "utf8", "big5")[pmatch(sys_name, c("linux", "darwin", "w
 sessionInfo() %>% capture.output %>% cat(file = "sessionInfo.log", sep = "\n")
 ```
 
-## 讀取表格檔案
-- 下載範例資料
-  https://lucy0222.github.io/2017_NCCU_R/hsb.csv
-- 利用`read.csv` 讀取 `csv` 檔 (一種以逗點分隔欄位的資料格式)    
+## 讀取檔案
+- 在資料處理之前
 
-```{r echo=TRUE, eval=FALSE}
-# 可以使用R指令來下載
-url <- "https://lucy0222.github.io/2017_NCCU_R/hsb.csv"
-download.file(url, destfile = "hsb.csv") # 把檔案另存成hbs.csv
-dat <- read.csv("hsb.csv")
-head(dat)
-```
-```{r echo=FALSE}
-setwd("/Users/pineapple/Documents/DSP/DSP集訓班/NCCU-R-Workshop-gh-pages/data/")
-dat <- read.csv("/Users/pineapple/Documents/DSP/DSP集訓班/NCCU-R-Workshop-gh-pages/data/hsb.csv")
-head(dat)
-```
+<p style="color:#0000C6;font-size:36px;">先搞定怎麼把資料讀進來！</p>
 
+</br>
 
-## 讀取表格檔案
-讀取自己電腦裡的csv檔
-```{r echo=TRUE, eval=FALSE}
-# 方法1. 透過介面選擇檔案所在路徑
-path <- file.choose()
-dat <- read.csv(path)
+- 在讀取資料進來之前
 
-# 方法2. 自行輸入檔案所在路徑
-path <- "/Volumes/LEEF SURGE/LearnR/hsb.csv"
-dat <- read.csv(path)
-
-# 方法3. 自行輸入檔案相對路徑
-dat <- read.csv("hsb.csv")
-```
-
-## 輸出表格檔案
-利用`write.csv`將`data.frame`格式的R物件另存成csv檔
-```{r echo=TRUE, eval=FALSE}
-write.csv(dat, "hsb_new.csv", row.names=FALSE, quote=FALSE)
-```
+<p style="color:#0000C6;font-size:36px;">先搞清楚所在路徑位置！</p>
 
 ## 淺談路徑設定  
 - `getwd` 查詢目前所在的資料夾路徑 (絕對路徑)
@@ -106,7 +108,51 @@ write.csv(dat, "hsb_new.csv", row.names=FALSE, quote=FALSE)
 - 檔案 (檔案路徑 file directory) vs. 資料夾 (工作路徑 working directory)
 ```{r echo=TRUE, eval=TRUE}
 getwd()
+```
+```{r eval=FALSE}
+# Mac
+setwd("/Users/apple/nicole/R code")
+# Windows 若複製路徑記得要改斜線！
+# D:\桌面\PONG\Rcode
+setwd("D:/桌面/PONG/Rcode")
+
 dat <- read.csv("hsb.csv")
+```
+
+## 讀取表格檔案
+讀取自己電腦裡的csv檔/txt檔
+```{r echo=TRUE, eval=FALSE}
+# 方法1. 透過介面選擇檔案所在路徑
+path <- file.choose()
+dat <- read.csv(path)
+
+# 方法2. 自行輸入檔案絕對路徑
+path <- "/Volumes/LEEF SURGE/LearnR/hsb.csv"
+dat <- read.csv(path)
+
+dat <- read.table("/Volumes/LEEF SURGE/LearnR/hsb.txt")
+
+# 方法3. 相對路徑
+dat <- read.csv("hsb.csv")
+dat <- read.table("hsb.txt")
+```
+
+## 讀取表格檔案
+- 下載範例資料
+  https://pongponglin.github.io/2017NCCU_R/data/hsb.csv (點擊即會下載)
+- 利用`read.csv` 讀取 `csv` 檔 (一種以逗點分隔欄位的資料格式)    
+
+```{r echo=TRUE, eval=FALSE}
+# 可以使用R指令來下載
+url <- "https://pongponglin.github.io/2017NCCU_R/data/hsb.csv"
+download.file(url, destfile = "hsb.csv") # 把檔案另存成hbs.csv
+dat <- read.csv("hsb.csv")
+head(dat)
+```
+
+```{r echo=FALSE}
+dat <- read.csv("data/hsb.csv")
+head(dat)
 ```
 
 ## 排解疑難1 - 路徑錯誤
@@ -122,7 +168,6 @@ Error in file(file, "rt") : 無法開啟連結
 - 絕對路徑 -> 確認檔案是否存在
 - 相對路徑 -> 利用`getwd`了解R 當下的路徑位置
 
-
 ## 排解疑難2 - 格式錯誤
 ```{r echo=TRUE, eval=FALSE}
 path <- "hsb.csv"
@@ -137,8 +182,9 @@ Error in read.table(file = file, header = header, sep = sep, quote = quote,  :
 - 必要時，請用其他文件編輯器校正欲讀取的檔案
 
 ## 排解疑難3 - 編碼錯誤 
+
 ```{r echo=TRUE}
-url <- "https://lucy0222.github.io/2017_NCCU_R/%E8%B2%B7%E8%B3%A3st_A_10109_10109.csv"
+url <- "https://pongponglin.github.io/2017NCCU_R/data/%E8%B2%B7%E8%B3%A3st_A_10109_10109.csv"
 ```
 ```{r echo=TRUE, eval=FALSE}
 dat <- read.csv(url)
@@ -152,13 +198,32 @@ Error in make.names(col.names, unique = TRUE) :
 
 ```{r echo=TRUE, eval=FALSE}
 # 利用`fileEncoding`參數選擇檔案編碼 - big5 / utf8
-dat2 <- read.csv(url, fileEncoding = "big5")
+dat2 <- read.csv(url, fileEncoding = "utf8")
+```
+
+## 輸出表格檔案
+利用`write.csv`將`data.frame`格式的R物件另存成csv檔
+```{r echo=TRUE, eval=FALSE}
+write.csv(dat, "hsb_new.csv", row.names=FALSE, fileEncoding = "utf8")
+```
+
+## 逐行輸入與輸出
+- `readLines`也可以用來讀取檔案
+- `writeLines`
+
+```{r echo=TRUE}
+output <- file("data/output.txt")
+writeLines(as.character(1:12), con = output)
+input <- readLines(output)
+input
+
+readLines("data/hsb.csv", n=5, encoding = "utf-8")
 ```
 
 ## 讀取其他軟體資料集
 - For SPSS and Stata datasets, use the `foreign` package
 - Cars: [Cars.sav](http://calcnet.mth.cmich.edu/org/spss/V16_materials/DataSets_v16/Cars.sav)
-- Milk Production: [p004.dat](http://www.ats.ucla.edu/stat/stata/examples/chp/p004.dta)
+- Milk Production: [p004.dat](https://stats.idre.ucla.edu/stat/stata/examples/chp/p004.dta)
 ```{r}
 # install.packages("foreign") # 安裝R套件 foreign
 library(foreign) # 載入套件 
@@ -179,61 +244,7 @@ airline <- read.sas7bdat("data/airline.sas7bdat")
 head(airline)
 ```
 
-# Ch02：讀取網頁內容(Lite)
-
-## 逐行輸入與輸出
-- `readLines`, `writeLines`
-- 是讀取網頁原始碼的好工具
-```{r echo=TRUE}
-output <- file("output.txt")
-writeLines(as.character(1:12), con = output)
-input <- readLines(output)
-input
-```
-
-
-## 練習
-從[網頁中](http://www.buzzhand.com/post_365903.html)，找出藝人官方身高
-```{r}
-web_page <- readLines("http://www.buzzhand.com/post_365903.html")
-matches <- gregexpr("[\u4E00-\u9FA5]+官方身高：[0-9]+cm", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp)
-```
-
-</br>
-```
-其中：
-[\u4E00-\u9FA5] 表示所有中文字符 ; [0-9] 含數字之字串 ; [a]+ 一或多個 a
-```
-
-## 進階練習
-找出[清心福全](http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html)台北市南港店的地址
-```{r echo=TRUE}
-# gregexpr要怎麼用？輸入：?gregexpr
-web_page <- readLines("http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html")
-matches <- gregexpr("台北市南港區[\u4E00-\u9FA5|0-9|(|)]+", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp) # 把 list 轉成 vector
-```
-
-## 小挑戰
-- 找出清心福全台北市門市的電話號碼
-- 提示：`"02-[0-9]+"`
-
-## 小挑戰
-- 找出清心福全台北市門市的電話號碼
-- 提示：`"02-[0-9]+"`
-
-### 參考解答
-```{r echo=TRUE}
-web_page <- readLines("http://www.319papago.idv.tw/lifeinfo/chingshin/chingshin-02.html")
-matches <- gregexpr("02-[0-9]+", web_page)
-tmp <- regmatches(web_page, matches)
-unlist(tmp) 
-```
-
-# Ch03: 條件判斷語句 - if
+# Ch02: 條件判斷語句 - if
 
 ## 條件判斷1
 - 一般而言，R語言的程式碼是由上自下依序執行
@@ -248,7 +259,6 @@ if(x > 2){
   cat(x, "is larger than 2")
 }
 ```
-
 
 ## 條件判斷2
 - 在R中使用`if`來進行判斷
@@ -283,11 +293,10 @@ ifelse(z > 2, "larger than 2", "smaller than 2")
 
 ```
 
-
-## 條件判斷
-- 若需要多個判斷分支時，加入`else if`, ...,  `else`
+## 條件判斷5
+- 若需要多個判斷分支時，加入`if`, `else if`, ...,  `else`
 ```{r}
-y <- 1
+y <- 2
 if(y > 2){
   cat(y, "is larger than 2")
 }else if(y < 2){
@@ -297,36 +306,26 @@ if(y > 2){
 }
 ```
 
-# Ch04: 自訂函數 - function
-
-## 自訂函數 (`function`)
-- 函數是R語言的基石，有利重複使用
-- 通過多個函數的組裝，可以完成更複雜的任務
-- 函數在子環境中執行，不對外產生影響
-```{r}
-foo <- function(x){ # 這個function有一個變數x
-   if(x > 2){
-    cat(x, "is larger than 2")
-  }else if(x < 2){
-    cat(x, "is smaller than 2")
-  }else{
-    cat(x, "is equal to 2")
-  }  
-}
-foo(1); foo(2); foo(3)
-```
-
-
-# Ch05: 循環語句 - for
+# Ch03: 循環語句 - for
 
 ## 循環語句
-- 可用來重複執行某段程式碼
-- `for loop`中，以‘足標’作為終止循環的條件
+- `for loop`:可用來重複執行某段程式碼
+
+```{r}
+x <- 0
+for (i in 1:10) {
+  x <- x+i
+  print(x)
+}
+```
+
+## 循環語句
+- 循環語句內加上條件判斷
 ```{r}
 x <- 0
 for(i in 1:10){
-  if(i %% 2 !=0) { # x是否為奇數，
-    x <- x + i # 自身累加
+  if(i %% 2 !=0) { # x是否為奇數
+    x <- x + i 
   }
 }
 x
@@ -336,7 +335,7 @@ x
 
 ## 雙重循環語句
 - 可用來重複執行某段程式碼
-- `\t` = tab鍵, `\n` = 空行
+- `\t` = tab鍵, `\n` = 換行
 ```{r}
 x <- 0
 k <- 0
@@ -350,8 +349,77 @@ for(i in 1:3){
 }
 ```
 
+## 簡易練習
+- 利用雙重循環語句畫出如下的兩個圖案
+- 聖誕樹的難度加高（三個循環語句）
+```{r, echo=FALSE}
+for (i in 1:5) {
+  for (j in 1:i){
+    cat("*")
+  }
+  cat("\n")
+}
+
+for (i in 1:10){
+  for (j in 10:i){
+    cat(" ")
+  }
+  for (k in 1:(2*i-1)){
+    cat("*")
+  }
+  cat("\n")
+}
+```
+
+# Ch04: 自訂函數 - function
+
+## 自訂函數 (`function`)
+- 函數是R語言的基石，有利重複使用
+- 通過多個函數的組裝，可以完成更複雜的任務
+- 函數在子環境中執行，不對外產生影響
+- 當有需要經常做這件事的時候，可以考慮寫成一個函式
+```{r eval=FALSE}
+myfun <- function(x){
+  # 函式內容
+}
+```
+
+## 自訂函數
+- 條件判斷
+
+```{r}
+myif <- function(x){ # 這個function有一個變數x
+   if(x > 2){
+    cat(x, "is larger than 2")
+  }else if(x < 2){
+    cat(x, "is smaller than 2")
+  }else{
+    cat(x, "is equal to 2")
+  }  
+}
+myif(1); myif(2); myif(3)
+```
+
+## 自訂函數
+- 循環語句
+- 我發明了一個運算法則：一個數字`x`:$\sqrt{(x*\pi)+1+2+3+4+5}$，
+```{r}
+myfun <- function(x){ # 這個function有一個變數x
+  x <- pi*x
+  for (i in 1:5) {
+    x <- x+i
+  }
+  x <- sqrt(x)
+  return(x)
+  }
+
+myfun(2)
+```
+
 ## 進階練習
-- 請先下載 [movies.zip](https://github.com/JohnsonHsieh/R-basic-for-social-science/raw/gh-pages/data/movies.zip) (解壓縮後有21個檔案)
+
+- 請先下載 [movies.zip](https://pongponglin.github.io/2017NCCU_R/data/movies.zip)
+- 下載下來的檔案解壓縮後有21個檔案
 - 一口氣讀入全部的檔案 (Hint: `dir + for loop + list`)
 - 將檔案合併 (Hint: `do.call + rbind`)
 
@@ -400,7 +468,6 @@ head(df)
 - 只讀取1995-1999電影資料
 - 提示：`gregexpr("movies-199[5-9]+.csv", fname)`
 
-
 ## 小挑戰 (參考解答)
 - 只讀取1995-1999電影資料
 - 提示：`gregexpr("movies-199[5-9]+.csv", fname)`
@@ -431,9 +498,9 @@ df <- myRead(fname90, path0="data/movies/")
 head(df)
 ```
 
-# Ch06: Pipe Line Coding Style
+# Ch05: Pipe Line Coding Style
 
-## 2014 年最有影響的套件之一：magrittr
+## 2014 年起最有影響的套件之一：magrittr
 - 壓縮的程式碼不好讀
 - 展開的程式碼會產生很多暫存變數
 - 套件`magrittr`部份解決了這個問題
@@ -460,7 +527,6 @@ mean(x)
 x %>% mean # 由左而右順序操作
 ```
 
-
 ## 幾種等價用法
 利用三角形面積公式說明%>%算子的幾種等價用法
 ```{r}
@@ -472,21 +538,18 @@ a %>% tri_area(h=5)     # 保留括號
 a %>% tri_area(., h=5)  # 以 `.` 來表示欲傳入的變數
 ```
 
-## 
+## 壓縮的指令
 ```{r}
-# 指令壓縮
 plot(density(sample(mtcars$mpg, size=10000, replace=TRUE), kernel="gaussian"), col="red", main="density of mpg")
 ```
 
-## 
+##Pipe Line
 ```{r}
-# Pipe Line
 mtcars$mpg %>% 
     sample(size=10000, replace=TRUE) %>% 
     density(kernel="gaussian") %>% 
     plot(col="red", main="density of mpg")
 ```
-
 
 # 資料處理
 
@@ -511,21 +574,20 @@ mtcars$mpg %>%
 ```{r}
 # install.packages("reshape2")
 library(reshape2)
-WP.melt <- data.frame(WorldPhones)
-WP.melt$year <- rownames(WP.melt)  
-WP.melt <- melt(WP.melt, id="year")
+WP <- data.frame(WorldPhones)
+WP$year <- rownames(WP)  
+WP.melt <- melt(WP, id="year")
 head(WP.melt)
 ```
 
 ## 資料拉皮 `reshape2`
 - `dcast`: long format -> wide format
 ```{r}
-WP.cast <- dcast(WP.melt, year~variable,value.var="value") 
+WP.cast <- dcast(WP.melt, year~variable, value.var="value") 
 head(WP.cast)
 ```
-
-## 2014 年最有影響的套件之一：dplyr
-- 讓R 使用者可以用更有彈性的方式來處理資料
+## 超高人氣的實用套件：dplyr
+- 讓 R 使用者可以用更有彈性的方式來處理資料
 - 針對`data.frame`做設計（名稱中的`d`）
 - 設計理念
     - 導入資料整理最重要的動作（非常類似SQL）
@@ -536,9 +598,9 @@ head(WP.cast)
 
 ```{r dplyr-vignette, echo = TRUE, eval=FALSE}
 vignette(all = TRUE, package = "dplyr")
-vignette("introduction", package = "dplyr")
+vignette("dplyr", package = "dplyr")
 ```
-
+- [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 - 更詳細的dplyr介紹可以閱讀dplyr的小論文
 - R 的開發者會針對一個主題撰寫小論文做介紹
 - dplyr作弊懶人包
@@ -568,24 +630,19 @@ arrange(iris, Petal.Length) %>% head
 
 ## 資料排序
 - arrange(dataframe, 要進行排序的項目,….)
-- 排序預設是由小到大，加上`desc`可使用遞增排列
+- 排序預設是由小到大，加上`desc`可使用遞減排列
 ```{r}
 arrange(iris, desc(Petal.Length)) %>% head
 ```
 
 ## 資料排序
 - arrange(dataframe, 要進行排序的項目,….)
-- 排序預設是由小到大，加上`desc`可使用遞增排列
+- 排序預設是由小到大，加上`desc`可使用遞減排列
 - 排序的項目可以不只一項，只要依序將項目填入後方即可
 
 ```{r}
 arrange(iris, desc(Petal.Length), - Sepal.Length ) %>% head
 ```
-
-## dplyr 常用函數
-- 移除重複資料: `distinct(iris)`
-- 隨機抽取資料: `sample_n(iris, 5)`
-- 抽取指定列: `slice(iris, c(1,3,4,5))`
 
 ## 對列做篩選 `filter`
 <center>
@@ -612,7 +669,7 @@ head(tmp)
 ## 對行做選取
 用負號`-`執行反向選取
 ```{r}
-tmp <- select(iris,c(-Petal.Width,-Species))
+tmp <- select(iris,-Petal.Width,-Species)
 head(tmp)
 ```
 
@@ -651,12 +708,17 @@ group_by(iris, Species) %>%
   summarise(SL.mean=mean(Sepal.Length), SW.sd=sd(Sepal.Width), PL.max=max(Petal.Length))
 ```
 
+## dplyr 常用函數
+- 移除重複資料: `distinct(iris)`
+- 隨機抽取資料: `sample_n(iris, 5)`
+- 抽取指定列: `slice(iris, c(1,3,4,5))`
+
 ## 資料表合併 {.columns-2}
 - `bind_rows`
 
 <img src='img/bind_rows.png' height=400 align='center'></img>
 
-- `bond_cols`
+- `bind_cols`
 
 <img src='img/bind_col.png' height=300 align='center'></img>
 
@@ -669,7 +731,13 @@ group_by(iris, Species) %>%
 <img src='img/join1.png' height=300 align='center'></img><img src='img/join2.png' height=300 align='center'></img>
 </center>
 
-
+## 資料表合併
+- 使用`merge`
+```{r}
+data1 <- data.frame(x1 = c("A","B","C", "D"), x2=c(11,12,13,14))
+data2 <- data.frame(x1 = c("A","B","C", "E" ), x3=c("f","g","h","i"))
+merge(data1, data2, by="x1", all = T)
+```
 
 ## 補充資料
 - [Learn R in R (Swirls)](https://github.com/wush978/DataScienceAndR)
@@ -684,4 +752,4 @@ group_by(iris, Species) %>%
 - [ptt R_Language版](https://www.ptt.cc/bbs/R_Language/index.html)
 - [R軟體使用者論壇](https://groups.google.com/forum/#!forum/taiwanruser)
 - [StackOverflow](http://stackoverflow.com/) 
-- 歡迎來信  ling32342@gmail.com  、 lillian60222@gmail.com 與我們一起交流！
+- 歡迎來信  nicole19940331@gmail.com 與我們一起交流！
